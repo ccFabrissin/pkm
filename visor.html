@@ -56,12 +56,9 @@ header h1 small{color:var(--aqua);font-weight:500}
 #side button,#side label.sb{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;color:#c9d0de;padding:8px 0 8px 6px;border-radius:10px;cursor:pointer;font:inherit;font-weight:600;white-space:nowrap;text-align:left;position:relative}
 #side button:hover,#side label.sb:hover{background:var(--char-2);color:#fff}
 #side button.on{background:var(--aqua);color:var(--char)}
-#side button:disabled{opacity:.6;cursor:wait}
 #side .ic{width:30px;flex:none;text-align:center;font-size:20px;line-height:1}
 #side .lb{opacity:0;transition:opacity .15s;font-size:14px}
 #side:hover .lb,#side:focus-within .lb{opacity:1}
-#side .dirty .ic::after{content:"";position:absolute;left:24px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--bad);box-shadow:0 0 0 2px var(--char-3)}
-#side .lb small{display:block;font-size:10px;font-weight:500;opacity:.75;line-height:1.1}
 .btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:7px 12px;border-radius:8px;cursor:pointer;font:inherit;font-weight:600}
 .btn:hover{border-color:var(--aqua)}
 main{padding:20px;max-width:1400px;margin:0 auto}
@@ -313,8 +310,6 @@ body.has-bg .modal .panel,body.has-bg .pop .panel{background:var(--panel)}
     <button data-v="meta" title="Meta"><span class="ic">📈</span><span class="lb">Meta</span></button>
   </nav>
   <div class="foot">
-    <button id="ghSave" title="Guardar los equipos en GitHub (actualiza data/db.json y el sitio)"><span class="ic">💾</span><span class="lb">Guardar en GitHub<small id="ghState"></small></span></button>
-    <button id="ghToken" title="Cambiar u olvidar el token de GitHub"><span class="ic">🔑</span><span class="lb">Token de GitHub</span></button>
     <label class="sb" title="Cargar otro data/db.json sin regenerar el visor"><span class="ic">📂</span><span class="lb">Cargar db.json</span><input type="file" id="file" accept=".json" hidden></label>
     <button id="theme" title="Cambiar entre modo claro y oscuro"><span class="ic">☾</span><span class="lb">Modo oscuro</span></button>
   </div>
@@ -351,9 +346,7 @@ function imgTag(name,base){
 
 // ---------- carga de datos ----------
 let U={species:{},pp:{}}; // uso por Pokémon (pokemon-zone)
-let DBRAW=null; // db.json tal como se cargó (se usa para volver a escribirlo al guardar en GitHub)
 function build(db){
-  DBRAW=db;
   const byKey=(list,k="name")=>Object.fromEntries(list.map(x=>[x[k],x]));
   const dex={},byName={};
   for(const x of db.pokedex){
@@ -530,8 +523,8 @@ const TYPE_ABBR=t=>({Electric:"ELEC",Fighting:"FIGHT",Psychic:"PSY",Normal:"NORM
 const emptyMember=()=>({species:"",item:"",ability:"",nature:"Serious",sp:{hp:0,atk:0,def:0,spa:0,spd:0,spe:0},moves:["","","",""]});
 let TB={teams:[],current:0,slot:0,mode:"overview"};
 
-// Los equipos viven en dos lugares: db.json (lo que está publicado en GitHub) y localStorage (lo que se editó en este navegador).
-// Al abrir se fusionan por id: gana el más reciente (campo "updated"); un equipo que estaba en db.json y ya no está fue borrado desde otra PC.
+// Los equipos viven en dos lugares: db.json (los que vienen embebidos en el visor) y localStorage (lo que se editó en este navegador).
+// Al abrir se fusionan por id: gana el más reciente (campo "updated"); un equipo que estaba en db.json y ya no está se quita también acá.
 const SEED_IDS="pkm-teams-seed-ids";
 function normSeed(st){
   const members=(st.members||[]).slice(0,6).map(x=>({...emptyMember(),...x,ability:x.ability||S.dex[x.species]?.abilities[0]||"",sp:{...emptyMember().sp,...x.sp},moves:[...(x.moves||[]),"","","",""].slice(0,4)}));
@@ -540,36 +533,25 @@ function normSeed(st){
   t.id=st.id||"seed-"+toId(st.name);
   return t;
 }
-// forma canónica de un equipo (sin fechas) para saber si hay cambios sin subir a GitHub
-const canonTeams=list=>JSON.stringify(list.map(t=>[t.id,t.name,t.members.map(m=>[m.species,m.item,m.ability,m.nature,STAT_KEYS.map(([,k])=>+m.sp[k]||0),m.moves])]));
 function loadTeams(){
   const seeds=S.seedTeams.map(normSeed);
-  TB.seedCanon=canonTeams(seeds);
   let local=null,prevIds=[];
   try{local=JSON.parse(localStorage.getItem(STORE)||"null");prevIds=JSON.parse(localStorage.getItem(SEED_IDS)||"[]");}catch(e){}
   if(local&&local.teams?.length){
     const byId=new Map(local.teams.map(t=>[t.id,t]));
     for(const s of seeds){const l=byId.get(s.id);if(!l||(s.updated&&(!l.updated||s.updated>l.updated)))byId.set(s.id,s);}
     const cur=new Set(seeds.map(s=>s.id));
-    for(const id of [...byId.keys()])if(!cur.has(id)&&prevIds.includes(id))byId.delete(id); // borrado desde otra PC
+    for(const id of [...byId.keys()])if(!cur.has(id)&&prevIds.includes(id))byId.delete(id); // borrado de db.json
     TB.teams=[...byId.values()];TB.current=Math.min(local.current||0,TB.teams.length-1);
   }else TB.teams=seeds;
   if(!TB.teams.length)TB.teams=[newTeam("Equipo 1")];
   try{localStorage.setItem(SEED_IDS,JSON.stringify(seeds.map(s=>s.id)));}catch(_){}
-  paintDirty();
-}
-const teamsDirty=()=>TB.seedCanon!=null&&canonTeams(TB.teams)!==TB.seedCanon;
-function paintDirty(){
-  const d=teamsDirty(),b=$("#ghSave");
-  if(b){b.classList.toggle("dirty",d);$("#ghState").textContent=d?"cambios sin subir":"todo subido";}
-  const m=$("#ghMsg");if(m)m.textContent=d?"● Hay cambios sin subir a GitHub":"✓ Equipos iguales a los publicados";
 }
 function newTeam(name,members){const now=new Date().toISOString();return{id:"t"+Date.now()+Math.random().toString(36).slice(2,6),name,created:now,updated:now,members:members||Array.from({length:6},emptyMember)};}
 function saveTeams(){
   const t=team();t.updated=new Date().toISOString();delete t.snapshot;
   try{localStorage.setItem(STORE,JSON.stringify({teams:TB.teams,current:TB.current}));const s=$("#savedMsg");if(s){s.textContent="✓ Guardado en este navegador "+new Date().toLocaleTimeString();}}
   catch(e){const s=$("#savedMsg");if(s)s.textContent="No se pudo guardar en este navegador: exportá el JSON";}
-  paintDirty();
 }
 const team=()=>TB.teams[TB.current];
 const member=()=>team().members[TB.slot];
@@ -606,8 +588,7 @@ function renderTeam(){
       <button class="btn" id="bNew">+ Nuevo</button><button class="btn" id="bDup">Duplicar</button><button class="btn" id="bDel">Eliminar</button>
       <button class="btn" id="bExp">Exportar</button><label class="btn">Importar<input type="file" id="bImp" accept=".json" hidden></label>
       <button class="btn" id="bPaste">Copiar texto</button>
-      <button class="btn" id="bGh" title="Sube los equipos a GitHub: actualiza data/db.json y el sitio publicado">💾 Guardar en GitHub</button>
-      <span class="saved" id="savedMsg"></span><span class="count" id="ghMsg"></span>
+      <span class="saved" id="savedMsg"></span>
     </div>
     <div class="slots">${t.members.map((m,i)=>{const p=formOf(m);return `<div class="slot ${TB.mode==="edit"&&TB.slot===i?"on":""} ${m.species?"":"empty"}" data-s="${i}">${p?imgTag(p.name,p.base)+esc(m.species):"+ Agregar"}</div>`}).join("")}
       <div class="slot ${TB.mode==="overview"?"on":""}" data-s="ov">📋<br>Vista general</div></div>
@@ -619,7 +600,6 @@ function renderTeam(){
   $("#bDel").onclick=()=>{if(!confirm(`¿Eliminar el equipo "${t.name}"?`))return;TB.teams.splice(TB.current,1);if(!TB.teams.length)TB.teams.push(newTeam("Equipo 1"));TB.current=0;TB.mode="overview";saveTeams();renderTeam();};
   $("#bExp").onclick=exportTeams;
   $("#bImp").onchange=importTeams;
-  $("#bGh").onclick=saveToGitHub;paintDirty();
   $("#bPaste").onclick=()=>{const txt=pasteText(t);navigator.clipboard?.writeText(txt).then(()=>{$("#savedMsg").textContent="✓ Texto copiado";},()=>prompt("Copiá el texto:",txt));};
   document.querySelectorAll(".slot").forEach(s=>s.onclick=()=>{if(s.dataset.s==="ov"){TB.mode="overview";}else{TB.slot=+s.dataset.s;TB.mode="edit";}renderTeam();});
   TB.mode==="edit"?renderEditor():renderOverview();
@@ -1083,78 +1063,6 @@ function renderMeta(){
       <span style="color:${S.owned.has(m.name)?"var(--good)":"var(--bad)"};font-weight:700">${S.owned.has(m.name)?"✓ Lo tengo":"✗ Falta"}</span></div>`}).join("")}</div>
     <p class="hint">Fuente: Pikalytics (14/09/2026). Actualizá la hoja Meta_Uso para refrescar.</p>`;
 }
-
-// ================= GUARDAR EN GITHUB =================
-// El sitio es estático (GitHub Pages), así que la única forma de persistir los equipos es escribir en el repo vía la API de GitHub
-// con un token personal (fine-grained, permiso Contents: read & write sobre este repo). El token queda solo en localStorage.
-const GH={owner:"ccFabrissin",repo:"pkm",branch:"main"};
-const GH_TOKEN="pkm-gh-token";
-const MK=s=>"<!--DATA-"+s+"-->"; // marcadores del bloque embebido (armados por partes para que scripts/actualizar_visor.py no los confunda)
-const ghToken=()=>{try{return localStorage.getItem(GH_TOKEN)||"";}catch(_){return "";}};
-function ghAskToken(){
-  const t=prompt(`Para guardar los equipos en el sitio hace falta un token de GitHub con permiso de escritura sobre ${GH.owner}/${GH.repo}.\n\n1. github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token\n2. Repository access: Only select repositories → ${GH.repo}\n3. Permissions → Repository permissions → Contents: Read and write\n\nPegá el token acá (queda guardado solo en este navegador):`);
-  if(t==null)return "";const v=t.trim();
-  try{if(v)localStorage.setItem(GH_TOKEN,v);else localStorage.removeItem(GH_TOKEN);}catch(_){}
-  return v;
-}
-async function gh(path,opt={},token){
-  const r=await fetch("https://api.github.com"+path,{method:opt.method||"GET",body:opt.body,
-    headers:{Authorization:"Bearer "+token,Accept:opt.raw?"application/vnd.github.raw+json":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(opt.body?{"Content-Type":"application/json"}:{})}});
-  if(!r.ok){let msg=r.status+" "+r.statusText;try{msg+=": "+(await r.json()).message;}catch(_){}throw new Error(msg);}
-  return opt.raw?r.text():r.json();
-}
-const cleanTeam=t=>{const {snapshot,...rest}=t;return rest;};
-// Reemplaza solo la sección "teams" del db.json del repo (formato indent=1 de crear_db.py) para que el diff en GitHub sea mínimo.
-function dbJsonWithTeams(txt,teams){
-  const m=/\n "teams": /.exec(txt);
-  if(m){const rest=txt.slice(m.index+m[0].length),nx=rest.search(/\n "[^"]+": /);
-    if(nx>0){const arr=JSON.stringify(teams,null,1).split("\n").map((l,i)=>i?" "+l:l).join("\n");return txt.slice(0,m.index)+m[0]+arr+","+rest.slice(nx);}}
-  return JSON.stringify({...JSON.parse(txt),teams},null,1);
-}
-async function saveToGitHub(){
-  if(!S.dex||!DBRAW){alert("No hay datos cargados.");return;}
-  if(!TB.teams.length)loadTeams();
-  const token=ghToken()||ghAskToken();if(!token)return;
-  const btn=$("#ghSave"),msg=s=>{const e=$("#ghMsg");if(e)e.textContent=s;$("#ghState").textContent=s;};
-  btn.disabled=true;
-  try{
-    saveTeams();
-    const teams=TB.teams.map(cleanTeam),R=`/repos/${GH.owner}/${GH.repo}`;
-    msg("Leyendo el repositorio…");
-    const br=await gh(`${R}/branches/${GH.branch}`,{},token);
-    const headSha=br.commit.sha,treeSha=br.commit.commit.tree.sha;
-    const [html,dbRepo]=await Promise.all([gh(`${R}/contents/visor.html?ref=${GH.branch}`,{raw:1},token),gh(`${R}/contents/data/db.json?ref=${GH.branch}`,{raw:1},token)]);
-    const db={...JSON.parse(dbRepo),teams}; // el db.json del repo es la fuente de verdad; solo cambian los equipos
-    const re=new RegExp(MK("START")+"[\\s\\S]*?"+MK("END"));
-    if(!re.test(html))throw new Error("el visor.html del repositorio no tiene el bloque de datos embebidos");
-    const now=new Date(),pad=n=>String(n).padStart(2,"0"),stamp=`${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
-    const payload=JSON.stringify(db).replace(/<\//g,"<\\/");
-    const block=MK("START")+`<script id="db" type="application/json" data-source="db.json (${stamp})">`+payload+"<\/script>"+MK("END");
-    const html2=html.replace(re,()=>block),dbTxt=dbJsonWithTeams(dbRepo,teams);
-    msg("Subiendo archivos…");
-    const blob=async content=>(await gh(`${R}/git/blobs`,{method:"POST",body:JSON.stringify({content,encoding:"utf-8"})},token)).sha;
-    const [shaDb,shaHtml]=await Promise.all([blob(dbTxt),blob(html2)]);
-    const tree=await gh(`${R}/git/trees`,{method:"POST",body:JSON.stringify({base_tree:treeSha,tree:[
-      {path:"data/db.json",mode:"100644",type:"blob",sha:shaDb},{path:"visor.html",mode:"100644",type:"blob",sha:shaHtml}]})},token);
-    const names=TB.teams.map(t=>t.name).join(", ");
-    const commit=await gh(`${R}/git/commits`,{method:"POST",body:JSON.stringify({message:`Equipos guardados desde el visor: ${names}`,tree:tree.sha,parents:[headSha]})},token);
-    await gh(`${R}/git/refs/heads/${GH.branch}`,{method:"PATCH",body:JSON.stringify({sha:commit.sha})},token);
-    DBRAW=db;S.seedTeams=db.teams;TB.seedCanon=canonTeams(TB.teams);
-    try{localStorage.setItem(SEED_IDS,JSON.stringify(TB.teams.map(t=>t.id)));}catch(_){}
-    paintDirty();
-    const s=$("#savedMsg");if(s)s.textContent=`✓ Subido a GitHub ${now.toLocaleTimeString()} (commit ${commit.sha.slice(0,7)}). El sitio se actualiza en 1-2 minutos.`;
-  }catch(err){
-    if(/^(401|403)/.test(err.message)){try{localStorage.removeItem(GH_TOKEN);}catch(_){}alert("GitHub rechazó el token ("+err.message+"). Volvé a intentar y pegá uno nuevo.");}
-    else alert("No se pudo guardar en GitHub: "+err.message);
-    paintDirty();
-  }finally{btn.disabled=false;}
-}
-$("#ghSave").onclick=saveToGitHub;
-$("#ghToken").onclick=()=>{
-  const cur=ghToken();
-  if(cur&&confirm("Ya hay un token de GitHub guardado en este navegador.\n\nAceptar: olvidarlo.\nCancelar: dejarlo como está.")){try{localStorage.removeItem(GH_TOKEN);}catch(_){}alert("Token olvidado.");return;}
-  if(!cur)ghAskToken();
-};
 
 // arranque con datos embebidos
 const embedded=JSON.parse($("#db").textContent);

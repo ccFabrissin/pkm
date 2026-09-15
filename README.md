@@ -13,16 +13,12 @@ Pestañas:
 
 El menú está en la barra lateral izquierda (solo íconos; se despliega al pasar el mouse).
 
-## Guardar los equipos en el sitio
+## Equipos: guardar, compartir y llevar a otra PC
 
-Los cambios en los equipos quedan solo en el navegador (localStorage). Para que se conserven entre PCs y en el sitio publicado, el botón **Guardar en GitHub** (barra lateral o pestaña Equipos) hace un commit en `main` que actualiza `data/db.json` (sección `teams`) y el bloque de datos embebido en `visor.html`. GitHub Pages republica el sitio en uno o dos minutos.
-
-Hace falta un token personal de GitHub, que se pide la primera vez y queda guardado solo en ese navegador (🔑 en la barra lateral para cambiarlo u olvidarlo):
-1. github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token.
-2. Repository access: solo este repo.
-3. Permissions → Contents: Read and write.
-
-Al abrir el visor, los equipos del navegador se fusionan con los de `db.json`: gana la versión más reciente de cada equipo y un equipo borrado desde otra PC desaparece. El punto rojo sobre 💾 avisa que hay cambios sin subir.
+Los equipos se guardan solos en el navegador (localStorage) con cada cambio. Eso no viaja a otra PC ni sobrevive a borrar los datos del navegador, así que para conservarlos o moverlos:
+- **Exportar** descarga un JSON con todos los equipos. **Importar** lee ese JSON y agrega los equipos que contiene (no reemplaza los que ya hay).
+- **Copiar texto** copia al portapapeles el equipo actual en formato de texto (especie, objeto, habilidad, naturaleza, SP y movimientos), pensado para pegarlo en Discord o en notas. Es solo lectura: no se puede importar.
+- Los equipos de `data/db.json` (sección `teams`) vienen embebidos en el visor y se fusionan con los del navegador al abrir: gana la versión más reciente de cada equipo. Para dejar un equipo fijo en el sitio, pegá el JSON exportado en esa sección y corré `python scripts/actualizar_visor.py`.
 
 ## Fondos
 
