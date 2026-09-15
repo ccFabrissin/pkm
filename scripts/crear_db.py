@@ -82,7 +82,7 @@ def main():
             mega_to = [x.strip() for x in to.split(",")]
             es, ver = next((MEGAPIEDRAS[t] for t in mega_to if t in MEGAPIEDRAS), ("", "v1.2.0 (megas nuevas de Reg M-C)"))
         else:
-            es, ver = OBJETOS.get(i["name"]) or ("", "No figura en WikiDex (sí en Serebii/MetaVGC)")
+            es, ver = OBJETOS.get(i["name"]) or ("", "")
         items.append({"name": i["name"], "nameEs": es, "category": item_category(i), "megaStone": i["megaStone"],
                       "megaFrom": mega_from, "megaTo": mega_to, "desc": i["desc"], "sprite": i.get("sprite", 0), "since": ver})
 
