@@ -674,22 +674,25 @@ function renderOverview(){
   bindTiles(body,mem);
   TB.megaShow=TB.megaShow||new Set(); // espacios cuya fila muestra la forma Mega
   TB.statSort=TB.statSort||{key:"spe",dir:-1};
-  const drawStats=()=>{
-    const rows=mem.map(m=>{
-      const i=t.members.indexOf(m),mega=megaFor(m.species,m.item),showMega=!!mega&&TB.megaShow.has(i);
-      const p=showMega?mega:S.dex[m.species],st=finalStats(p,m);
-      return{i,p,m,mega,showMega,name:p.name,types:p.types.join("/"),item:m.item,nature:m.nature,...st,tot:Object.values(st).reduce((a,c)=>a+c,0)};});
-    // formato condicional por columna: rojo (menor) → verde (mayor) dentro del equipo
-    const rng={};for(const k of [...STAT_KEYS.map(([,k])=>k),"tot"]){const vs=rows.map(r=>r[k]);rng[k]=[Math.min(...vs),Math.max(...vs)];}
-    const heat=(v,k)=>{const [lo,hi]=rng[k],t=hi>lo?(v-lo)/(hi-lo):.5;return `--t:${t.toFixed(2)}`;};
-    const cell=(r,k)=>`<td class="ts"><span class="hp" style="${heat(r[k],k)}">${r[k]}</span></td>`;
-    sortableTable($("#teamStats"),[{k:"name",l:"Pokémon"},{k:"item",l:"Objeto"},{k:"nature",l:"Naturaleza"},...STAT_KEYS.map(([l,k])=>({k,l,num:1})),{k:"tot",l:"Total",num:1}],rows,
-      r=>`<tr class="tsr ${r.showMega?"mega":""}"><td class="tsn">${imgTag(r.p.name,r.p.base)}<div><b>${esc(r.name)}</b>${r.mega?` <small class="count">${r.showMega?"forma Mega":"forma base"}</small>`:""}<div class="types" style="justify-content:flex-start">${r.p.types.map(typeTag).join("")}</div></div></td>
-        <td class="tsi">${!r.item?`<span class="count">—</span>`:r.mega?`<button type="button" class="megabtn ${r.showMega?"on":""}" data-mega="${r.i}" title="${r.showMega?"Ver la forma base":"Ver la forma Mega: "+esc(r.mega.name)}">${itemIcon(r.item)}<span>${esc(r.item)}</span><span class="mk">${r.showMega?"MEGA ✓":"MEGA"}</span></button>`:itemIcon(r.item)+`<span>${esc(r.item)}</span>`}</td>
-        <td><b>${esc(r.nature)}</b> ${natureChips(r.nature)}</td>${STAT_KEYS.map(([,k])=>cell(r,k)).join("")}<td class="ts"><span class="hp tot" style="${heat(r.tot,"tot")}">${r.tot}</span></td></tr>`,TB.statSort);
-    $("#teamStats").querySelectorAll("[data-mega]").forEach(b=>b.onclick=e=>{e.stopPropagation();const i=+b.dataset.mega;TB.megaShow.has(i)?TB.megaShow.delete(i):TB.megaShow.add(i);drawStats();});
-  };
-  drawStats();
+  // Las filas son objetos estables: al alternar base/Mega se actualizan en el lugar (sin reordenar) y el orden por columna las reutiliza.
+  const fillRow=r=>{const m=r.m,mega=megaFor(m.species,m.item),showMega=!!mega&&TB.megaShow.has(r.i),p=showMega?mega:S.dex[m.species],st=finalStats(p,m);
+    return Object.assign(r,{p,mega,showMega,name:p.name,types:p.types.join("/"),item:m.item,nature:m.nature,...st,tot:Object.values(st).reduce((a,c)=>a+c,0)});};
+  const rows=mem.map(m=>fillRow({i:t.members.indexOf(m),m}));
+  // formato condicional por columna: rojo (menor) → verde (mayor) dentro del equipo
+  const rng={},calcRng=()=>{for(const k of [...STAT_KEYS.map(([,k])=>k),"tot"]){const vs=rows.map(r=>r[k]);rng[k]=[Math.min(...vs),Math.max(...vs)];}};
+  const heat=(v,k)=>{const [lo,hi]=rng[k],t=hi>lo?(v-lo)/(hi-lo):.5;return `--t:${t.toFixed(2)}`;};
+  const cell=(r,k)=>`<td class="ts"><span class="hp" style="${heat(r[k],k)}">${r[k]}</span></td>`;
+  const rowHtml=r=>`<tr class="tsr ${r.showMega?"mega":""}" data-i="${r.i}"><td class="tsn">${imgTag(r.p.name,r.p.base)}<div><b>${esc(r.name)}</b>${r.mega?` <small class="count">${r.showMega?"forma Mega":"forma base"}</small>`:""}<div class="types" style="justify-content:flex-start">${r.p.types.map(typeTag).join("")}</div></div></td>
+      <td class="tsi">${!r.item?`<span class="count">—</span>`:r.mega?`<button type="button" class="megabtn ${r.showMega?"on":""}" data-mega="${r.i}" title="${r.showMega?"Ver la forma base":"Ver la forma Mega: "+esc(r.mega.name)}">${itemIcon(r.item)}<span>${esc(r.item)}</span><span class="mk">${r.showMega?"MEGA ✓":"MEGA"}</span></button>`:itemIcon(r.item)+`<span>${esc(r.item)}</span>`}</td>
+      <td><b>${esc(r.nature)}</b> ${natureChips(r.nature)}</td>${STAT_KEYS.map(([,k])=>cell(r,k)).join("")}<td class="ts"><span class="hp tot" style="${heat(r.tot,"tot")}">${r.tot}</span></td></tr>`;
+  calcRng();
+  const ts=$("#teamStats");
+  sortableTable(ts,[{k:"name",l:"Pokémon"},{k:"item",l:"Objeto"},{k:"nature",l:"Naturaleza"},...STAT_KEYS.map(([l,k])=>({k,l,num:1})),{k:"tot",l:"Total",num:1}],rows,rowHtml,TB.statSort);
+  // clic en la megapiedra (delegado: sobrevive a los reordenamientos por columna). Cambia la fila en su lugar, sin reordenar.
+  ts.onclick=e=>{const b=e.target.closest("[data-mega]");if(!b)return;
+    const i=+b.dataset.mega;TB.megaShow.has(i)?TB.megaShow.delete(i):TB.megaShow.add(i);
+    rows.forEach(fillRow);calcRng();const by=new Map(rows.map(r=>[r.i,r]));
+    ts.querySelectorAll("tbody tr[data-i]").forEach(tr=>{tr.outerHTML=rowHtml(by.get(+tr.dataset.i));});};
 }
 function natureTxt(n){const x=S.natures[n];return x&&x[0]?`(+${x[0]} −${x[1]})`:"(neutra)";}
 function weakTilesHtml(mem){
