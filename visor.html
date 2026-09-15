@@ -39,17 +39,28 @@
 }}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{padding-left:var(--side)}
 header{position:sticky;top:0;z-index:5;background:var(--char);color:#fff;border-bottom:3px solid var(--aqua);padding:12px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 header h1{font-size:17px;margin:0 12px 0 0}
 header h1 small{color:var(--aqua);font-weight:500}
-nav{display:flex;gap:4px;flex-wrap:wrap}
-nav button{border:0;background:transparent;color:#c9d0de;padding:7px 12px;border-radius:8px;cursor:pointer;font:inherit;font-weight:600}
-nav button:hover{color:#fff}
-nav button.on{background:var(--aqua);color:var(--char)}
 .load{margin-left:auto;display:flex;gap:8px;align-items:center;color:#c9d0de;font-size:12px}
-header .btn{border-color:var(--char-2);background:var(--char-2);color:#fff}
-header .btn:hover{border-color:var(--aqua)}
-#theme{width:36px;padding:7px 0;text-align:center;font-size:15px;line-height:1}
+/* ---- menú lateral: solo íconos, se despliega con el mouse ---- */
+:root{--side:58px}
+#side{position:fixed;left:0;top:0;bottom:0;z-index:6;width:var(--side);background:var(--char-3);color:#c9d0de;border-right:3px solid var(--aqua);display:flex;flex-direction:column;padding:10px 0 8px;overflow:hidden;transition:width .18s ease;box-shadow:2px 0 14px #0003}
+#side:hover,#side:focus-within{width:220px}
+#side .logo{display:flex;align-items:center;gap:12px;padding:6px 0 12px 12px;white-space:nowrap;color:#fff;font-weight:800;font-size:15px;border-bottom:1px solid var(--char-2);margin:0 8px 8px}
+#side .logo .ic{color:var(--aqua)}
+#side nav{display:flex;flex-direction:column;gap:3px;padding:0 8px;flex:1}
+#side .foot{border-top:1px solid var(--char-2);margin:8px 8px 0;padding-top:8px;display:flex;flex-direction:column;gap:3px}
+#side button,#side label.sb{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;color:#c9d0de;padding:8px 0 8px 6px;border-radius:10px;cursor:pointer;font:inherit;font-weight:600;white-space:nowrap;text-align:left;position:relative}
+#side button:hover,#side label.sb:hover{background:var(--char-2);color:#fff}
+#side button.on{background:var(--aqua);color:var(--char)}
+#side button:disabled{opacity:.6;cursor:wait}
+#side .ic{width:30px;flex:none;text-align:center;font-size:20px;line-height:1}
+#side .lb{opacity:0;transition:opacity .15s;font-size:14px}
+#side:hover .lb,#side:focus-within .lb{opacity:1}
+#side .dirty .ic::after{content:"";position:absolute;left:24px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--bad);box-shadow:0 0 0 2px var(--char-3)}
+#side .lb small{display:block;font-size:10px;font-weight:500;opacity:.75;line-height:1.1}
 .btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:7px 12px;border-radius:8px;cursor:pointer;font:inherit;font-weight:600}
 .btn:hover{border-color:var(--aqua)}
 main{padding:20px;max-width:1400px;margin:0 auto}
@@ -114,7 +125,7 @@ td.itc{white-space:nowrap;vertical-align:middle}td.itc>span{vertical-align:middl
 .chips{display:flex;flex-wrap:wrap;gap:4px;max-height:220px;overflow:auto}
 .chip{font-size:12px;padding:2px 8px;border-radius:6px;background:var(--accent-soft)}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media (max-width:700px){.cols{grid-template-columns:1fr}header{padding:10px 16px}main{padding:16px}.load{margin-left:0}}
+@media (max-width:700px){.cols{grid-template-columns:1fr}header{padding:10px 16px}main{padding:16px}.load{margin-left:0}:root{--side:48px}#side .ic{width:26px;font-size:18px}}
 .metabar{height:10px;background:var(--aqua);border-radius:5px}
 .hint{color:var(--muted);font-size:12px;margin:6px 0 0}
 /* ---- teambuilder ---- */
@@ -258,6 +269,11 @@ td.itc{white-space:nowrap;vertical-align:middle}td.itc>span{vertical-align:middl
   background:color-mix(in srgb,hsl(calc(var(--t)*130) 65% 46%) 28%,var(--panel));
   box-shadow:inset 0 0 0 1px color-mix(in srgb,hsl(calc(var(--t)*130) 65% 46%) 45%,transparent)}
 .hp.tot{min-width:64px;background:color-mix(in srgb,var(--accent) calc(var(--t)*40%),var(--panel));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 50%,transparent)}
+.megabtn{display:inline-flex;align-items:center;gap:4px;border:1px dashed var(--accent);background:transparent;color:inherit;font:inherit;padding:2px 12px 2px 2px;border-radius:999px;cursor:pointer;vertical-align:middle}
+.megabtn:hover{background:var(--accent-soft)}
+.megabtn.on{background:var(--accent);color:var(--char);border-style:solid;font-weight:700}
+.megabtn .mk{font-size:10px;font-weight:800;letter-spacing:.04em;opacity:.8}
+tr.tsr.mega td.tsn b{color:var(--accent-ink)}
 /* ---- selector de tipo ---- */
 .tp{position:relative;display:inline-block}
 .tp-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:5px 10px;border-radius:8px;cursor:pointer;font:inherit;min-height:36px}
@@ -285,21 +301,26 @@ body.has-bg .modal .panel,body.has-bg .pop .panel{background:var(--panel)}
 </style>
 </head>
 <body>
+<aside id="side">
+  <div class="logo"><span class="ic">◓</span><span class="lb">PKM Champions</span></div>
+  <nav id="tabs">
+    <button data-v="box" class="on" title="Mi Box"><span class="ic">🎒</span><span class="lb">Mi Box</span></button>
+    <button data-v="team" title="Equipos"><span class="ic">⚔️</span><span class="lb">Equipos</span></button>
+    <button data-v="dex" title="Pokédex Reg M-C"><span class="ic">📖</span><span class="lb">Pokédex Reg M-C</span></button>
+    <button data-v="items" title="Objetos"><span class="ic">🎁</span><span class="lb">Objetos</span></button>
+    <button data-v="moves" title="Movimientos"><span class="ic">💥</span><span class="lb">Movimientos</span></button>
+    <button data-v="meta" title="Meta"><span class="ic">📈</span><span class="lb">Meta</span></button>
+  </nav>
+  <div class="foot">
+    <button id="ghSave" title="Guardar los equipos en GitHub (actualiza data/db.json y el sitio)"><span class="ic">💾</span><span class="lb">Guardar en GitHub<small id="ghState"></small></span></button>
+    <button id="ghToken" title="Cambiar u olvidar el token de GitHub"><span class="ic">🔑</span><span class="lb">Token de GitHub</span></button>
+    <label class="sb" title="Cargar otro data/db.json sin regenerar el visor"><span class="ic">📂</span><span class="lb">Cargar db.json</span><input type="file" id="file" accept=".json" hidden></label>
+    <button id="theme" title="Cambiar entre modo claro y oscuro"><span class="ic">☾</span><span class="lb">Modo oscuro</span></button>
+  </div>
+</aside>
 <header>
   <h1>PKM Champions DB <small>· Dobles Reg M-C</small></h1>
-  <nav id="tabs">
-    <button data-v="box" class="on">Mi Box</button>
-    <button data-v="team">Equipos</button>
-    <button data-v="dex">Pokédex Reg M-C</button>
-    <button data-v="items">Objetos</button>
-    <button data-v="moves">Movimientos</button>
-    <button data-v="meta">Meta</button>
-  </nav>
-  <div class="load">
-    <span id="src"></span>
-    <label class="btn" title="Cargar otro data/db.json sin regenerar el visor">Cargar db.json<input type="file" id="file" accept=".json" hidden></label>
-    <button class="btn" id="theme" title="Cambiar entre modo claro y oscuro">☾</button>
-  </div>
+  <div class="load"><span id="src"></span></div>
 </header>
 <div id="bg"></div>
 <main id="view"></main>
@@ -329,7 +350,9 @@ function imgTag(name,base){
 
 // ---------- carga de datos ----------
 let U={species:{},pp:{}}; // uso por Pokémon (pokemon-zone)
+let DBRAW=null; // db.json tal como se cargó (se usa para volver a escribirlo al guardar en GitHub)
 function build(db){
+  DBRAW=db;
   const byKey=(list,k="name")=>Object.fromEntries(list.map(x=>[x[k],x]));
   const dex={},byName={};
   for(const x of db.pokedex){
@@ -388,6 +411,7 @@ function render(){
   bgApply();
 }
 document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{view=b.dataset.v;render();});
+$("#side").addEventListener("click",e=>{const b=e.target.closest("button");if(b)b.blur();}); // que el menú se pliegue al soltar el mouse aunque el botón haya quedado con foco
 
 const F={q:"",type:"",show:"",sort:"n"};
 function typeOptions(sel){return `<option value="">Todos los tipos</option>`+S.types.map(t=>`<option ${t===sel?"selected":""}>${t}</option>`).join("");}
@@ -489,7 +513,7 @@ function bgApply(){
 
 (function(){
   const isDark=isDarkTheme;
-  const paint=()=>{$("#theme").textContent=isDark()?"☀":"☾";};
+  const paint=()=>{$("#theme .ic").textContent=isDark()?"☀":"☾";$("#theme .lb").textContent=isDark()?"Modo claro":"Modo oscuro";};
   $("#theme").onclick=()=>{const t=isDark()?"light":"dark";document.documentElement.dataset.theme=t;try{localStorage.setItem("pkm-theme",t);}catch(_){}paint();bgApply();};
   matchMedia("(prefers-color-scheme:dark)").addEventListener("change",()=>{paint();bgApply();});
   paint();
@@ -505,23 +529,46 @@ const TYPE_ABBR=t=>({Electric:"ELEC",Fighting:"FIGHT",Psychic:"PSY",Normal:"NORM
 const emptyMember=()=>({species:"",item:"",ability:"",nature:"Serious",sp:{hp:0,atk:0,def:0,spa:0,spd:0,spe:0},moves:["","","",""]});
 let TB={teams:[],current:0,slot:0,mode:"overview"};
 
+// Los equipos viven en dos lugares: db.json (lo que está publicado en GitHub) y localStorage (lo que se editó en este navegador).
+// Al abrir se fusionan por id: gana el más reciente (campo "updated"); un equipo que estaba en db.json y ya no está fue borrado desde otra PC.
+const SEED_IDS="pkm-teams-seed-ids";
+function normSeed(st){
+  const members=(st.members||[]).slice(0,6).map(x=>({...emptyMember(),...x,ability:x.ability||S.dex[x.species]?.abilities[0]||"",sp:{...emptyMember().sp,...x.sp},moves:[...(x.moves||[]),"","","",""].slice(0,4)}));
+  while(members.length<6)members.push(emptyMember());
+  const t={...newTeam(st.name,members),...st,members};
+  t.id=st.id||"seed-"+toId(st.name);
+  return t;
+}
+// forma canónica de un equipo (sin fechas) para saber si hay cambios sin subir a GitHub
+const canonTeams=list=>JSON.stringify(list.map(t=>[t.id,t.name,t.members.map(m=>[m.species,m.item,m.ability,m.nature,STAT_KEYS.map(([,k])=>+m.sp[k]||0),m.moves])]));
 function loadTeams(){
-  try{const d=JSON.parse(localStorage.getItem(STORE)||"null");if(d&&d.teams?.length){TB.teams=d.teams;TB.current=Math.min(d.current||0,d.teams.length-1);}}catch(e){}
-  if(!TB.teams.length){ // primer uso: arranca con los equipos guardados en db.json
-    TB.teams=S.seedTeams.map(st=>{
-      const members=st.members.slice(0,6).map(x=>({...emptyMember(),...x,ability:x.ability||S.dex[x.species]?.abilities[0]||"",sp:{...emptyMember().sp,...x.sp},moves:[...(x.moves||[]),"","","",""].slice(0,4)}));
-      while(members.length<6)members.push(emptyMember());
-      return {...newTeam(st.name,members),...(st.id?{id:st.id}:{})};
-    });
-    if(!TB.teams.length)TB.teams=[newTeam("Equipo 1")];
-  }
+  const seeds=S.seedTeams.map(normSeed);
+  TB.seedCanon=canonTeams(seeds);
+  let local=null,prevIds=[];
+  try{local=JSON.parse(localStorage.getItem(STORE)||"null");prevIds=JSON.parse(localStorage.getItem(SEED_IDS)||"[]");}catch(e){}
+  if(local&&local.teams?.length){
+    const byId=new Map(local.teams.map(t=>[t.id,t]));
+    for(const s of seeds){const l=byId.get(s.id);if(!l||(s.updated&&(!l.updated||s.updated>l.updated)))byId.set(s.id,s);}
+    const cur=new Set(seeds.map(s=>s.id));
+    for(const id of [...byId.keys()])if(!cur.has(id)&&prevIds.includes(id))byId.delete(id); // borrado desde otra PC
+    TB.teams=[...byId.values()];TB.current=Math.min(local.current||0,TB.teams.length-1);
+  }else TB.teams=seeds;
+  if(!TB.teams.length)TB.teams=[newTeam("Equipo 1")];
+  try{localStorage.setItem(SEED_IDS,JSON.stringify(seeds.map(s=>s.id)));}catch(_){}
+  paintDirty();
+}
+const teamsDirty=()=>TB.seedCanon!=null&&canonTeams(TB.teams)!==TB.seedCanon;
+function paintDirty(){
+  const d=teamsDirty(),b=$("#ghSave");
+  if(b){b.classList.toggle("dirty",d);$("#ghState").textContent=d?"cambios sin subir":"todo subido";}
+  const m=$("#ghMsg");if(m)m.textContent=d?"● Hay cambios sin subir a GitHub":"✓ Equipos iguales a los publicados";
 }
 function newTeam(name,members){const now=new Date().toISOString();return{id:"t"+Date.now()+Math.random().toString(36).slice(2,6),name,created:now,updated:now,members:members||Array.from({length:6},emptyMember)};}
 function saveTeams(){
-  const t=team();t.updated=new Date().toISOString();
-  t.snapshot=t.members.map(m=>{const p=formOf(m);return p?{species:m.species,form:p.name,stats:finalStats(p,m)}:null;});
-  try{localStorage.setItem(STORE,JSON.stringify({teams:TB.teams,current:TB.current}));const s=$("#savedMsg");if(s){s.textContent="✓ Guardado "+new Date().toLocaleTimeString();}}
+  const t=team();t.updated=new Date().toISOString();delete t.snapshot;
+  try{localStorage.setItem(STORE,JSON.stringify({teams:TB.teams,current:TB.current}));const s=$("#savedMsg");if(s){s.textContent="✓ Guardado en este navegador "+new Date().toLocaleTimeString();}}
   catch(e){const s=$("#savedMsg");if(s)s.textContent="No se pudo guardar en este navegador: exportá el JSON";}
+  paintDirty();
 }
 const team=()=>TB.teams[TB.current];
 const member=()=>team().members[TB.slot];
@@ -558,7 +605,8 @@ function renderTeam(){
       <button class="btn" id="bNew">+ Nuevo</button><button class="btn" id="bDup">Duplicar</button><button class="btn" id="bDel">Eliminar</button>
       <button class="btn" id="bExp">Exportar</button><label class="btn">Importar<input type="file" id="bImp" accept=".json" hidden></label>
       <button class="btn" id="bPaste">Copiar texto</button>
-      <span class="saved" id="savedMsg"></span>
+      <button class="btn" id="bGh" title="Sube los equipos a GitHub: actualiza data/db.json y el sitio publicado">💾 Guardar en GitHub</button>
+      <span class="saved" id="savedMsg"></span><span class="count" id="ghMsg"></span>
     </div>
     <div class="slots">${t.members.map((m,i)=>{const p=formOf(m);return `<div class="slot ${TB.mode==="edit"&&TB.slot===i?"on":""} ${m.species?"":"empty"}" data-s="${i}">${p?imgTag(p.name,p.base)+esc(m.species):"+ Agregar"}</div>`}).join("")}
       <div class="slot ${TB.mode==="overview"?"on":""}" data-s="ov">📋<br>Vista general</div></div>
@@ -570,6 +618,7 @@ function renderTeam(){
   $("#bDel").onclick=()=>{if(!confirm(`¿Eliminar el equipo "${t.name}"?`))return;TB.teams.splice(TB.current,1);if(!TB.teams.length)TB.teams.push(newTeam("Equipo 1"));TB.current=0;TB.mode="overview";saveTeams();renderTeam();};
   $("#bExp").onclick=exportTeams;
   $("#bImp").onchange=importTeams;
+  $("#bGh").onclick=saveToGitHub;paintDirty();
   $("#bPaste").onclick=()=>{const txt=pasteText(t);navigator.clipboard?.writeText(txt).then(()=>{$("#savedMsg").textContent="✓ Texto copiado";},()=>prompt("Copiá el texto:",txt));};
   document.querySelectorAll(".slot").forEach(s=>s.onclick=()=>{if(s.dataset.s==="ov"){TB.mode="overview";}else{TB.slot=+s.dataset.s;TB.mode="edit";}renderTeam();});
   TB.mode==="edit"?renderEditor():renderOverview();
@@ -618,22 +667,27 @@ function renderOverview(){
   }).join("");
   body.innerHTML=`${warns.map(w=>`<div class="warnbox">⚠ ${esc(w)}</div>`).join("")}
     <div class="team-grid">${cards}</div>
-    <div class="panel" style="margin-top:14px"><h4 style="margin:0 0 8px">Estadísticas del equipo <small class="count">(nivel 50 con puntos y naturaleza)</small></h4><div id="teamStats"></div></div>
+    <div class="panel" style="margin-top:14px"><h4 style="margin:0 0 8px">Estadísticas del equipo <small class="count">(nivel 50 con puntos y naturaleza)</small></h4><div id="teamStats"></div>${megas.length?`<p class="hint">Se muestra la forma base. Hacé clic en la megapiedra para ver las estadísticas de la forma Mega (solo si el Pokémon la lleva equipada).</p>`:""}</div>
     <div class="panel" style="margin-top:14px"><h4 style="margin-top:0">Debilidades del equipo</h4>${weakTilesHtml(mem)}</div>
     <div class="panel scroll" style="margin-top:14px"><h4 style="margin-top:0">Detalle por tipo</h4>${weakMatrixHtml(mem)}</div>`;
   body.querySelectorAll("[data-edit]").forEach(c=>c.onclick=()=>{TB.slot=+c.dataset.edit;TB.mode="edit";renderTeam();});
   bindTiles(body,mem);
+  TB.megaShow=TB.megaShow||new Set(); // espacios cuya fila muestra la forma Mega
+  TB.statSort=TB.statSort||{key:"spe",dir:-1};
   const drawStats=()=>{
-    const mode="final";
-    const rows=mem.map(m=>{const p=formOf(m),st=finalStats(p,m);return{p,m,name:p.name,types:p.types.join("/"),item:m.item,nature:m.nature,...st,tot:Object.values(st).reduce((a,c)=>a+c,0)};});
+    const rows=mem.map(m=>{
+      const i=t.members.indexOf(m),mega=megaFor(m.species,m.item),showMega=!!mega&&TB.megaShow.has(i);
+      const p=showMega?mega:S.dex[m.species],st=finalStats(p,m);
+      return{i,p,m,mega,showMega,name:p.name,types:p.types.join("/"),item:m.item,nature:m.nature,...st,tot:Object.values(st).reduce((a,c)=>a+c,0)};});
     // formato condicional por columna: rojo (menor) → verde (mayor) dentro del equipo
     const rng={};for(const k of [...STAT_KEYS.map(([,k])=>k),"tot"]){const vs=rows.map(r=>r[k]);rng[k]=[Math.min(...vs),Math.max(...vs)];}
     const heat=(v,k)=>{const [lo,hi]=rng[k],t=hi>lo?(v-lo)/(hi-lo):.5;return `--t:${t.toFixed(2)}`;};
     const cell=(r,k)=>`<td class="ts"><span class="hp" style="${heat(r[k],k)}">${r[k]}</span></td>`;
     sortableTable($("#teamStats"),[{k:"name",l:"Pokémon"},{k:"item",l:"Objeto"},{k:"nature",l:"Naturaleza"},...STAT_KEYS.map(([l,k])=>({k,l,num:1})),{k:"tot",l:"Total",num:1}],rows,
-      r=>`<tr class="tsr"><td class="tsn">${imgTag(r.p.name,r.p.base)}<div><b>${esc(r.name)}</b><div class="types" style="justify-content:flex-start">${r.p.types.map(typeTag).join("")}</div></div></td>
-        <td class="tsi">${r.item?itemIcon(r.item)+`<span>${esc(r.item)}</span>`:`<span class="count">—</span>`}</td>
-        <td><b>${esc(r.nature)}</b> ${natureChips(r.nature)}</td>${STAT_KEYS.map(([,k])=>cell(r,k)).join("")}<td class="ts"><span class="hp tot" style="${heat(r.tot,"tot")}">${r.tot}</span></td></tr>`,"spe");
+      r=>`<tr class="tsr ${r.showMega?"mega":""}"><td class="tsn">${imgTag(r.p.name,r.p.base)}<div><b>${esc(r.name)}</b>${r.mega?` <small class="count">${r.showMega?"forma Mega":"forma base"}</small>`:""}<div class="types" style="justify-content:flex-start">${r.p.types.map(typeTag).join("")}</div></div></td>
+        <td class="tsi">${!r.item?`<span class="count">—</span>`:r.mega?`<button type="button" class="megabtn ${r.showMega?"on":""}" data-mega="${r.i}" title="${r.showMega?"Ver la forma base":"Ver la forma Mega: "+esc(r.mega.name)}">${itemIcon(r.item)}<span>${esc(r.item)}</span><span class="mk">${r.showMega?"MEGA ✓":"MEGA"}</span></button>`:itemIcon(r.item)+`<span>${esc(r.item)}</span>`}</td>
+        <td><b>${esc(r.nature)}</b> ${natureChips(r.nature)}</td>${STAT_KEYS.map(([,k])=>cell(r,k)).join("")}<td class="ts"><span class="hp tot" style="${heat(r.tot,"tot")}">${r.tot}</span></td></tr>`,TB.statSort);
+    $("#teamStats").querySelectorAll("[data-mega]").forEach(b=>b.onclick=e=>{e.stopPropagation();const i=+b.dataset.mega;TB.megaShow.has(i)?TB.megaShow.delete(i):TB.megaShow.add(i);drawStats();});
   };
   drawStats();
 }
@@ -926,13 +980,16 @@ function usagePanelHtml(m,us,p){
    ${(us.builds||[]).length?`<h4>Builds destacadas</h4><div class="usage-cols">${us.builds.slice(0,4).map((b,i)=>`<div class="buildc"><b>#${i+1}</b> ${esc(b.ability)} · <b>${esc(b.item)}</b> · ${esc(b.nature||"")} <span class="count">(${b.naturePct||""})</span><br>${b.moves.map(esc).join(" · ")}<br><span class="count">${b.wr}% WR · ${b.teams} equipos</span> <button class="btn" style="padding:2px 8px;float:right" data-apply-build="${i}">Aplicar</button></div>`).join("")}</div>`:""}`;
 }
 
+// initial: clave inicial de orden, o un objeto {key,dir} compartido para que el orden sobreviva a un redibujado
 function sortableTable(el,cols,rows,rowHtml,initial){
-  let key=initial||cols[0].k,dir=cols.find(c=>c.k===key)?.num?-1:1;
+  const st=initial&&typeof initial==="object"?initial:{key:initial};
+  if(!st.key)st.key=cols[0].k;if(st.dir==null)st.dir=cols.find(c=>c.k===st.key)?.num?-1:1;
   const draw=()=>{
+    const {key,dir}=st;
     const rs=[...rows].sort((a,b)=>{const A=a[key],B=b[key];return (typeof A==="number"&&typeof B==="number"?A-B:String(A).localeCompare(String(B)))*dir;});
     el.innerHTML=`<div class="panel scroll" style="max-height:72vh;padding:0"><table><thead><tr>${cols.map(c=>`<th class="${c.num?"num":""}" data-k="${c.k}">${c.l}${c.k===key?(dir>0?" ▲":" ▼"):""}</th>`).join("")}</tr></thead><tbody>${rs.slice(0,600).map(rowHtml).join("")}</tbody></table></div>
     ${rs.length>600?`<p class="hint">Mostrando 600 de ${rs.length}. Afiná la búsqueda.</p>`:""}`;
-    el.querySelectorAll("th").forEach(th=>th.onclick=()=>{if(key===th.dataset.k)dir*=-1;else{key=th.dataset.k;dir=cols.find(c=>c.k===key).num?-1:1;}draw();});
+    el.querySelectorAll("th").forEach(th=>th.onclick=()=>{if(st.key===th.dataset.k)st.dir*=-1;else{st.key=th.dataset.k;st.dir=cols.find(c=>c.k===st.key).num?-1:1;}draw();});
     el.querySelectorAll("tr[data-p]").forEach(tr=>tr.onclick=()=>openDetail(S.box.find(b=>b.name===tr.dataset.p)||null,tr.dataset.p));
   };
   draw();
@@ -1022,6 +1079,78 @@ function renderMeta(){
       <span style="color:${S.owned.has(m.name)?"var(--good)":"var(--bad)"};font-weight:700">${S.owned.has(m.name)?"✓ Lo tengo":"✗ Falta"}</span></div>`}).join("")}</div>
     <p class="hint">Fuente: Pikalytics (14/09/2026). Actualizá la hoja Meta_Uso para refrescar.</p>`;
 }
+
+// ================= GUARDAR EN GITHUB =================
+// El sitio es estático (GitHub Pages), así que la única forma de persistir los equipos es escribir en el repo vía la API de GitHub
+// con un token personal (fine-grained, permiso Contents: read & write sobre este repo). El token queda solo en localStorage.
+const GH={owner:"ccFabrissin",repo:"pkm",branch:"main"};
+const GH_TOKEN="pkm-gh-token";
+const MK=s=>"<!--DATA-"+s+"-->"; // marcadores del bloque embebido (armados por partes para que scripts/actualizar_visor.py no los confunda)
+const ghToken=()=>{try{return localStorage.getItem(GH_TOKEN)||"";}catch(_){return "";}};
+function ghAskToken(){
+  const t=prompt(`Para guardar los equipos en el sitio hace falta un token de GitHub con permiso de escritura sobre ${GH.owner}/${GH.repo}.\n\n1. github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token\n2. Repository access: Only select repositories → ${GH.repo}\n3. Permissions → Repository permissions → Contents: Read and write\n\nPegá el token acá (queda guardado solo en este navegador):`);
+  if(t==null)return "";const v=t.trim();
+  try{if(v)localStorage.setItem(GH_TOKEN,v);else localStorage.removeItem(GH_TOKEN);}catch(_){}
+  return v;
+}
+async function gh(path,opt={},token){
+  const r=await fetch("https://api.github.com"+path,{method:opt.method||"GET",body:opt.body,
+    headers:{Authorization:"Bearer "+token,Accept:opt.raw?"application/vnd.github.raw+json":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(opt.body?{"Content-Type":"application/json"}:{})}});
+  if(!r.ok){let msg=r.status+" "+r.statusText;try{msg+=": "+(await r.json()).message;}catch(_){}throw new Error(msg);}
+  return opt.raw?r.text():r.json();
+}
+const cleanTeam=t=>{const {snapshot,...rest}=t;return rest;};
+// Reemplaza solo la sección "teams" del db.json del repo (formato indent=1 de crear_db.py) para que el diff en GitHub sea mínimo.
+function dbJsonWithTeams(txt,teams){
+  const m=/\n "teams": /.exec(txt);
+  if(m){const rest=txt.slice(m.index+m[0].length),nx=rest.search(/\n "[^"]+": /);
+    if(nx>0){const arr=JSON.stringify(teams,null,1).split("\n").map((l,i)=>i?" "+l:l).join("\n");return txt.slice(0,m.index)+m[0]+arr+","+rest.slice(nx);}}
+  return JSON.stringify({...JSON.parse(txt),teams},null,1);
+}
+async function saveToGitHub(){
+  if(!S.dex||!DBRAW){alert("No hay datos cargados.");return;}
+  if(!TB.teams.length)loadTeams();
+  const token=ghToken()||ghAskToken();if(!token)return;
+  const btn=$("#ghSave"),msg=s=>{const e=$("#ghMsg");if(e)e.textContent=s;$("#ghState").textContent=s;};
+  btn.disabled=true;
+  try{
+    saveTeams();
+    const teams=TB.teams.map(cleanTeam),R=`/repos/${GH.owner}/${GH.repo}`;
+    msg("Leyendo el repositorio…");
+    const br=await gh(`${R}/branches/${GH.branch}`,{},token);
+    const headSha=br.commit.sha,treeSha=br.commit.commit.tree.sha;
+    const [html,dbRepo]=await Promise.all([gh(`${R}/contents/visor.html?ref=${GH.branch}`,{raw:1},token),gh(`${R}/contents/data/db.json?ref=${GH.branch}`,{raw:1},token)]);
+    const db={...JSON.parse(dbRepo),teams}; // el db.json del repo es la fuente de verdad; solo cambian los equipos
+    const re=new RegExp(MK("START")+"[\\s\\S]*?"+MK("END"));
+    if(!re.test(html))throw new Error("el visor.html del repositorio no tiene el bloque de datos embebidos");
+    const now=new Date(),pad=n=>String(n).padStart(2,"0"),stamp=`${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+    const payload=JSON.stringify(db).replace(/<\//g,"<\\/");
+    const block=MK("START")+`<script id="db" type="application/json" data-source="db.json (${stamp})">`+payload+"<\/script>"+MK("END");
+    const html2=html.replace(re,()=>block),dbTxt=dbJsonWithTeams(dbRepo,teams);
+    msg("Subiendo archivos…");
+    const blob=async content=>(await gh(`${R}/git/blobs`,{method:"POST",body:JSON.stringify({content,encoding:"utf-8"})},token)).sha;
+    const [shaDb,shaHtml]=await Promise.all([blob(dbTxt),blob(html2)]);
+    const tree=await gh(`${R}/git/trees`,{method:"POST",body:JSON.stringify({base_tree:treeSha,tree:[
+      {path:"data/db.json",mode:"100644",type:"blob",sha:shaDb},{path:"visor.html",mode:"100644",type:"blob",sha:shaHtml}]})},token);
+    const names=TB.teams.map(t=>t.name).join(", ");
+    const commit=await gh(`${R}/git/commits`,{method:"POST",body:JSON.stringify({message:`Equipos guardados desde el visor: ${names}`,tree:tree.sha,parents:[headSha]})},token);
+    await gh(`${R}/git/refs/heads/${GH.branch}`,{method:"PATCH",body:JSON.stringify({sha:commit.sha})},token);
+    DBRAW=db;S.seedTeams=db.teams;TB.seedCanon=canonTeams(TB.teams);
+    try{localStorage.setItem(SEED_IDS,JSON.stringify(TB.teams.map(t=>t.id)));}catch(_){}
+    paintDirty();
+    const s=$("#savedMsg");if(s)s.textContent=`✓ Subido a GitHub ${now.toLocaleTimeString()} (commit ${commit.sha.slice(0,7)}). El sitio se actualiza en 1-2 minutos.`;
+  }catch(err){
+    if(/^(401|403)/.test(err.message)){try{localStorage.removeItem(GH_TOKEN);}catch(_){}alert("GitHub rechazó el token ("+err.message+"). Volvé a intentar y pegá uno nuevo.");}
+    else alert("No se pudo guardar en GitHub: "+err.message);
+    paintDirty();
+  }finally{btn.disabled=false;}
+}
+$("#ghSave").onclick=saveToGitHub;
+$("#ghToken").onclick=()=>{
+  const cur=ghToken();
+  if(cur&&confirm("Ya hay un token de GitHub guardado en este navegador.\n\nAceptar: olvidarlo.\nCancelar: dejarlo como está.")){try{localStorage.removeItem(GH_TOKEN);}catch(_){}alert("Token olvidado.");return;}
+  if(!cur)ghAskToken();
+};
 
 // arranque con datos embebidos
 const embedded=JSON.parse($("#db").textContent);
