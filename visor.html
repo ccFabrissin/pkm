@@ -272,6 +272,12 @@ td.itc{white-space:nowrap;vertical-align:middle}td.itc>span{vertical-align:middl
 .megabtn.on{background:var(--accent);color:var(--char);border-style:solid;font-weight:700}
 .megabtn .mk{font-size:10px;font-weight:800;letter-spacing:.04em;opacity:.8}
 tr.tsr.mega td.tsn b{color:var(--accent-ink)}
+.benchbtn{flex:none;width:22px;height:22px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font:inherit;font-weight:900;line-height:1;cursor:pointer;padding:0}
+.benchbtn:hover{border-color:var(--accent);color:var(--accent-ink)}
+#teamStats tr.bench td{padding:3px 6px;font-size:12px;color:var(--muted)}
+#teamStats tr.bench .tsn img{width:26px;height:26px}
+#teamStats tr.bench .tsn b{font-size:13px;font-weight:600;color:var(--muted)}
+#teamStats tr.tsr:not(.bench)+tr.bench td{border-top:2px dashed var(--accent)}
 /* ---- selector de tipo ---- */
 .tp{position:relative;display:inline-block}
 .tp-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:5px 10px;border-radius:8px;cursor:pointer;font:inherit;min-height:36px}
@@ -648,7 +654,7 @@ function renderOverview(){
   }).join("");
   body.innerHTML=`${warns.map(w=>`<div class="warnbox">⚠ ${esc(w)}</div>`).join("")}
     <div class="team-grid">${cards}</div>
-    <div class="panel" style="margin-top:14px"><h4 style="margin:0 0 8px">Estadísticas del equipo <small class="count">(nivel 50 con puntos y naturaleza)</small></h4><div id="teamStats"></div>${megas.length?`<p class="hint">Se muestra la forma base. Hacé clic en la megapiedra para ver las estadísticas de la forma Mega (solo si el Pokémon la lleva equipada).</p>`:""}</div>
+    <div class="panel" style="margin-top:14px"><h4 style="margin:0 0 8px">Estadísticas del equipo <small class="count">(nivel 50 con puntos y naturaleza)</small></h4><div id="teamStats"></div><p class="hint">Con <b>−</b> mandás un Pokémon al banco: queda minimizado al final de la tabla (los 4 que usás en la partida quedan arriba); con <b>+</b> vuelve.${megas.length?" Se muestra la forma base: hacé clic en la megapiedra para ver las estadísticas de la forma Mega (solo si el Pokémon la lleva equipada).":""}</p></div>
     <div class="panel" style="margin-top:14px"><h4 style="margin-top:0">Debilidades del equipo</h4>${weakTilesHtml(mem)}</div>
     <div class="panel scroll" style="margin-top:14px"><h4 style="margin-top:0">Detalle por tipo</h4>${weakMatrixHtml(mem)}</div>`;
   body.querySelectorAll("[data-edit]").forEach(c=>c.onclick=()=>{TB.slot=+c.dataset.edit;TB.mode="edit";renderTeam();});
@@ -657,20 +663,27 @@ function renderOverview(){
   TB.statSort=TB.statSort||{key:"spe",dir:-1};
   // Las filas son objetos estables: al alternar base/Mega se actualizan en el lugar (sin reordenar) y el orden por columna las reutiliza.
   const fillRow=r=>{const m=r.m,mega=megaFor(m.species,m.item),showMega=!!mega&&TB.megaShow.has(r.i),p=showMega?mega:S.dex[m.species],st=finalStats(p,m);
-    return Object.assign(r,{p,mega,showMega,name:p.name,types:p.types.join("/"),item:m.item,nature:m.nature,...st,tot:Object.values(st).reduce((a,c)=>a+c,0)});};
+    return Object.assign(r,{p,mega,showMega,bench:!!m.bench,_g:m.bench?1:0,name:p.name,types:p.types.join("/"),item:m.item,nature:m.nature,...st,tot:Object.values(st).reduce((a,c)=>a+c,0)});};
   const rows=mem.map(m=>fillRow({i:t.members.indexOf(m),m}));
-  // formato condicional por columna: rojo (menor) → verde (mayor) dentro del equipo
-  const rng={},calcRng=()=>{for(const k of [...STAT_KEYS.map(([,k])=>k),"tot"]){const vs=rows.map(r=>r[k]);rng[k]=[Math.min(...vs),Math.max(...vs)];}};
+  // formato condicional por columna: rojo (menor) → verde (mayor) entre los Pokémon en uso (los del banco no cuentan)
+  const rng={},calcRng=()=>{const act=rows.filter(r=>!r.bench),src=act.length?act:rows;for(const k of [...STAT_KEYS.map(([,k])=>k),"tot"]){const vs=src.map(r=>r[k]);rng[k]=[Math.min(...vs),Math.max(...vs)];}};
   const heat=(v,k)=>{const [lo,hi]=rng[k],t=hi>lo?(v-lo)/(hi-lo):.5;return `--t:${t.toFixed(2)}`;};
   const cell=(r,k)=>`<td class="ts"><span class="hp" style="${heat(r[k],k)}">${r[k]}</span></td>`;
-  const rowHtml=r=>`<tr class="tsr ${r.showMega?"mega":""}" data-i="${r.i}"><td class="tsn">${imgTag(r.p.name,r.p.base)}<div><b>${esc(r.name)}</b>${r.mega?` <small class="count">${r.showMega?"forma Mega":"forma base"}</small>`:""}<div class="types" style="justify-content:flex-start">${r.p.types.map(typeTag).join("")}</div></div></td>
+  const rowHtml=r=>r.bench?`<tr class="tsr bench" data-i="${r.i}"><td class="tsn"><button type="button" class="benchbtn" data-bench="${r.i}" title="Volver a poner en uso">+</button>${imgTag(r.p.name,r.p.base)}<div><b>${esc(r.name)}</b> <small>· en el banco</small></div></td>
+      <td class="tsi">${r.item?esc(r.item):"—"}</td><td>${esc(r.nature)}</td>${STAT_KEYS.map(([,k])=>`<td class="ts">${r[k]}</td>`).join("")}<td class="ts">${r.tot}</td></tr>`
+    :`<tr class="tsr ${r.showMega?"mega":""}" data-i="${r.i}"><td class="tsn"><button type="button" class="benchbtn" data-bench="${r.i}" title="Mandar al banco (minimizar al final de la tabla)">−</button>${imgTag(r.p.name,r.p.base)}<div><b>${esc(r.name)}</b>${r.mega?` <small class="count">${r.showMega?"forma Mega":"forma base"}</small>`:""}<div class="types" style="justify-content:flex-start">${r.p.types.map(typeTag).join("")}</div></div></td>
       <td class="tsi">${!r.item?`<span class="count">—</span>`:r.mega?`<button type="button" class="megabtn ${r.showMega?"on":""}" data-mega="${r.i}" title="${r.showMega?"Ver la forma base":"Ver la forma Mega: "+esc(r.mega.name)}">${itemIcon(r.item)}<span>${esc(r.item)}</span><span class="mk">${r.showMega?"MEGA ✓":"MEGA"}</span></button>`:itemIcon(r.item)+`<span>${esc(r.item)}</span>`}</td>
       <td><b>${esc(r.nature)}</b> ${natureChips(r.nature)}</td>${STAT_KEYS.map(([,k])=>cell(r,k)).join("")}<td class="ts"><span class="hp tot" style="${heat(r.tot,"tot")}">${r.tot}</span></td></tr>`;
   calcRng();
   const ts=$("#teamStats");
-  sortableTable(ts,[{k:"name",l:"Pokémon"},{k:"item",l:"Objeto"},{k:"nature",l:"Naturaleza"},...STAT_KEYS.map(([l,k])=>({k,l,num:1})),{k:"tot",l:"Total",num:1}],rows,rowHtml,TB.statSort);
-  // clic en la megapiedra (delegado: sobrevive a los reordenamientos por columna). Cambia la fila en su lugar, sin reordenar.
-  ts.onclick=e=>{const b=e.target.closest("[data-mega]");if(!b)return;
+  const redraw=sortableTable(ts,[{k:"name",l:"Pokémon"},{k:"item",l:"Objeto"},{k:"nature",l:"Naturaleza"},...STAT_KEYS.map(([l,k])=>({k,l,num:1})),{k:"tot",l:"Total",num:1}],rows,rowHtml,TB.statSort);
+  // clics delegados (sobreviven a los reordenamientos por columna):
+  // - megapiedra: cambia la fila en su lugar, sin reordenar
+  // - banco (−/+): marca el miembro y redibuja; los del banco van siempre al final
+  ts.onclick=e=>{
+    const bb=e.target.closest("[data-bench]");
+    if(bb){const m=t.members[+bb.dataset.bench];m.bench=!m.bench;saveTeams();rows.forEach(fillRow);calcRng();redraw();return;}
+    const b=e.target.closest("[data-mega]");if(!b)return;
     const i=+b.dataset.mega;TB.megaShow.has(i)?TB.megaShow.delete(i):TB.megaShow.add(i);
     rows.forEach(fillRow);calcRng();const by=new Map(rows.map(r=>[r.i,r]));
     ts.querySelectorAll("tbody tr[data-i]").forEach(tr=>{tr.outerHTML=rowHtml(by.get(+tr.dataset.i));});};
@@ -970,13 +983,15 @@ function sortableTable(el,cols,rows,rowHtml,initial){
   if(!st.key)st.key=cols[0].k;if(st.dir==null)st.dir=cols.find(c=>c.k===st.key)?.num?-1:1;
   const draw=()=>{
     const {key,dir}=st;
-    const rs=[...rows].sort((a,b)=>{const A=a[key],B=b[key];return (typeof A==="number"&&typeof B==="number"?A-B:String(A).localeCompare(String(B)))*dir;});
+    const rs=[...rows].sort((a,b)=>{const g=(a._g||0)-(b._g||0);if(g)return g; // _g: grupo fijo (p. ej. banco al final)
+      const A=a[key],B=b[key];return (typeof A==="number"&&typeof B==="number"?A-B:String(A).localeCompare(String(B)))*dir;});
     el.innerHTML=`<div class="panel scroll" style="max-height:72vh;padding:0"><table><thead><tr>${cols.map(c=>`<th class="${c.num?"num":""}" data-k="${c.k}">${c.l}${c.k===key?(dir>0?" ▲":" ▼"):""}</th>`).join("")}</tr></thead><tbody>${rs.slice(0,600).map(rowHtml).join("")}</tbody></table></div>
     ${rs.length>600?`<p class="hint">Mostrando 600 de ${rs.length}. Afiná la búsqueda.</p>`:""}`;
     el.querySelectorAll("th").forEach(th=>th.onclick=()=>{if(st.key===th.dataset.k)st.dir*=-1;else{st.key=th.dataset.k;st.dir=cols.find(c=>c.k===st.key).num?-1:1;}draw();});
     el.querySelectorAll("tr[data-p]").forEach(tr=>tr.onclick=()=>openDetail(S.box.find(b=>b.name===tr.dataset.p)||null,tr.dataset.p));
   };
   draw();
+  return draw;
 }
 
 function renderDex(){
