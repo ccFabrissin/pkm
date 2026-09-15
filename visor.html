@@ -7,35 +7,36 @@
 <script>try{const t=localStorage.getItem("pkm-theme");if(t)document.documentElement.dataset.theme=t;}catch(_){}</script>
 <style>
 /* Paleta: Charcoal Blue #373F51 · Sky Aqua #54DEFD. Modo claro por defecto; oscuro con [data-theme=dark] o preferencia del sistema. */
-/* Paleta adaptativa: --h y --s los fija el JS según el fondo de cada pantalla (por defecto Sky Aqua sobre Charcoal Blue). */
+/* Paleta adaptativa: --h y --s los fija el JS según el fondo de cada pantalla (por defecto Sky Aqua sobre Charcoal Blue).
+   Solo los acentos siguen el tono del fondo; las superficies (fondo, paneles, filas) se mantienen casi neutras para no teñirse de ocre con fondos cálidos. */
 :root{
   --h:191;--s:90%;
-  --bg:hsl(var(--h) 25% 95%);--panel:hsl(var(--h) 30% 99%);--ink:hsl(var(--h) 20% 17%);--muted:hsl(var(--h) 10% 45%);--line:hsl(var(--h) 22% 87%);
+  --bg:hsl(var(--h) 8% 95%);--panel:hsl(var(--h) 10% 99%);--ink:hsl(var(--h) 8% 15%);--muted:hsl(var(--h) 5% 45%);--line:hsl(var(--h) 8% 87%);
   --accent:hsl(var(--h) var(--s) 60%);--accent-ink:hsl(var(--h) var(--s) 31%);--accent-soft:hsl(var(--h) 60% 92%);
   --aqua:var(--accent);--aqua-2:hsl(var(--h) var(--s) 78%);--aqua-ink:var(--accent-ink);
-  --char:hsl(var(--h) 24% 26%);--char-2:hsl(var(--h) 20% 36%);--char-3:hsl(var(--h) 26% 19%);--char-4:hsl(var(--h) 26% 14%);
-  --row:hsl(var(--h) 25% 95%);--row-ink:var(--ink);--row-muted:var(--muted);--ctrl:hsl(var(--h) 20% 87%);
+  --char:hsl(var(--h) 9% 22%);--char-2:hsl(var(--h) 8% 32%);--char-3:hsl(var(--h) 9% 15%);--char-4:hsl(var(--h) 9% 10%);
+  --row:hsl(var(--h) 8% 95%);--row-ink:var(--ink);--row-muted:var(--muted);--ctrl:hsl(var(--h) 8% 87%);
   --good:#2e9d5b;--bad:#d24b4b;--warn:#d99a1e;
-  --gm-bg:linear-gradient(160deg,hsl(var(--h) 28% 92%),hsl(var(--h) 26% 84%));--gm-chrome:#fff;--gm-pill:#fff;--gm-pill-hover:hsl(var(--h) 45% 96%);--gm-pill-ink:var(--ink);--gm-pill-muted:var(--accent-ink);--gm-ball:hsl(var(--h) 22% 90%);--gm-border:var(--char);
+  --gm-bg:linear-gradient(160deg,hsl(var(--h) 10% 92%),hsl(var(--h) 9% 84%));--gm-chrome:#fff;--gm-pill:#fff;--gm-pill-hover:hsl(var(--h) 30% 96%);--gm-pill-ink:var(--ink);--gm-pill-muted:var(--accent-ink);--gm-ball:hsl(var(--h) 8% 90%);--gm-border:var(--char);
   --veil:.84;--gm-img:none;
 }
 :root[data-theme="dark"]{
-  --bg:hsl(var(--h) 22% 12%);--panel:hsl(var(--h) 20% 18%);--ink:hsl(var(--h) 20% 95%);--muted:hsl(var(--h) 12% 70%);--line:hsl(var(--h) 16% 28%);
+  --bg:hsl(var(--h) 6% 9%);--panel:hsl(var(--h) 6% 14%);--ink:hsl(var(--h) 5% 95%);--muted:hsl(var(--h) 5% 70%);--line:hsl(var(--h) 6% 25%);
   --accent:hsl(var(--h) var(--s) 66%);--accent-ink:var(--accent);--accent-soft:hsl(var(--h) 45% 24%);
   --aqua-2:hsl(var(--h) var(--s) 80%);
-  --char:hsl(var(--h) 22% 21%);--char-2:hsl(var(--h) 18% 31%);--char-3:hsl(var(--h) 24% 16%);--char-4:hsl(var(--h) 24% 11%);
-  --row:hsl(var(--h) 16% 27%);--ctrl:hsl(var(--h) 16% 34%);
-  --gm-bg:linear-gradient(160deg,hsl(var(--h) 20% 18%),hsl(var(--h) 22% 10%));--gm-chrome:hsl(var(--h) 16% 27%);--gm-pill:hsl(var(--h) 16% 27%);--gm-pill-hover:hsl(var(--h) 16% 34%);--gm-pill-muted:hsl(var(--h) var(--s) 78%);--gm-ball:hsl(var(--h) 16% 36%);--gm-border:var(--accent);
-  --veil:.86;
+  --char:hsl(var(--h) 6% 16%);--char-2:hsl(var(--h) 6% 26%);--char-3:hsl(var(--h) 6% 12%);--char-4:hsl(var(--h) 6% 8%);
+  --row:hsl(var(--h) 6% 23%);--ctrl:hsl(var(--h) 6% 30%);
+  --gm-bg:linear-gradient(160deg,hsl(var(--h) 6% 14%),hsl(var(--h) 6% 7%));--gm-chrome:hsl(var(--h) 6% 23%);--gm-pill:hsl(var(--h) 6% 23%);--gm-pill-hover:hsl(var(--h) 6% 30%);--gm-pill-muted:hsl(var(--h) var(--s) 78%);--gm-ball:hsl(var(--h) 6% 32%);--gm-border:var(--accent);
+  --veil:.88;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:hsl(var(--h) 22% 12%);--panel:hsl(var(--h) 20% 18%);--ink:hsl(var(--h) 20% 95%);--muted:hsl(var(--h) 12% 70%);--line:hsl(var(--h) 16% 28%);
+  --bg:hsl(var(--h) 6% 9%);--panel:hsl(var(--h) 6% 14%);--ink:hsl(var(--h) 5% 95%);--muted:hsl(var(--h) 5% 70%);--line:hsl(var(--h) 6% 25%);
   --accent:hsl(var(--h) var(--s) 66%);--accent-ink:var(--accent);--accent-soft:hsl(var(--h) 45% 24%);
   --aqua-2:hsl(var(--h) var(--s) 80%);
-  --char:hsl(var(--h) 22% 21%);--char-2:hsl(var(--h) 18% 31%);--char-3:hsl(var(--h) 24% 16%);--char-4:hsl(var(--h) 24% 11%);
-  --row:hsl(var(--h) 16% 27%);--ctrl:hsl(var(--h) 16% 34%);
-  --gm-bg:linear-gradient(160deg,hsl(var(--h) 20% 18%),hsl(var(--h) 22% 10%));--gm-chrome:hsl(var(--h) 16% 27%);--gm-pill:hsl(var(--h) 16% 27%);--gm-pill-hover:hsl(var(--h) 16% 34%);--gm-pill-muted:hsl(var(--h) var(--s) 78%);--gm-ball:hsl(var(--h) 16% 36%);--gm-border:var(--accent);
-  --veil:.86;
+  --char:hsl(var(--h) 6% 16%);--char-2:hsl(var(--h) 6% 26%);--char-3:hsl(var(--h) 6% 12%);--char-4:hsl(var(--h) 6% 8%);
+  --row:hsl(var(--h) 6% 23%);--ctrl:hsl(var(--h) 6% 30%);
+  --gm-bg:linear-gradient(160deg,hsl(var(--h) 6% 14%),hsl(var(--h) 6% 7%));--gm-chrome:hsl(var(--h) 6% 23%);--gm-pill:hsl(var(--h) 6% 23%);--gm-pill-hover:hsl(var(--h) 6% 30%);--gm-pill-muted:hsl(var(--h) var(--s) 78%);--gm-ball:hsl(var(--h) 6% 32%);--gm-border:var(--accent);
+  --veil:.88;
 }}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
@@ -201,7 +202,7 @@ td.itc{white-space:nowrap;vertical-align:middle}td.itc>span{vertical-align:middl
 .gm-pill .dot{position:absolute;left:5px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--aqua);box-shadow:0 0 0 2px var(--gm-chrome)}
 .gm-pill .pct{margin-left:auto;font-size:12px;color:var(--gm-pill-muted);font-weight:600}
 .gm-pill.sel .pct{color:var(--char-2)}
-.gm-panel{background:linear-gradient(160deg,hsl(var(--h) 20% 32% / .95),hsl(var(--h) 24% 18% / .95));border:2px solid var(--aqua);border-radius:14px;color:#fff;min-height:340px;padding:18px 22px;font-size:17px;line-height:1.45;position:relative;overflow:hidden}
+.gm-panel{background:linear-gradient(160deg,hsl(var(--h) 7% 27% / .95),hsl(var(--h) 7% 13% / .95));border:2px solid var(--aqua);border-radius:14px;color:#fff;min-height:340px;padding:18px 22px;font-size:17px;line-height:1.45;position:relative;overflow:hidden}
 .gm-panel::after{content:"";position:absolute;left:-60px;top:-40px;width:260px;height:260px;border-radius:50%;border:26px solid hsl(var(--h) var(--s) 66% / .12);pointer-events:none}
 .gm-panel h3{margin:0 0 8px;font-size:22px;font-weight:600;color:var(--aqua)}
 .gm-tag{display:inline-block;background:var(--aqua);color:var(--char);border-radius:999px;padding:3px 16px;font-size:15px;font-weight:600;margin:10px 6px 0 0}
