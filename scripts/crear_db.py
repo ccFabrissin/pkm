@@ -1,7 +1,7 @@
 """Genera data/db.json: la base de datos única del proyecto (Reg M-C).
 
 Toma los datos de referencia de data/fuentes/ (extraídos de Pokémon Showdown y WikiDex) y
-conserva lo que ya haya en db.json y sea tuyo o descargado: box, teams y usage.
+conserva lo que ya haya en db.json y sea tuyo o descargado: teams y usage.
 Uso: python scripts/crear_db.py
 """
 import json
@@ -105,7 +105,6 @@ def main():
                         "Pikalytics (top de uso)", "pokemon-zone.com (uso por Pokémon y PP de Champions)"],
             "generated": time.strftime("%Y-%m-%d %H:%M"),
         },
-        "box": old.get("box", []),
         "teams": old.get("teams", []),
         "pokedex": pokedex,
         "items": items,
@@ -118,12 +117,8 @@ def main():
         "usage": usage,
     }
     DB.write_text(json.dumps(db, ensure_ascii=False, indent=1), encoding="utf-8")
-    names = {p["name"] for p in pokedex}
-    bad = [b["name"] for b in db["box"] if b["name"] not in names]
-    print(f"OK {DB.relative_to(ROOT)}: box={len(db['box'])} equipos={len(db['teams'])} pokedex={len(pokedex)} "
+    print(f"OK {DB.relative_to(ROOT)}: equipos={len(db['teams'])} pokedex={len(pokedex)} "
           f"objetos={len(items)} movimientos={len(moves)} uso={len(usage['species'])} especies")
-    if bad:
-        print("Nombres de la box que no están en la Pokédex:", bad)
 
 
 if __name__ == "__main__":

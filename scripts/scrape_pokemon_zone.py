@@ -147,9 +147,6 @@ def main():
     if args:
         names = [n for n in names if n in args]
         force = True
-    # primero los Pokémon de la box, así lo más útil llega antes
-    owned = {b["name"] for b in db.get("box", [])}
-    names.sort(key=lambda n: n not in owned)
     result = db.get("usage") or {"species": {}, "pp": {}}
     result["source"] = "pokemon-zone.com (Limitless, Reg M-C)"
     result["date"] = time.strftime("%Y-%m-%d")
