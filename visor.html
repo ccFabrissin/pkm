@@ -112,6 +112,14 @@ td.itc{white-space:nowrap;vertical-align:middle}td.itc>span{vertical-align:middl
 .weak{font-size:15px}.weak th{font-size:13px;text-align:center}.weak th.mon{vertical-align:bottom;padding-bottom:4px}.weak th.mon img{width:48px;height:48px;display:block;margin:0 auto;object-fit:contain}.weak th.mon span{display:block}.weak td{text-align:center;font-weight:700;min-width:60px;padding:9px 8px;font-size:16px}.weak td:first-child{text-align:left}.weak .t{font-size:12px;padding:3px 9px}
 .w4{background:#e05252;color:#fff}.w2{background:#f3a3a3;color:#5b0f0f}.r2{background:#bfe6c8;color:#0e4a24}.r4{background:#6dc486;color:#fff}.i0{background:#8a8aa0;color:#fff}
 .sum{font-weight:700}
+.dlg{position:fixed;inset:0;z-index:60;background:rgba(31,37,48,.55);display:grid;place-items:center;padding:16px}
+.dlg-box{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:14px;padding:18px 20px 16px;max-width:400px;width:100%;box-shadow:0 18px 48px #0007}
+.dlg-box p{margin:0 0 14px;font-size:15px;line-height:1.4}
+.dlg-box textarea{width:100%;box-sizing:border-box;font:12px/1.4 ui-monospace,Consolas,monospace;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);padding:8px;margin:-6px 0 14px;resize:vertical}
+.dlg-btns{display:flex;justify-content:flex-end;gap:8px}
+.btn.pri{background:var(--accent);color:var(--char-4);border-color:transparent}
+.btn.pri:hover{filter:brightness(1.08)}
+.btn.pri.danger{background:#d24b4b;color:#fff}
 .modal{position:fixed;inset:0;background:rgba(31,37,48,.65);display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto;z-index:10}
 .modal.on{display:flex}
 .modal .panel{max-width:760px;width:100%}
@@ -219,7 +227,15 @@ td.itc{white-space:nowrap;vertical-align:middle}td.itc>span{vertical-align:middl
 .up2{color:#ff6b7d;font-weight:900}.down2{color:var(--aqua);font-weight:900}
 .gm-preview{max-width:960px;margin:14px auto 0;background:var(--gm-pill);color:var(--gm-pill-ink);border-radius:10px;padding:8px 14px;font-size:14px;display:flex;flex-wrap:wrap;gap:6px 18px}
 .gm-sort{display:flex;gap:10px;margin:0 0 10px 4px}
-.gm-sort button{flex:1;border:0;border-radius:10px;background:var(--char);color:#fff;font:inherit;font-size:15px;padding:6px 14px;text-align:left;cursor:pointer}
+.gm-dd{flex:1;position:relative}
+.gm-dd>button{width:100%;border:0;border-radius:10px;background:var(--char);color:#fff;font:inherit;font-size:15px;padding:6px 14px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.gm-dd>button::after{content:"▾";opacity:.7;font-size:13px}
+.gm-dd.open>button{border-radius:10px 10px 0 0}
+.gm-menu{display:none;position:absolute;left:0;right:0;top:100%;z-index:5;background:var(--char);border-radius:0 0 10px 10px;padding:4px;box-shadow:0 10px 24px #0006}
+.gm-dd.open .gm-menu{display:block}
+.gm-menu button{display:block;width:100%;border:0;background:transparent;color:#fff;font:inherit;font-size:15px;padding:7px 12px;border-radius:8px;text-align:left;cursor:pointer}
+.gm-menu button:hover{background:#ffffff1f}
+.gm-menu button.on{background:var(--accent);color:var(--char-4)}
 .mv-pill{display:grid;grid-template-columns:54px 1fr 50px;align-items:center;min-height:48px;border-radius:10px;background:var(--gm-pill);border:0;padding:0;overflow:hidden;cursor:pointer;font:inherit;color:var(--gm-pill-ink);box-shadow:0 2px 0 #0003;position:relative;text-align:left}
 .mv-pill:hover{background:var(--gm-pill-hover)}
 .mv-pill .ti{align-self:stretch;display:grid;place-items:center}
@@ -367,7 +383,7 @@ function build(db){
 $("#file").addEventListener("change",async e=>{
   const f=e.target.files[0];if(!f)return;
   try{build(JSON.parse(await f.text()));TB.teams=[];$("#src").textContent="Datos: "+f.name;}
-  catch(err){alert("No es un db.json válido: "+err.message);}
+  catch(err){aviso("No es un db.json válido: "+err.message);}
 });
 
 // ---------- cálculos ----------
@@ -453,6 +469,22 @@ function openDetail(pname){
   $("#modal").classList.add("on");
 }
 function closeModal(){$("#modal").classList.remove("on");}
+// Diálogos propios (los alert/confirm nativos del navegador desentonan con el visor). Devuelven una promesa: true = aceptó.
+function dlg({text,ok="Aceptar",cancel=null,danger=false,extra=""}){
+  return new Promise(res=>{
+    const el=document.createElement("div");el.className="dlg";
+    el.innerHTML=`<div class="dlg-box"><p>${esc(text)}</p>${extra}<div class="dlg-btns">${cancel?`<button class="btn" data-r="0">${esc(cancel)}</button>`:""}<button class="btn pri ${danger?"danger":""}" data-r="1">${esc(ok)}</button></div></div>`;
+    document.body.appendChild(el);
+    const done=r=>{el.remove();document.removeEventListener("keydown",key,true);res(r);};
+    const key=e=>{if(e.key==="Escape"){e.stopPropagation();done(false);}else if(e.key==="Enter"&&e.target.tagName!=="TEXTAREA"){e.stopPropagation();done(true);}};
+    document.addEventListener("keydown",key,true);
+    el.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>done(b.dataset.r==="1"));
+    el.onclick=e=>{if(e.target===el)done(false);};
+    const ta=el.querySelector("textarea");if(ta){ta.focus();ta.select();}else el.querySelector(".pri").focus();
+  });
+}
+const aviso=text=>dlg({text});
+const confirmar=(text,ok="Eliminar")=>dlg({text,ok,cancel:"Cancelar",danger:true});
 // ================= FONDOS =================
 // Las imágenes de fondos/ rotan en cada pantalla y la paleta se adapta al color dominante de la que está en uso.
 // FONDOS lo genera scripts/paleta_fondos.py: {archivo:{h:tono, s:saturación, lum:luminosidad media}}.
@@ -563,10 +595,10 @@ function renderTeam(){
   $("#teamName").oninput=e=>{t.name=e.target.value;saveTeams();$("#teamSel").options[TB.current].text=`${t.name} (${t.members.filter(m=>m.species).length}/6)`;};
   $("#bNew").onclick=()=>{TB.teams.push(newTeam("Equipo "+(TB.teams.length+1)));TB.current=TB.teams.length-1;TB.slot=0;TB.mode="edit";saveTeams();renderTeam();};
   $("#bDup").onclick=()=>{const c=JSON.parse(JSON.stringify(t));Object.assign(c,newTeam(t.name+" (copia)",c.members));TB.teams.push(c);TB.current=TB.teams.length-1;saveTeams();renderTeam();};
-  $("#bDel").onclick=()=>{if(!confirm(`¿Eliminar el equipo "${t.name}"?`))return;TB.teams.splice(TB.current,1);if(!TB.teams.length)TB.teams.push(newTeam("Equipo 1"));TB.current=0;TB.mode="overview";saveTeams();renderTeam();};
+  $("#bDel").onclick=async()=>{if(!await confirmar(`¿Eliminar el equipo "${t.name}"?`))return;TB.teams.splice(TB.current,1);if(!TB.teams.length)TB.teams.push(newTeam("Equipo 1"));TB.current=0;TB.mode="overview";saveTeams();renderTeam();};
   $("#bExp").onclick=exportTeams;
   $("#bImp").onchange=importTeams;
-  $("#bPaste").onclick=()=>{const txt=pasteText(t);navigator.clipboard?.writeText(txt).then(()=>{$("#savedMsg").textContent="✓ Texto copiado";},()=>prompt("Copiá el texto:",txt));};
+  $("#bPaste").onclick=()=>{const txt=pasteText(t);navigator.clipboard?.writeText(txt).then(()=>{$("#savedMsg").textContent="✓ Texto copiado";},()=>dlg({text:"No se pudo copiar al portapapeles. Copiá el texto de acá:",extra:`<textarea readonly rows="8">${esc(txt)}</textarea>`}));};
   document.querySelectorAll(".slot").forEach(s=>s.onclick=()=>{if(s.dataset.s==="ov"){TB.mode="overview";}else{TB.slot=+s.dataset.s;TB.mode="edit";}renderTeam();});
   TB.mode==="edit"?renderEditor():renderOverview();
 }
@@ -580,8 +612,8 @@ async function importTeams(e){
   const f=e.target.files[0];if(!f)return;
   try{const d=JSON.parse(await f.text());const list=d.teams||[d];let n=0;
     for(const x of list){if(x.members){TB.teams.push({...newTeam(x.name||"Importado"),...x,id:"t"+Date.now()+n});n++;}}
-    TB.current=TB.teams.length-1;saveTeams();renderTeam();alert(`${n} equipo(s) importado(s)`);
-  }catch(err){alert("Archivo no válido: "+err.message);}
+    TB.current=TB.teams.length-1;saveTeams();renderTeam();aviso(`${n} equipo(s) importado(s)`);
+  }catch(err){aviso("Archivo no válido: "+err.message);}
 }
 function pasteText(t){
   return t.members.filter(m=>m.species).map(m=>{
@@ -739,9 +771,9 @@ function renderEditor(){
   body.querySelectorAll("[data-apply-spread]").forEach(el=>el.onclick=()=>{const sp=us.spreads[+el.dataset.applySpread];m.sp={hp:sp.hp,atk:sp.atk,def:sp.def,spa:sp.spa,spd:sp.spd,spe:sp.spe};saveTeams();renderEditor();});
   body.querySelectorAll("[data-apply-build]").forEach(el=>el.onclick=()=>{const b=us.builds[+el.dataset.applyBuild];m.ability=b.ability;m.item=S.items[b.item]?b.item:m.item;if(b.nature&&S.natures[b.nature])m.nature=b.nature;m.moves=[...b.moves.filter(x=>S.moves[x]),"","","",""].slice(0,4);saveTeams();renderTeam();});
   body.querySelectorAll("[data-pick]").forEach(el=>el.onclick=()=>{const [kind,val]=el.dataset.pick.split("|");
-    if(kind==="move"){if(m.moves.includes(val))return;const i=m.moves.indexOf("");if(i<0){alert("Los 4 movimientos ya están elegidos: cambiá uno desde su casilla.");return;}m.moves[i]=val;}
+    if(kind==="move"){if(m.moves.includes(val))return;const i=m.moves.indexOf("");if(i<0){aviso("Los 4 movimientos ya están elegidos: cambiá uno desde su casilla.");return;}m.moves[i]=val;}
     if(kind==="item")m.item=val; if(kind==="ability")m.ability=val; if(kind==="nature")m.nature=val;
-    if(kind==="mate"){const i=t.members.findIndex(x=>!x.species);if(i<0){alert("El equipo ya tiene 6 Pokémon.");return;}t.members[i]={...emptyMember(),species:val,ability:S.dex[val]?.abilities[0]||""};}
+    if(kind==="mate"){const i=t.members.findIndex(x=>!x.species);if(i<0){aviso("El equipo ya tiene 6 Pokémon.");return;}t.members[i]={...emptyMember(),species:val,ability:S.dex[val]?.abilities[0]||""};}
     saveTeams();renderTeam();});
 }
 // ================= SELECTORES ESTILO JUEGO =================
@@ -810,6 +842,11 @@ function pickMove(m,p,us,slot){
   const filters=[["off","Filters Off"],["Physical","Physical"],["Special","Special"],["Status","Status"],["meta","Used in meta"]];
   let sel=m.moves[slot]||null,si=0,fi=0;
   const g=gameModal({title:"Select a move.",revert:m.moves[slot]||"—",onRevert:()=>{sel=m.moves[slot]||null;draw(true);}});
+  // orden y filtro: botón que despliega la lista de opciones (antes rotaba con cada clic)
+  const dd=(id,opts,cur,label)=>`<div class="gm-dd" id="${id}"><button type="button">${label}</button><div class="gm-menu">${opts.map(([,l],i)=>`<button type="button" data-i="${i}" class="${i===cur?"on":""}">${l}</button>`).join("")}</div></div>`;
+  const bindDd=(id,onPick)=>{const el=$("#"+id);el.querySelector(":scope>button").onclick=()=>{const open=el.classList.contains("open");g.content.querySelectorAll(".gm-dd.open").forEach(x=>x.classList.remove("open"));if(!open)el.classList.add("open");};
+    el.querySelectorAll(".gm-menu button").forEach(b=>b.onclick=()=>onPick(+b.dataset.i));};
+  g.el.addEventListener("click",e=>{if(!e.target.closest(".gm-dd"))g.content.querySelectorAll(".gm-dd.open").forEach(x=>x.classList.remove("open"));});
   const catIcon=c=>c==="Physical"?"✷":c==="Special"?"◎":"◐";
   const draw=(scroll)=>{
     const [sk,sl]=sorts[si],[fk,fl]=filters[fi];
@@ -821,7 +858,7 @@ function pickMove(m,p,us,slot){
     const known=m.moves.filter(Boolean);
     const flags=d?d.flags:[];
     g.content.innerHTML=`<div class="gm-body"><div>
-       <div class="gm-sort"><button id="mvSort">${sl} ⇣≡</button><button id="mvFilt">${fl}</button></div>
+       <div class="gm-sort">${dd("mvSort",sorts,si,sl+" ⇣≡")}${dd("mvFilt",filters,fi,fl)}</div>
        <div class="gm-list" id="mvList">${list.map(n=>{const x=S.moves[n],pc=pctIn(us?.moves,n);return `<button class="mv-pill ${n===sel?"sel":""}" data-m="${esc(n)}">${known.includes(n)?`<span class="dot"></span>`:""}
          <span class="ti" style="background:${TYPE_COLORS[x.type]}">${typeIcon(x.type)}</span><span class="nm">${esc(n)}${pc!=null?`<small>${pc}%</small>`:""}</span><span class="pp">${ppOf(n)}</span></button>`}).join("")||"<p>Sin movimientos con este filtro.</p>"}</div></div>
        <div class="gm-panel">${d?`<div class="mv-table"><div>Category</div><div>Power</div><div>Accuracy</div><div class="v">${catIcon(d.category)}</div><div class="v">${d.power||"—"}</div><div class="v">${d.accuracy==="-"?"—":d.accuracy}</div></div>
@@ -833,8 +870,7 @@ function pickMove(m,p,us,slot){
     g.ok.textContent=isCurrent?"Forget Move":elsewhere?"Already known":"Confirm";
     g.ok.disabled=!sel||elsewhere;
     g.content.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{sel=b.dataset.m;draw();});
-    $("#mvSort").onclick=()=>{si=(si+1)%sorts.length;draw();};
-    $("#mvFilt").onclick=()=>{fi=(fi+1)%filters.length;draw();};
+    bindDd("mvSort",i=>{si=i;draw();});bindDd("mvFilt",i=>{fi=i;draw();});
     if(scroll)g.content.querySelector(".mv-pill.sel")?.scrollIntoView({block:"center"});
   };
   g.ok.onclick=()=>{if(sel===m.moves[slot])m.moves[slot]="";else m.moves[slot]=sel;g.close();commit();};
@@ -904,7 +940,7 @@ function bindSpecies(){
 function addToTeam(name){
   if(!TB.teams.length)loadTeams();
   const t=team(),i=t.members.findIndex(x=>!x.species);
-  if(i<0){alert(`El equipo "${t.name}" ya tiene 6 Pokémon.`);return;}
+  if(i<0){aviso(`El equipo "${t.name}" ya tiene 6 Pokémon.`);return;}
   t.members[i]={...emptyMember(),species:name,ability:S.dex[name]?.abilities[0]||""};
   saveTeams();closeModal();view="team";TB.slot=i;TB.mode="edit";render();
 }
