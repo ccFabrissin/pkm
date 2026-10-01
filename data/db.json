@@ -18,7 +18,7 @@
    "Pikalytics (top de uso)",
    "pokemon-zone.com (uso por Pokémon y PP de Champions)"
   ],
-  "generated": "2026-09-14 21:04"
+  "generated": "2026-10-01 15:10"
  },
  "teams": [
   {
@@ -43632,127 +43632,127 @@
   {
    "pos": 1,
    "name": "Rillaboom",
-   "use": 37.61
+   "use": 35.2
   },
   {
    "pos": 2,
    "name": "Sneasler",
-   "use": 36.64
+   "use": 31.76
   },
   {
    "pos": 3,
    "name": "Incineroar",
-   "use": 28.45
+   "use": 25.12
   },
   {
    "pos": 4,
-   "name": "Salamence",
-   "use": 25.96
+   "name": "Golisopod",
+   "use": 20.78
   },
   {
    "pos": 5,
-   "name": "Kingambit",
-   "use": 24.96
+   "name": "Salamence",
+   "use": 20.76
   },
   {
    "pos": 6,
-   "name": "Basculegion",
-   "use": 23.78
+   "name": "Indeedee-F",
+   "use": 20.25
   },
   {
    "pos": 7,
-   "name": "Golisopod",
-   "use": 21.68
+   "name": "Kingambit",
+   "use": 20.11
   },
   {
    "pos": 8,
-   "name": "Indeedee-F",
-   "use": 21.61
+   "name": "Farigiraf",
+   "use": 19.66
   },
   {
    "pos": 9,
-   "name": "Farigiraf",
-   "use": 18.04
+   "name": "Basculegion",
+   "use": 18.48
   },
   {
    "pos": 10,
    "name": "Garchomp",
-   "use": 15.44
+   "use": 16.76
   },
   {
    "pos": 11,
-   "name": "Pelipper",
-   "use": 14.81
+   "name": "Charizard",
+   "use": 15.8
   },
   {
    "pos": 12,
-   "name": "Whimsicott",
-   "use": 11.44
+   "name": "Gholdengo",
+   "use": 15.1
   },
   {
    "pos": 13,
-   "name": "Sinistcha",
-   "use": 11.04
+   "name": "Archaludon",
+   "use": 15.02
   },
   {
    "pos": 14,
-   "name": "Gholdengo",
-   "use": 10.38
+   "name": "Pelipper",
+   "use": 12.05
   },
   {
    "pos": 15,
-   "name": "Archaludon",
-   "use": 10.12
+   "name": "Whimsicott",
+   "use": 11.43
   },
   {
    "pos": 16,
-   "name": "Floette-Eternal",
-   "use": 10.04
+   "name": "Milotic",
+   "use": 11.22
   },
   {
    "pos": 17,
-   "name": "Tyranitar",
-   "use": 8.91
+   "name": "Raichu",
+   "use": 10.55
   },
   {
    "pos": 18,
-   "name": "Baxcalibur",
-   "use": 8.42
+   "name": "Sylveon",
+   "use": 9.61
   },
   {
    "pos": 19,
-   "name": "Lucario",
-   "use": 8.34
+   "name": "Politoed",
+   "use": 9.6
   },
   {
    "pos": 20,
-   "name": "Milotic",
-   "use": 8.31
+   "name": "Arcanine-Hisui",
+   "use": 9.31
   },
   {
    "pos": 21,
-   "name": "Charizard",
-   "use": 8.01
+   "name": "Staraptor",
+   "use": 9.04
   },
   {
    "pos": 22,
-   "name": "Sylveon",
-   "use": 7.8
+   "name": "Grimmsnarl",
+   "use": 8.97
   },
   {
    "pos": 23,
-   "name": "Gardevoir",
-   "use": 7.62
+   "name": "Tyranitar",
+   "use": 8.52
   },
   {
    "pos": 24,
-   "name": "Torkoal",
-   "use": 7.04
+   "name": "Gardevoir",
+   "use": 7.68
   },
   {
    "pos": 25,
-   "name": "Arcanine-Hisui",
-   "use": 6.13
+   "name": "Sinistcha",
+   "use": 7.41
   }
  ],
  "usage": {

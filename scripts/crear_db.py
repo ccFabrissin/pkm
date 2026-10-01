@@ -27,14 +27,14 @@ NATURES = [  # (nombre, sube, baja)
     ("Quirky", "", ""),
 ]
 
-# Uso en dobles Reg M-C (Pikalytics, 14/09/2026)
-USAGE_TOP = [("Rillaboom", 37.61), ("Sneasler", 36.64), ("Incineroar", 28.45), ("Salamence", 25.96),
-             ("Kingambit", 24.96), ("Basculegion", 23.78), ("Golisopod", 21.68), ("Indeedee-F", 21.61),
-             ("Farigiraf", 18.04), ("Garchomp", 15.44), ("Pelipper", 14.81), ("Whimsicott", 11.44),
-             ("Sinistcha", 11.04), ("Gholdengo", 10.38), ("Archaludon", 10.12), ("Floette-Eternal", 10.04),
-             ("Tyranitar", 8.91), ("Baxcalibur", 8.42), ("Lucario", 8.34), ("Milotic", 8.31),
-             ("Charizard", 8.01), ("Sylveon", 7.80), ("Gardevoir", 7.62), ("Torkoal", 7.04),
-             ("Arcanine-Hisui", 6.13)]
+# Uso en dobles Reg M-C (Pikalytics, 01/10/2026)
+USAGE_TOP = [("Rillaboom", 35.20), ("Sneasler", 31.76), ("Incineroar", 25.12), ("Golisopod", 20.78),
+             ("Salamence", 20.76), ("Indeedee-F", 20.25), ("Kingambit", 20.11), ("Farigiraf", 19.66),
+             ("Basculegion", 18.48), ("Garchomp", 16.76), ("Charizard", 15.80), ("Gholdengo", 15.10),
+             ("Archaludon", 15.02), ("Pelipper", 12.05), ("Whimsicott", 11.43), ("Milotic", 11.22),
+             ("Raichu", 10.55), ("Sylveon", 9.61), ("Politoed", 9.60), ("Arcanine-Hisui", 9.31),
+             ("Staraptor", 9.04), ("Grimmsnarl", 8.97), ("Tyranitar", 8.52), ("Gardevoir", 7.68),
+             ("Sinistcha", 7.41)]
 
 # Categorías de la mochila del juego (pestañas del selector de objetos)
 ITEM_CATS = {
