@@ -279,27 +279,94 @@
  "plans": {
   "team": "yk",
   "date": "01/10/2026",
-  "note": "Guía por tipos, habilidades y datos de uso (pokemon-zone); sin cálculos de daño exactos.",
+  "note": "Planes revisados con la calculadora y el simulador de salidas del visor contra los sets más usados (pokemon-zone) y los equipos de torneo de Reg M-C. Los % son daño sobre el HP del rival, sin críticos ni Protect.",
   "plans": [
    {
-    "id": "sol",
-    "name": "Sol",
+    "id": "estandar",
+    "name": "Estándar",
     "tag": "por defecto",
-    "color": "#f5b942",
+    "color": "#2dd4bf",
     "when": [
      {
-      "label": "Fake Out y prioridad",
+      "label": "El núcleo más usado",
       "mons": [
        "Rillaboom",
        "Sneasler",
-       "Kingambit"
+       "Salamence-Mega",
+       "Incineroar",
+       "Kingambit",
+       "Basculegion"
       ]
      },
      {
-      "label": "Débiles a Fuego",
+      "label": "Tailwind",
+      "mons": [
+       "Whimsicott",
+       "Aerodactyl-Mega",
+       "Talonflame"
+      ]
+     },
+     {
+      "label": "Eléctricos y Roca",
+      "mons": [
+       "Raichu-Mega-Y",
+       "Arcanine-Hisui",
+       "Pawmot",
+       "Jolteon"
+      ]
+     }
+    ],
+    "lead": [
+     "Annihilape",
+     "Salamence"
+    ],
+    "back": [
+     "Kingambit",
+     "Mimikyu"
+    ],
+    "turn1": [
+     {
+      "who": "Salamence",
+      "what": "Mega + Hyper Voice: Sneasler 96–113%, Rillaboom 79–93%, Whimsicott 117–138%. Tailwind si enfrente hay Tailwind o Raichu. Intimidate frena a Rillaboom, Sneasler, Basculegion y Arcanine-H."
+     },
+     {
+      "who": "Annihilape",
+      "what": "Inmune a Fake Out y Extreme Speed. Close Combat a Incineroar (92–108%), Kingambit, Raichu (110–130%) o Arcanine-H; Ice Punch a Mega Salamence: con el +1 que le da su Intimidate (Defiant) hace 107–127%. Ojo: la Choice Scarf lo ata al primer movimiento."
+     }
+    ],
+    "danger": [
+     {
+      "if": "Floette o Sylveon entre los 6: Light of Ruin y Hyper Voice debilitan de un golpe a Salamence y a Annihilape",
+      "then": "pasar al plan Anti-hadas (Charizard + Kingambit)."
+     },
+     {
+      "if": "Mega Salamence rival empata en velocidad con el tuyo y su Double-Edge hace 86–102% a Annihilape",
+      "then": "Annihilape pega antes por la Scarf: Ice Punch a Salamence primero."
+     },
+     {
+      "if": "Tu Intimidate le da +1 a Kingambit rival (Defiant)",
+      "then": "bajarlo con Close Combat o guardar a Salamence atrás si Kingambit sale adelante."
+     }
+    ]
+   },
+   {
+    "id": "sol",
+    "name": "Sol",
+    "color": "#f5b942",
+    "when": [
+     {
+      "label": "Rillaboom con Sneasler, sin Agua ni Roca",
+      "mons": [
+       "Rillaboom",
+       "Sneasler",
+       "Kingambit",
+       "Gholdengo"
+      ]
+     },
+     {
+      "label": "Megas débiles a Fuego",
       "mons": [
        "Golisopod-Mega",
-       "Lucario-Mega-Z",
        "Metagross-Mega"
       ]
      }
@@ -309,27 +376,27 @@
      "Farigiraf"
     ],
     "back": [
-     "Annihilape",
-     "Mimikyu"
+     "Kingambit",
+     "Annihilape"
     ],
     "turn1": [
      {
       "who": "Charizard",
-      "what": "Mega + Heat Wave."
+      "what": "Mega + Heat Wave: Rillaboom 133–157%, Gholdengo 140–165%, Kingambit 117–138%, Golisopod 198–234%, Sneasler 81–96%."
      },
      {
       "who": "Farigiraf",
-      "what": "Expanding Force al más frágil (x4 a Sneasler). Armor Tail frena Fake Out, Grassy Glide y Sucker Punch."
+      "what": "Expanding Force a Sneasler (152–180%) o al que quede en pie. Armor Tail frena Fake Out, Grassy Glide y Sucker Punch: Charizard ataca tranquilo."
      }
     ],
     "danger": [
      {
-      "if": "El rival tiene dos amenazas entre Roca, Agua y Eléctrico",
-      "then": "no es este plan: Charizard va atrás o se queda afuera (regla 6)."
+      "if": "Basculegion (Wave Crash 117–138% a Charizard incluso con sol), Raichu (Zap Cannon 116–137%) o Arcanine-H (Head Smash) entre los 6",
+      "then": "no es este plan: usar Estándar."
      },
      {
-      "if": "Mega Froslass entre los 6",
-      "then": "pasar al plan Anti-hielo."
+      "if": "Incineroar + Mega Salamence adelante: doble Intimidate y los dos resisten Fuego",
+      "then": "Estándar: Annihilape queda con +2."
      }
     ]
    },
@@ -339,11 +406,18 @@
     "color": "#f0705a",
     "when": [
      {
-      "label": "Intimidate adelante",
+      "label": "Rillaboom adelante, sin Sneasler",
       "mons": [
+       "Rillaboom",
        "Incineroar",
-       "Salamence-Mega",
-       "Staraptor-Mega"
+       "Sinistcha"
+      ]
+     },
+     {
+      "label": "Megas frágiles",
+      "mons": [
+       "Lucario-Mega-Z",
+       "Gengar-Mega"
       ]
      }
     ],
@@ -352,50 +426,35 @@
      "Annihilape"
     ],
     "back": [
-     "Farigiraf",
+     "Kingambit",
      "Mimikyu"
     ],
     "turn1": [
      {
       "who": "Charizard",
-      "what": "Mega + Heat Wave. Incineroar y Salamence resisten Fuego: contra Salamence, Ancient Power (x2)."
+      "what": "Mega + Heat Wave: Rillaboom 133–157%, Lucario Z 193–227%. Contra Incineroar y Salamence, que resisten Fuego, Ancient Power."
      },
      {
       "who": "Annihilape",
-      "what": "Ice Punch a Salamence (x4) o Close Combat a Incineroar (x2), con el +1 que deja Defiant."
+      "what": "Inmune a Fake Out. Close Combat a Incineroar (92–108%; 136–160% con el +1 de Defiant) o Shadow Claw a Gengar (99–116%)."
      }
     ],
     "danger": [
      {
-      "if": "Fake Out de Incineroar (no hay Armor Tail adelante)",
-      "then": "el que no lo recibe ataca igual; Farigiraf entra en el primer cambio."
+      "if": "Sneasler adelante: Fake Out a Charizard, que pierde el turno 1",
+      "then": "con Sneasler entre los 6, Farigiraf en lugar de Annihilape (plan Sol)."
      },
      {
-      "if": "Brave Bird de Staraptor o Hyper Voice de Mega Salamence sobre Annihilape (x2)",
-      "then": "U-turn y entra Farigiraf."
+      "if": "Basculegion, Raichu o Arcanine-H entre los 6",
+      "then": "Charizard no sale adelante: usar Estándar."
      }
     ]
    },
    {
-    "id": "trick-room",
-    "name": "Trick Room",
-    "color": "#a78bfa",
+    "id": "anti-hadas",
+    "name": "Anti-hadas y Trick Room",
+    "color": "#ec7fc4",
     "when": [
-     {
-      "label": "Tailwind",
-      "mons": [
-       "Whimsicott",
-       "Salamence-Mega",
-       "Aerodactyl-Mega"
-      ]
-     },
-     {
-      "label": "Fantasmas",
-      "mons": [
-       "Gholdengo",
-       "Basculegion"
-      ]
-     },
      {
       "label": "Hadas",
       "mons": [
@@ -403,44 +462,9 @@
        "Sylveon",
        "Gardevoir-Mega"
       ]
-     }
-    ],
-    "lead": [
-     "Farigiraf",
-     "Kingambit"
-    ],
-    "back": [
-     "Charizard",
-     "Mimikyu"
-    ],
-    "turn1": [
-     {
-      "who": "Farigiraf",
-      "what": "Trick Room. Armor Tail frena Fake Out y el Encore de Whimsicott (Prankster)."
      },
      {
-      "who": "Kingambit",
-      "what": "Iron Head al hada o a Aerodactyl (x2); Kowtow Cleave al fantasma (x2)."
-     }
-    ],
-    "danger": [
-     {
-      "if": "Charizard y Mimikyu son rápidos: con Trick Room activo atacan últimos",
-      "then": "que entren cuando se termina, o apagalo usando Trick Room de nuevo."
-     },
-     {
-      "if": "Wave Crash de Basculegion sobre Charizard (x2)",
-      "then": "Charizard entra recién con Basculegion debilitado."
-     }
-    ]
-   },
-   {
-    "id": "anti-trick-room",
-    "name": "Anti-Trick Room",
-    "color": "#ec7fc4",
-    "when": [
-     {
-      "label": "Trick Room rival y Psychic Terrain",
+      "label": "Trick Room con Psychic Terrain",
       "mons": [
        "Hatterene",
        "Indeedee-F"
@@ -448,31 +472,35 @@
      }
     ],
     "lead": [
-     "Farigiraf",
-     "Kingambit"
+     "Mimikyu",
+     "Charizard"
     ],
     "back": [
-     "Charizard",
-     "Mimikyu"
+     "Kingambit",
+     "Farigiraf"
     ],
     "turn1": [
      {
-      "who": "Kingambit",
-      "what": "Kowtow Cleave a Indeedee (x2, no falla) o Iron Head a Hatterene (x2). Es inmune a Psíquico."
+      "who": "Mimikyu",
+      "what": "Play Rough al hada: Floette 85–101% y Shadow Sneak la remata; Gardevoir 84–99%. Disguise absorbe un Light of Ruin."
      },
      {
-      "who": "Farigiraf",
-      "what": "Thunderbolt al mismo objetivo. Trick Room solo después de que lo pongan ellos: lo anula."
+      "who": "Charizard",
+      "what": "Mega + Weather Ball al mismo objetivo (Floette 71–83%, Hatterene 88–104%, Gardevoir 80–94%); Heat Wave si al lado hay Rillaboom o Kingambit. Resiste Hada: Light of Ruin le hace 48–57%."
      }
     ],
     "danger": [
      {
-      "if": "Psychic Terrain bloquea Sucker Punch y Shadow Sneak (regla 4)",
-      "then": "Kingambit pega con Kowtow Cleave e Iron Head; Mimikyu, con Play Rough y Wood Hammer."
+      "if": "Incineroar al lado de Floette: Fake Out a Charizard e Intimidate a Mimikyu",
+      "then": "Annihilape + Kingambit adelante: Close Combat a Incineroar e Iron Head a Floette (116–137%; la Focus Sash aguanta un Light of Ruin)."
      },
      {
-      "if": "Annihilape es débil a Psíquico y Hada",
-      "then": "se queda afuera de este plan."
+      "if": "Hatterene o Indeedee: Trick Room y Psychic Terrain, que bloquea Shadow Sneak y Sucker Punch (regla 4)",
+      "then": "Kingambit adelante en lugar de Mimikyu (inmune a Psíquico; Iron Head a Hatterene 98–115%, a Sylveon 106–125%). Farigiraf anula el Trick Room con el suyo."
+     },
+     {
+      "if": "Torkoal o Armarouge: Eruption y Armor Cannon hacen 158–187% a Kingambit",
+      "then": "Salamence + Annihilape adelante."
      }
     ]
    },
@@ -490,31 +518,35 @@
      }
     ],
     "lead": [
-     "Farigiraf",
+     "Charizard",
      "Kingambit"
     ],
     "back": [
-     "Charizard",
-     "Annihilape"
+     "Annihilape",
+     "Farigiraf"
     ],
     "turn1": [
      {
       "who": "Kingambit",
-      "what": "Kowtow Cleave a Froslass (x2, no falla). Resiste Hielo y Fantasma."
+      "what": "Kowtow Cleave a Froslass: 100–118% aun con nieve y no falla. Blizzard le hace 21–24%. A Ninetales, Iron Head (177–208%)."
      },
      {
-      "who": "Farigiraf",
-      "what": "Trick Room: Froslass es más rápida que todo tu equipo salvo Annihilape. Es inmune a Shadow Ball y frena el Fake Out y el Grassy Glide de Rillaboom."
+      "who": "Charizard",
+      "what": "Mega: como es más lento que Froslass megaevoluciona después y queda sol en vez de nieve. Heat Wave: Froslass 144–169%, Rillaboom 133–157%. Blizzard le hace 36–42%."
      }
     ],
     "danger": [
      {
-      "if": "Annihilape: Close Combat no afecta a Froslass y Shadow Ball le pega x2",
-      "then": "entra solo a rematar con Shadow Claw (x2); si además hay hadas o psíquicos, va Mimikyu en su lugar."
+      "if": "Arcanine-H al lado de Froslass: Head Smash debilita a Charizard",
+      "then": "Annihilape adelante en lugar de Charizard: Close Combat a Arcanine-H (lleva Focus Sash)."
      },
      {
-      "if": "Nieve: Blizzard no falla y habilita Aurora Veil",
-      "then": "megaevolucionar a Charizard al entrar cambia la nieve por sol (Heat Wave x2)."
+      "if": "Annihilape: Close Combat no afecta a Froslass y Shadow Ball le hace 86–102%",
+      "then": "a Froslass la baja Kingambit; Annihilape solo con Shadow Claw."
+     },
+     {
+      "if": "Farigiraf adelante recibe Blizzard + Wood Hammer de Rillaboom y cae antes de poner Trick Room",
+      "then": "por eso va atrás: entra cuando Froslass ya cayó."
      }
     ]
    },
@@ -534,31 +566,31 @@
      }
     ],
     "lead": [
-     "Salamence",
-     "Farigiraf"
+     "Mimikyu",
+     "Charizard"
     ],
     "back": [
      "Annihilape",
-     "Mimikyu"
+     "Farigiraf"
     ],
     "turn1": [
      {
-      "who": "Salamence",
-      "what": "Mega + Hyper Voice: rompe la Focus Sash de Pelipper (ojo con Wide Guard)."
+      "who": "Charizard",
+      "what": "Mega: el sol reemplaza la lluvia. Se apagan Swift Swim y Electro Shot y el Weather Ball de Pelipper baja de 112–132% a 18–22%. Weather Ball a Archaludon (79–93%) o Ancient Power a Pelipper (78–92%)."
      },
      {
-      "who": "Farigiraf",
-      "what": "Thunderbolt a Pelipper (x4)."
+      "who": "Mimikyu",
+      "what": "Wood Hammer a Swampert (162–191%), Politoed (96–113%) o Basculegion (110–129%); Play Rough a Pelipper (64–75%)."
      }
     ],
     "danger": [
      {
-      "if": "Archaludon es el lead probable",
-      "then": "salir con Annihilape en lugar de Salamence (Close Combat x2); cuidado con Hurricane de Pelipper, que en lluvia no falla (x2 a Annihilape)."
+      "if": "Pelipper o Politoed vuelven a entrar: vuelve la lluvia y Charizard cae (Weather Ball 112–132%)",
+      "then": "Protect o cambio a Farigiraf: Thunderbolt a Pelipper hace 146–172% (suele llevar Focus Sash)."
      },
      {
-      "if": "Mega Swampert con Swift Swim",
-      "then": "Trick Room de Farigiraf o Wood Hammer de Mimikyu (x4)."
+      "if": "Archaludon: Flash Cannon hace 90–107% a Mimikyu ya sin Disguise",
+      "then": "Weather Ball + Close Combat de Annihilape (78–91%) lo bajan en un turno."
      }
     ]
    },
@@ -571,37 +603,42 @@
       "label": "Arena y Roca",
       "mons": [
        "Tyranitar-Mega",
-       "Excadrill",
-       "Arcanine-Hisui"
+       "Excadrill"
+      ]
+     },
+     {
+      "label": "Su compañero con Scarf",
+      "mons": [
+       "Indeedee"
       ]
      }
     ],
     "lead": [
-     "Salamence",
+     "Mimikyu",
      "Annihilape"
     ],
     "back": [
-     "Mimikyu",
-     "Farigiraf"
+     "Salamence",
+     "Kingambit"
     ],
     "turn1": [
      {
-      "who": "Salamence",
-      "what": "Mega + Tailwind. Intimidate ya bajó el Ataque rival; Hyper Voice está resistido por los tres."
+      "who": "Annihilape",
+      "what": "Close Combat a Tyranitar (153–180%) o a Excadrill (152–180%, lleva Focus Sash)."
      },
      {
-      "who": "Annihilape",
-      "what": "Close Combat a Tyranitar (x4) o a Arcanine-H (x2; suele llevar Focus Sash)."
+      "who": "Mimikyu",
+      "what": "Play Rough a Tyranitar (71–84%) o Shadow Sneak para rematar a Excadrill tras la Focus Sash. Disguise aguanta el primer golpe."
      }
     ],
     "danger": [
      {
-      "if": "Rock Slide o Head Smash sobre Salamence (x2)",
-      "then": "Protect mientras Annihilape baja al de Roca. Nunca Charizard acá (Roca x4)."
+      "if": "Indeedee con Choice Scarf adelante: es más rápido que Annihilape y Expanding Force le hace 102–120%",
+      "then": "Salamence adelante en lugar de Annihilape; Play Rough de Mimikyu debilita a Indeedee (101–119%)."
      },
      {
-      "if": "Extreme Speed de Arcanine-H y Excadrill con Sand Rush pegan primero",
-      "then": "entra Farigiraf: Armor Tail frena Extreme Speed y Trick Room frena a Excadrill."
+      "if": "Excadrill con Sand Rush es más rápido que todo tu equipo e Iron Head hace 142–168% a Mimikyu",
+      "then": "Close Combat a Excadrill el turno 1. Nunca Charizard (Roca x4) ni Farigiraf (Knock Off de Tyranitar 100–117%)."
      }
     ]
    },
@@ -621,80 +658,77 @@
      }
     ],
     "lead": [
-     "Farigiraf",
-     "Mimikyu"
+     "Mimikyu",
+     "Annihilape"
     ],
     "back": [
-     "Charizard",
-     "Annihilape"
+     "Salamence",
+     "Kingambit"
     ],
     "turn1": [
      {
       "who": "Mimikyu",
-      "what": "Play Rough al dragón (x2). Es inmune a Dragón y Disguise aguanta un golpe."
+      "what": "Play Rough: Garchomp 98–116%, Garchomp Z 107–126%, Baxcalibur 70–82%. Inmune a Dragón, Fake Out y Extreme Speed."
      },
      {
-      "who": "Farigiraf",
-      "what": "Expanding Force al mismo objetivo. Armor Tail frena Extreme Speed e Ice Shard."
+      "who": "Annihilape",
+      "what": "Ice Punch a Garchomp (90–106%); contra Baxcalibur, Close Combat (76–89%)."
      }
     ],
     "danger": [
      {
-      "if": "Garchomp y Garchomp Z son más rápidos que Mimikyu",
-      "then": "Ice Punch de Annihilape (x4 a Garchomp y Dragonite, x2 a Garchomp Z) o Trick Room."
+      "if": "Mega Dragonite con Multiscale: el primer golpe hace la mitad (Play Rough 46–54%, Ice Punch 42–50%)",
+      "then": "los dos al mismo objetivo el turno 1."
      },
      {
-      "if": "Charizard pega poco acá: los dragones resisten Fuego, Baxcalibur sube su Ataque con Thermal Exchange y Rock Slide de Garchomp es x4",
-      "then": "entra solo a rematar con Ancient Power (x2 a Dragonite y Baxcalibur). Alternativa: Kingambit atrás (resiste Dragón y Hielo)."
+      "if": "Baxcalibur: Icicle Crash hace 122–143% a Salamence aun con Intimidate",
+      "then": "con Baxcalibur Salamence no entra: lo bajan Close Combat + Play Rough o Iron Head de Kingambit (62–73%)."
+     },
+     {
+      "if": "Rillaboom al lado del dragón: Wood Hammer hace 155–183% a Mimikyu ya sin Disguise",
+      "then": "Charizard + Annihilape adelante (Sol agresivo): Heat Wave a Rillaboom e Ice Punch o Close Combat al dragón."
      }
     ]
    },
    {
-    "id": "anti-electricos",
-    "name": "Anti-eléctricos",
+    "id": "espejo-sol",
+    "name": "Espejo de sol",
     "color": "#f2e24a",
     "when": [
      {
-      "label": "Eléctricos rápidos",
+      "label": "Sol rival",
       "mons": [
-       "Raichu-Mega-Y",
-       "Jolteon",
-       "Pawmot"
-      ]
-     },
-     {
-      "label": "Roca y Extreme Speed",
-      "mons": [
-       "Arcanine-Hisui"
+       "Charizard-Mega-Y",
+       "Venusaur"
       ]
      }
     ],
     "lead": [
-     "Farigiraf",
-     "Annihilape"
+     "Salamence",
+     "Mimikyu"
     ],
     "back": [
-     "Mimikyu",
-     "Salamence"
+     "Annihilape",
+     "Kingambit"
     ],
     "turn1": [
      {
-      "who": "Farigiraf",
-      "what": "Expanding Force a Pawmot (x2) o al eléctrico más frágil. Nada de Thunderbolt (Lightning Rod, Volt Absorb). Armor Tail frena Fake Out y Extreme Speed."
+      "who": "Salamence",
+      "what": "Mega + Hyper Voice: Venusaur 80–94%, Charizard 30–36%. Resiste Fuego y Planta e Intimidate frena a Garchomp."
      },
      {
-      "who": "Annihilape",
-      "what": "Close Combat a Arcanine-H (x2) o al eléctrico. Es inmune a Focus Blast y al Close Combat de Pawmot."
+      "who": "Mimikyu",
+      "what": "Play Rough a Garchomp (98–116%) o al que haya tocado Hyper Voice. Disguise aguanta un Heat Wave."
      }
     ],
     "danger": [
      {
-      "if": "Mega Froslass entre los 6: es el lead más probable (regla 2)",
-      "then": "pasar al plan Anti-hielo: Kingambit en lugar de Annihilape."
+      "if": "Venusaur con sol es más rápido que todo tu equipo y duerme con Sleep Powder",
+      "then": "bajarlo primero: Hyper Voice + Ice Punch de Annihilape (59–70%)."
      },
      {
-      "if": "Head Smash de Arcanine-H sobre Salamence (x2)",
-      "then": "Intimidate lo amortigua y Salamence es neutro a Eléctrico. Nunca Charizard acá (Eléctrico x2, Roca x4)."
+      "if": "Charizard rival no cae de un golpe (Hyper Voice 30–36%) y Weather Ball hace 183–215% a Kingambit",
+      "then": "desgastarlo con Hyper Voice + Shadow Sneak; Kingambit entra solo contra Sylveon o Venusaur."
      }
     ]
    }
@@ -702,10 +736,18 @@
   "rules": [
    "Una sola mega por combate: Charizard y Salamence nunca van juntos en un plan.",
    "El plan se elige por el lead más probable del rival (sobre todo su mega), no solo por sus 6.",
-   "Inmunidades: Froslass no recibe Close Combat; Indeedee y Farigiraf no reciben Fantasma; Annihilape es débil a Fantasma, Psíquico, Hada y Volador.",
+   "Inmunidades: Froslass no recibe Close Combat; Indeedee y Farigiraf no reciben Fantasma; Mimikyu y Annihilape (Fantasma) no reciben Fake Out ni Extreme Speed; Annihilape es débil a Fantasma, Psíquico, Hada y Volador.",
    "Psychic Terrain (Indeedee) bloquea la prioridad: Shadow Sneak y Sucker Punch fallan contra rivales que están en el suelo.",
-   "Armor Tail de Farigiraf bloquea Fake Out, Sucker Punch, Grassy Glide y Extreme Speed: por eso Farigiraf está en casi todos los planes.",
-   "Charizard adelante se arriesga a Eléctrico (Raichu), Agua y Roca x4 (Arcanine-H, Rock Slide): si el rival tiene dos de esas amenazas, va atrás."
+   "Armor Tail de Farigiraf bloquea Fake Out, Sucker Punch, Grassy Glide y Extreme Speed, pero Farigiraf pega poco: adelante solo al lado de Charizard; en el resto de los planes va atrás.",
+   "Charizard no sale adelante contra Basculegion (Wave Crash 117–138% incluso con sol), Raichu (Zap Cannon 116–137%) ni Arcanine-H o Rock Slide (Roca x4).",
+   "Floette y Sylveon debilitan de un golpe a Salamence y a Annihilape: contra hadas salen Mimikyu + Charizard, con Kingambit atrás (Iron Head).",
+   "El Intimidate rival le da +1 a Annihilape y a Kingambit (Defiant): contra Incineroar y Mega Salamence, Annihilape adelante.",
+   "Mega Charizard megaevoluciona después que Pelipper y Froslass y deja sol: apaga la lluvia y la nieve mientras ellos no vuelvan a entrar."
+  ],
+  "ideas": [
+   "Charizard con naturaleza Timid y el mismo reparto de puntos: su velocidad pasa de 144 a 158 y supera a Arcanine-H (156), Garchomp (154), Mega Floette (154) y al Mega Charizard rival (152). Heat Wave sigue debilitando de un golpe a Rillaboom, Kingambit, Gholdengo y Froslass. En el simulador es el cambio que más mejora al equipo: las salidas con sol contra Raichu, Staraptor, Froslass y el espejo de sol pasan de parejas a favorables.",
+   "Si además pasa a 2 HP / 32 SpA / 32 Spe (velocidad 167) también supera a Mega Staraptor (161) y Mega Metagross (162), a cambio de aguantar menos.",
+   "Farigiraf es el que menos pesa en el simulador: pega poco y solo sale adelante en el plan Sol. El simulador no mide bien el apoyo (Armor Tail, Trick Room largo), así que no es concluyente; si en la práctica tampoco rinde, el sexto puesto es el primero a revisar."
   ]
  },
  "pokedex": [

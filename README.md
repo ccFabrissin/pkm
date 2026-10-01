@@ -8,7 +8,11 @@ Abrí `visor.html` con doble clic. Los datos ya vienen embebidos, así que no ha
 
 Pestañas:
 - **Equipos:** el teambuilder. Replica la pantalla de entrenamiento del juego (Stat Points, naturaleza, habilidad, objeto y movimientos) y muestra el uso del meta, las debilidades y la tabla de stats. En la tabla de stats un Pokémon con su megapiedra equipada aparece en su forma base: clic en la piedra para ver la forma Mega. Los equipos se guardan en el navegador y se pueden exportar e importar en JSON.
-- **Mi equipo · planes:** la página del equipo yK. Muestra sus 6 Pokémon (clic en uno para editarlo en Equipos) y la tabla de planes de salida: qué 4 llevar según lo que trae el rival, la jugada del turno 1, el peligro de cada plan y las reglas rápidas. Los planes están en la sección `plans` de `data/db.json` (`team` es el id del equipo); después de editarlos corré `python scripts/actualizar_visor.py`. Si cambiás el equipo, la tabla avisa cuando un plan queda con dos megas o con un Pokémon que ya no está.
+- **Mi equipo · planes:** la página del equipo yK (clic en un Pokémon para editarlo en Equipos). Tiene:
+  - **Vista previa del rival:** marcás los 6 del rival y un simulador de los primeros 3 turnos ordena tus salidas posibles, muestra el turno 1 contra sus leads más probables y marca qué plan de la tabla conviene.
+  - **Planes de salida:** qué 4 llevar según lo que trae el rival, la jugada del turno 1, el peligro de cada plan, las reglas rápidas y los ajustes para probar. Están en la sección `plans` de `data/db.json` (`team` es el id del equipo); después de editarlos corré `python scripts/actualizar_visor.py`.
+  - **Matriz de daño y velocidades:** tu equipo contra el set más usado de cada rival (pokemon-zone).
+  - Todo se calcula con el equipo como está guardado: si cambiás un set, la simulación, la matriz y las velocidades cambian, y la tabla avisa cuando un plan queda con dos megas o con un Pokémon que ya no está. La calculadora no incluye críticos, Protect ni cambios: sirve para comparar, no para predecir.
 - **Pokédex Reg M-C, Objetos, Movimientos y Meta:** tablas de consulta.
 
 El menú está en la barra lateral izquierda (solo íconos; se despliega al pasar el mouse).
