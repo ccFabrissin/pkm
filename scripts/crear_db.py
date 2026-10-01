@@ -1,7 +1,7 @@
 """Genera data/db.json: la base de datos única del proyecto (Reg M-C).
 
 Toma los datos de referencia de data/fuentes/ (extraídos de Pokémon Showdown y WikiDex) y
-conserva lo que ya haya en db.json y sea tuyo o descargado: teams y usage.
+conserva lo que ya haya en db.json y sea tuyo o descargado: teams, plans y usage.
 Uso: python scripts/crear_db.py
 """
 import json
@@ -106,6 +106,7 @@ def main():
             "generated": time.strftime("%Y-%m-%d %H:%M"),
         },
         "teams": old.get("teams", []),
+        "plans": old.get("plans", {}),
         "pokedex": pokedex,
         "items": items,
         "moves": moves,

@@ -8,6 +8,7 @@ Abrí `visor.html` con doble clic. Los datos ya vienen embebidos, así que no ha
 
 Pestañas:
 - **Equipos:** el teambuilder. Replica la pantalla de entrenamiento del juego (Stat Points, naturaleza, habilidad, objeto y movimientos) y muestra el uso del meta, las debilidades y la tabla de stats. En la tabla de stats un Pokémon con su megapiedra equipada aparece en su forma base: clic en la piedra para ver la forma Mega. Los equipos se guardan en el navegador y se pueden exportar e importar en JSON.
+- **Mi equipo · planes:** la página del equipo yK. Muestra sus 6 Pokémon (clic en uno para editarlo en Equipos) y la tabla de planes de salida: qué 4 llevar según lo que trae el rival, la jugada del turno 1, el peligro de cada plan y las reglas rápidas. Los planes están en la sección `plans` de `data/db.json` (`team` es el id del equipo); después de editarlos corré `python scripts/actualizar_visor.py`. Si cambiás el equipo, la tabla avisa cuando un plan queda con dos megas o con un Pokémon que ya no está.
 - **Pokédex Reg M-C, Objetos, Movimientos y Meta:** tablas de consulta.
 
 El menú está en la barra lateral izquierda (solo íconos; se despliega al pasar el mouse).
@@ -26,7 +27,7 @@ Las imágenes de `fondos/` van rotando en cada pantalla y la paleta de colores s
 ## Datos
 
 Todo está en `data/db.json`:
-- equipos
+- equipos y planes de salida
 - Pokédex (349 formas legales), objetos (166), movimientos (510), habilidades y learnsets
 - naturalezas, tabla de tipos y uso del meta
 
