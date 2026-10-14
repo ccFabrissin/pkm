@@ -40,6 +40,8 @@ Vienen de componentes de [React Bits](https://reactbits.dev) portados a JS plano
 - **Aurora** (fondo): shader WebGL2 en un canvas fijo; se ajusta en `AURORA_OPTS` dentro de `index.html`. Sin WebGL2 vuelven las partículas 2D de antes.
 - **BorderGlow** (tablas de posiciones): borde de malla de colores y luz exterior que siguen al puntero. Es solo CSS más un `pointermove` que setea `--edge-proximity` y `--cursor-angle`.
 - **FlipCard** (tablas de posiciones): giro 3D con transición CSS, sin la librería `motion`. Gira solo con el switch.
+- **BorderGlow** también en Próximo partido: la tarjeta de slots, la de ayuda y las de los equipos armados.
+- **RefineFrame** (equipos armados): al apretar "Armar equipos", cada tarjeta aparece como mosaico grueso y se resuelve de arriba hacia abajo con un frente brillante y un chip de etapa (En cola → Armando → Afinando → Listo). El original pixela una imagen en canvas; acá se pixelan clones de la tarjeta con filtros SVG (`<defs>` al principio del body).
 
 Los tres respetan `prefers-reduced-motion`.
 
