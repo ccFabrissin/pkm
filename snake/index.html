@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%90%8D%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&family=Share+Tech+Mono&family=Outfit:wght@400;500;600;700&family=Gelasio:wght@700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    Fútbol de los Jueves — dashboard moderno (dark)
@@ -2158,10 +2158,28 @@ body.evol-fs .bump-axis  { font-size: 8px; }
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: auto;
+  overflow: visible;
   z-index: 1;
   border-radius: inherit;
 }
+
+/* tarjetas de Próximo partido adentro del glow: el vidrio y el borde los pone la tarjeta */
+.border-glow-card > .border-glow-inner > .card {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  border-radius: inherit;
+  margin: 0;
+}
+.border-glow-card > .border-glow-inner > .team {
+  border-color: transparent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-radius: inherit;
+}
+.border-glow-card.glow-proximo-card { margin-bottom: 14px; z-index: 5; }
+.border-glow-card.glow-proximo-help { margin-top: 14px; }
 
 /* las tablas de posiciones adentro de la tarjeta: el vidrio lo pone la tarjeta */
 .border-glow-card .standings-wrap {
@@ -2235,12 +2253,323 @@ body.evol-fs .bump-axis  { font-size: 8px; }
 .flip-card[data-fade]:not(.is-flipped) .flip-card__face--front,
 .flip-card[data-fade].is-flipped .flip-card__face--back { opacity: 1; }
 .flip-card[data-fade] .flip-card__shadow { animation: none; }
+
+/* ---------- Vista: RACHAS ----------
+   Dos modos con fondo de video: hielo (campamento invernal, estilo "Camper") y
+   fuego (hero cinematográfico con liquid glass). Se eligen con el slicer y el
+   body lleva data-rachas="hielo|fuego". */
+
+#bg-rachas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #0b1a2b;
+}
+#bg-rachas video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 58%;
+  pointer-events: none;
+  display: block;
+}
+/* hielo: velo oscuro arriba para que el header se lea */
+#bg-rachas .rachas-scrim {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: clamp(178px, 30vh, 320px);
+  background: linear-gradient(180deg, rgba(8,17,29,.88) 0%, rgba(8,17,29,.52) 42%, rgba(8,17,29,.18) 74%, rgba(8,17,29,0) 100%);
+  pointer-events: none;
+}
+/* fuego: solo desenfoque abajo, sin oscurecer */
+#bg-rachas .rachas-blur {
+  position: absolute;
+  inset: 0;
+  display: none;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  -webkit-mask-image: linear-gradient(to top, black 0%, transparent 45%);
+  mask-image: linear-gradient(to top, black 0%, transparent 45%);
+  pointer-events: none;
+}
+body[data-rachas="fuego"] #bg-rachas { background: #000; }
+body[data-rachas="fuego"] #bg-rachas video { object-position: 50% 50%; }
+body[data-rachas="fuego"] #bg-rachas .rachas-scrim { display: none; }
+body[data-rachas="fuego"] #bg-rachas .rachas-blur { display: block; }
+
+body.rachas-on {
+  background: #0b1a2b;
+  background-image: none;
+  animation: none;
+}
+body.rachas-on[data-rachas="fuego"] { background: #000; }
+body.rachas-on #bg-aurora,
+body.rachas-on #bg-particles { display: none !important; }
+@media (max-width: 760px) {
+  #bg-rachas video { object-position: 72% 50%; }
+}
+
+/* Liquid glass (modo fuego) */
+.liquid-glass {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.rachas {
+  --rz-accent: #7dd3fc;
+  --rz-accent-ink: #0b1a2b;
+  --rz-accent-soft: rgba(125, 211, 252, 0.18);
+  --rz-glass: rgba(9, 20, 34, 0.5);
+  --rz-line: rgba(255, 255, 255, 0.14);
+  --rz-radius: 0px;
+  --rz-sub: rgba(255, 255, 255, 0.78);
+  font-family: 'Outfit', 'Century Gothic', 'Poppins', system-ui, sans-serif;
+  max-width: 640px;
+  color: #fff;
+}
+.rachas--fuego {
+  --rz-accent: #ffffff;
+  --rz-accent-ink: #000000;
+  --rz-accent-soft: rgba(255, 255, 255, 0.12);
+  --rz-glass: rgba(255, 255, 255, 0.01);
+  --rz-line: rgba(255, 255, 255, 0.12);
+  --rz-radius: 999px;
+  --rz-sub: #9ca3af;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.rachas-title {
+  font-family: 'Gelasio', Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  font-size: clamp(40px, 6.5vw, 76px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  margin: 10px 0 22px;
+  color: #fff;
+}
+.rachas--fuego .rachas-sub, .rachas--fuego .rachas-meta { text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55); }
+.rachas--fuego .rachas-title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.rachas-slicer {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 18px;
+  border-radius: var(--rz-radius);
+  background: var(--rz-glass);
+  border: 1px solid var(--rz-line);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+.rachas-slicer button {
+  appearance: none;
+  border: 0;
+  border-radius: var(--rz-radius);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  font: 600 14px/1 inherit;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  padding: 10px 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.rachas-slicer button:hover { color: #fff; }
+.rachas-slicer button[aria-checked="true"] {
+  background: var(--rz-accent);
+  color: var(--rz-accent-ink);
+}
+.rachas-slicer button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.rachas-sub {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--rz-sub);
+  max-width: 48ch;
+}
+
+.rachas-list { display: flex; flex-direction: column; gap: 10px; }
+
+.rachas-item {
+  border-radius: calc(var(--rz-radius) / 40);   /* 0 en hielo, ~25px en fuego */
+  background: var(--rz-glass);
+  border: 1px solid var(--rz-line);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  overflow: hidden;
+}
+.rachas-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 16px;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+.rachas-head:hover { background: rgba(255, 255, 255, 0.05); }
+.rachas-head:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+.rachas-avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--rz-radius);
+  background: var(--rz-accent-soft);
+  border: 1px solid var(--rz-line);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.rachas-who { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.rachas-name { font-weight: 600; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rachas-meta { font-size: 13px; color: rgba(255, 255, 255, 0.66); }
+.rachas-badge {
+  margin-left: auto;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 20px;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px var(--rz-accent-soft));
+}
+.rachas-count {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 4px 9px;
+  border-radius: var(--rz-radius);
+  background: var(--rz-accent);
+  color: var(--rz-accent-ink);
+}
+.rachas-chevron {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: transform 0.25s ease;
+}
+.rachas-item.open .rachas-chevron { transform: rotate(180deg); }
+
+.rachas-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.rachas-item.open .rachas-panel { grid-template-rows: 1fr; }
+.rachas-panel-inner { overflow: hidden; }
+.rachas-ep {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 16px 10px 70px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+}
+.rachas-ep:last-child { padding-bottom: 14px; }
+.rachas-ep-count { font-weight: 700; color: var(--rz-accent); white-space: nowrap; }
+.rachas-ep-dates { color: rgba(255, 255, 255, 0.82); }
+.rachas-ep-live {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--rz-radius);
+  border: 1px solid var(--rz-accent);
+  color: var(--rz-accent);
+}
+.rachas-empty {
+  padding: 18px 20px;
+  border-radius: calc(var(--rz-radius) / 40);
+  background: var(--rz-glass);
+  border: 1px solid var(--rz-line);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Entrada. Hielo: subida suave. Fuego: blur-fade-up escalonado. */
+.rachas-title, .rachas-slicer, .rachas-sub, .rachas-item, .rachas-empty {
+  animation: rachasRise 0.54s cubic-bezier(0.22, 0.75, 0.2, 1) backwards;
+}
+.rachas-title  { animation-delay: 90ms; }
+.rachas-slicer { animation-delay: 145ms; }
+.rachas-sub    { animation-delay: 200ms; }
+.rachas-item, .rachas-empty { animation-delay: calc(260ms + var(--i, 0) * 55ms); }
+.rachas--fuego .rachas-title, .rachas--fuego .rachas-slicer, .rachas--fuego .rachas-sub,
+.rachas--fuego .rachas-item, .rachas--fuego .rachas-empty {
+  animation: blurFadeUp 1s ease-out backwards;
+}
+.rachas--fuego .rachas-title  { animation-delay: 300ms; }
+.rachas--fuego .rachas-slicer { animation-delay: 400ms; }
+.rachas--fuego .rachas-sub    { animation-delay: 500ms; }
+.rachas--fuego .rachas-item, .rachas--fuego .rachas-empty { animation-delay: calc(600ms + var(--i, 0) * 80ms); }
+
+@keyframes rachasRise {
+  from { opacity: 0; transform: translateY(9px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes blurFadeUp {
+  from { opacity: 0; filter: blur(20px); transform: translateY(40px); }
+  to   { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+@media (max-width: 760px) {
+  .rachas { max-width: none; }
+  .rachas-ep { padding-left: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rachas-title, .rachas-slicer, .rachas-sub, .rachas-item, .rachas-empty { animation: none !important; }
+  .rachas-panel, .rachas-chevron { transition: none; }
+}
 </style>
 </head>
 <body>
 
 <canvas id="bg-aurora" aria-hidden="true"></canvas>
 <canvas id="bg-particles" aria-hidden="true"></canvas>
+<div id="bg-rachas" class="hidden" aria-hidden="true">
+  <video id="bg-rachas-video" muted loop playsinline disablepictureinpicture preload="none" width="1280" height="960"></video>
+  <div class="rachas-scrim"></div>
+  <div class="rachas-blur"></div>
+</div>
 
 <header class="topbar">
   <div class="brand">
@@ -2262,6 +2591,7 @@ body.evol-fs .bump-axis  { font-size: 8px; }
     <a href="#/proximo"    data-route="proximo">Próximo partido</a>
     <a href="#/historial"  data-route="historial">Historial</a>
     <a href="#/jugador"    data-route="jugador">Jugadores</a>
+    <a href="#/rachas"     data-route="rachas">Rachas</a>
     <a href="#/cruces"     data-route="cruces">Cruces</a>
     <a href="#/evolucion"  data-route="evolucion">Evolución</a>
   </nav>
@@ -2282,6 +2612,7 @@ body.evol-fs .bump-axis  { font-size: 8px; }
   <section id="view-proximo"   class="view hidden"></section>
   <section id="view-historial" class="view hidden"></section>
   <section id="view-jugador"   class="view hidden"></section>
+  <section id="view-rachas"    class="view hidden"></section>
   <section id="view-cruces"    class="view hidden"></section>
   <section id="view-evolucion" class="view hidden"></section>
 </main>
@@ -2620,7 +2951,7 @@ function snakeAssign(sortedPlayers) {
 
 // ---------------- Router ----------------
 
-const VIEWS = ['tabla', 'proximo', 'historial', 'jugador', 'cruces', 'evolucion'];
+const VIEWS = ['tabla', 'proximo', 'historial', 'jugador', 'rachas', 'cruces', 'evolucion'];
 
 function parseHash() {
   const h = location.hash.replace(/^#\/?/, '') || 'tabla';
@@ -2643,6 +2974,9 @@ function render() {
     document.body.classList.remove('evol-fs');
   }
 
+  // Fondo de video solo en Rachas (y la aurora apagada mientras tanto)
+  if (route === 'rachas') enterRachasBackdrop(); else leaveRachasBackdrop();
+
   const target = document.getElementById('view-' + route);
   target.classList.remove('hidden');
   ({
@@ -2652,6 +2986,7 @@ function render() {
     jugador: () => renderJugador(decodeURIComponent(param || '')),
     cruces: () => renderCruces(decodeURIComponent(param || '')),
     evolucion: renderEvolucion,
+    rachas: () => renderRachas(target, decodeURIComponent(param || '')),
   })[route](target);
 }
 
@@ -2887,8 +3222,8 @@ function buildStandingsFlip(frontSection, backSection) {
 // Port del componente de React Bits: envuelve un nodo en una tarjeta cuyo
 // borde se ilumina del lado por donde se acerca el puntero.
 
-function wrapBorderGlow(node) {
-  const card = el(`<div class="border-glow-card"><span class="edge-light"></span><div class="border-glow-inner"></div></div>`);
+function wrapBorderGlow(node, extraClass) {
+  const card = el(`<div class="border-glow-card${extraClass ? ' ' + extraClass : ''}"><span class="edge-light"></span><div class="border-glow-inner"></div></div>`);
   card.querySelector('.border-glow-inner').appendChild(node);
   card.addEventListener('pointermove', (e) => {
     const rect = card.getBoundingClientRect();
@@ -3408,6 +3743,180 @@ function getCurrentLoseStreak(name) {
 }
 
 const STREAK_THRESHOLD = 3; // estrictamente mayor a 3 → 4+
+
+// ---------------- Vista: RACHAS ----------------
+// Episodios de fuego (victorias seguidas) y hielo (derrotas seguidas) de cada
+// jugador. Usa el mismo umbral que los badges de la tabla: más de STREAK_THRESHOLD.
+
+const RACHAS_MODE_KEY = 'futbol-rachas-mode-v1';
+const RACHAS_MIN = STREAK_THRESHOLD + 1;
+const RACHAS_VIDEOS = {
+  hielo: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261005_115704_e1b28e05-aef1-477c-924b-0c1d4612f86f.mp4',
+  fuego: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4',
+};
+
+// Todas las rachas de `type` ('G' fuego / 'P' hielo) de un jugador, en orden.
+// Cada una trae cuántos partidos duró, de qué fecha a qué fecha y si sigue abierta.
+function streakEpisodes(name, type) {
+  const ms = playerMatches(MATCHES, name);
+  const eps = [];
+  let run = [];
+  const flush = (activa) => {
+    if (run.length >= RACHAS_MIN) {
+      eps.push({ count: run.length, desde: run[0].fecha, hasta: run[run.length - 1].fecha, activa });
+    }
+    run = [];
+  };
+  for (const m of ms) {
+    if (m.resultado === type) run.push(m);
+    else flush(false);
+  }
+  flush(true);
+  return eps;
+}
+
+function rachasData(type) {
+  return PLAYERS_LIST
+    .map(name => ({ name, eps: streakEpisodes(name, type) }))
+    .filter(p => p.eps.length)
+    .map(p => ({
+      ...p,
+      total: p.eps.reduce((a, e) => a + e.count, 0),
+      mejor: Math.max(...p.eps.map(e => e.count)),
+      activa: p.eps.some(e => e.activa),
+    }))
+    .sort((a, b) => (b.activa - a.activa) || (b.mejor - a.mejor) || (b.total - a.total) || a.name.localeCompare(b.name));
+}
+
+function loadRachasMode(param) {
+  if (param === 'hielo' || param === 'fuego') return param;
+  try {
+    const v = localStorage.getItem(RACHAS_MODE_KEY);
+    if (v === 'hielo' || v === 'fuego') return v;
+  } catch (e) {}
+  return 'hielo';
+}
+function saveRachasMode(mode) {
+  try { localStorage.setItem(RACHAS_MODE_KEY, mode); } catch (e) {}
+}
+
+function enterRachasBackdrop() {
+  document.body.classList.add('rachas-on');
+  const wrap = document.getElementById('bg-rachas');
+  if (wrap) wrap.classList.remove('hidden');
+}
+function leaveRachasBackdrop() {
+  if (!document.body.classList.contains('rachas-on')) return;
+  document.body.classList.remove('rachas-on');
+  delete document.body.dataset.rachas;
+  const wrap = document.getElementById('bg-rachas');
+  const v = document.getElementById('bg-rachas-video');
+  if (wrap) wrap.classList.add('hidden');
+  if (v) v.pause();
+}
+function setRachasVideo(mode) {
+  const v = document.getElementById('bg-rachas-video');
+  if (!v) return;
+  if (v.dataset.mode !== mode) {
+    v.dataset.mode = mode;
+    v.preload = 'auto';
+    v.src = RACHAS_VIDEOS[mode];
+    v.load();
+  }
+  const p = v.play();
+  if (p && p.catch) p.catch(() => {});
+}
+
+function renderRachas(root, param) {
+  let mode = loadRachasMode(param);
+  root.innerHTML = '';
+
+  const wrap = el(`
+    <div class="rachas">
+      <h1 class="rachas-title">Rachas</h1>
+      <div class="rachas-slicer" role="radiogroup" aria-label="Tipo de racha">
+        <button type="button" role="radio" data-mode="hielo" aria-checked="false">\u{1F9CA} Hielo</button>
+        <button type="button" role="radio" data-mode="fuego" aria-checked="false">\u{1F525} Fuego</button>
+      </div>
+      <p class="rachas-sub"></p>
+      <div class="rachas-list"></div>
+    </div>
+  `);
+  const slicer = wrap.querySelector('.rachas-slicer');
+  const sub = wrap.querySelector('.rachas-sub');
+  const list = wrap.querySelector('.rachas-list');
+
+  function paint() {
+    const hielo = mode === 'hielo';
+    document.body.dataset.rachas = mode;
+    setRachasVideo(mode);
+    wrap.classList.toggle('rachas--fuego', !hielo);
+    slicer.classList.toggle('liquid-glass', !hielo);
+    slicer.querySelectorAll('button').forEach(b => {
+      b.setAttribute('aria-checked', b.dataset.mode === mode ? 'true' : 'false');
+    });
+
+    const type = hielo ? 'P' : 'G';
+    const icon = hielo ? '\u{1F9CA}' : '\u{1F525}';
+    const data = rachasData(type);
+
+    sub.textContent = hielo
+      ? `${data.length} ${data.length === 1 ? 'jugador tuvo' : 'jugadores tuvieron'} el hielo: ${RACHAS_MIN} o más derrotas seguidas. Click en uno para ver cada racha.`
+      : `${data.length} ${data.length === 1 ? 'jugador tuvo' : 'jugadores tuvieron'} el fuego: ${RACHAS_MIN} o más victorias seguidas. Click en uno para ver cada racha.`;
+
+    list.innerHTML = '';
+    if (!data.length) {
+      list.appendChild(el(`<div class="rachas-empty ${hielo ? '' : 'liquid-glass'}">Todavía nadie llegó a ${RACHAS_MIN} ${hielo ? 'derrotas' : 'victorias'} seguidas.</div>`));
+      return;
+    }
+
+    data.forEach((p, i) => {
+      const n = p.eps.length;
+      const meta = `${n} ${n === 1 ? 'racha' : 'rachas'} · la más larga ${p.mejor}${p.activa ? ' · en curso' : ''}`;
+      const eps = p.eps.map(e => `
+        <div class="rachas-ep">
+          <span class="rachas-ep-count">${icon} ${e.count} partidos</span>
+          <span class="rachas-ep-dates">${esc(fmtFecha(e.desde))} \u2192 ${esc(fmtFecha(e.hasta))}</span>
+          ${e.activa ? '<span class="rachas-ep-live">en curso</span>' : ''}
+        </div>
+      `).join('');
+      const item = el(`
+        <div class="rachas-item ${hielo ? '' : 'liquid-glass'}" style="--i:${i}">
+          <button type="button" class="rachas-head" aria-expanded="false">
+            <span class="rachas-avatar">${esc(initials(p.name))}</span>
+            <span class="rachas-who">
+              <span class="rachas-name">${esc(p.name)}</span>
+              <span class="rachas-meta">${esc(meta)}</span>
+            </span>
+            <span class="rachas-badge" title="Racha más larga: ${p.mejor}">${icon}<span class="rachas-count">${p.mejor}</span></span>
+            <svg class="rachas-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="rachas-panel"><div class="rachas-panel-inner">${eps}</div></div>
+        </div>
+      `);
+      const head = item.querySelector('.rachas-head');
+      head.addEventListener('click', () => {
+        const open = item.classList.toggle('open');
+        head.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      list.appendChild(item);
+    });
+  }
+
+  slicer.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () => {
+      if (b.dataset.mode === mode) return;
+      mode = b.dataset.mode;
+      saveRachasMode(mode);
+      history.replaceState(null, '', '#/rachas/' + mode);
+      paint();
+    });
+  });
+
+  paint();
+  root.appendChild(wrap);
+}
+
 
 
 // ---------------- Vista: TABLA ----------------
@@ -4314,8 +4823,8 @@ function renderProximo(root) {
       `);
       return node;
     };
-    teamsWrap.appendChild(card('Equipo Blanco', teams.blanco, 'blanco'));
-    teamsWrap.appendChild(card('Equipo Negro',  teams.negro,  'negro'));
+    teamsWrap.appendChild(wrapBorderGlow(card('Equipo Blanco', teams.blanco, 'blanco')));
+    teamsWrap.appendChild(wrapBorderGlow(card('Equipo Negro',  teams.negro,  'negro')));
 
     // Odómetro en los promedios de cada equipo
     teamsWrap.querySelectorAll('strong[data-anim-to]').forEach(s => {
@@ -4345,14 +4854,14 @@ function renderProximo(root) {
     refreshCount();
   });
 
-  root.appendChild(slotsCard);
+  root.appendChild(wrapBorderGlow(slotsCard, 'glow-proximo-card'));
   root.appendChild(actions);
 
   // Card explicativa del cálculo (usa el patrón actual según modo)
   const pattern = snakePatternFor(slotCount);
   const blancoPositions = pattern.map((t, i) => t === 'B' ? (i + 1) : null).filter(x => x);
   const negroPositions  = pattern.map((t, i) => t === 'N' ? (i + 1) : null).filter(x => x);
-  root.appendChild(el(`
+  root.appendChild(wrapBorderGlow(el(`
     <div class="card proximo-help">
       <h3 class="card-title">Cómo se calcula el puntaje</h3>
       <ul class="help-list">
@@ -4362,7 +4871,7 @@ function renderProximo(root) {
         <li>Reparto serpiente: <strong>${blancoPositions.join(', ')}</strong> al Blanco · <strong>${negroPositions.join(', ')}</strong> al Negro.</li>
       </ul>
     </div>
-  `));
+  `), 'glow-proximo-help'));
 
   root.appendChild(teamsWrap);
 

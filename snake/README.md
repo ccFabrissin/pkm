@@ -10,6 +10,7 @@ Es una página estática (`index.html`) que lee en vivo el Google Sheet del grup
 - **Próximo partido:** elegís 10 o 12 jugadores (5v5 / 6v6) y arma los equipos con la serpiente: ordena por puntaje efectivo y reparte Blanco / Negro / Negro / Blanco / Blanco… Los jugadores con 5 partidos o menos se ponderan con el promedio del resto; se pueden tipear jugadores nuevos. La selección queda guardada en el navegador.
 - **Historial:** todos los partidos, con equipos y resultado.
 - **Jugadores:** ficha de cada uno (rachas, compañeros, rivales).
+- **Rachas:** quién tuvo alguna vez el fuego (4 o más victorias seguidas) o el hielo (4 o más derrotas seguidas), el mismo umbral que los badges de la tabla. Un slicer elige Hielo o Fuego; click en un jugador despliega cada racha con cuántos partidos duró y de qué fecha a qué fecha. Cada modo tiene su fondo de video (campamento invernal / hero cinematográfico) y la elección queda guardada en el navegador; también se puede entrar directo por `#/rachas/hielo` o `#/rachas/fuego`.
 - **Cruces:** con quién ganás y perdés más.
 - **Evolución:** cómo subió y bajó cada jugador en la tabla partido a partido, con reproducción animada.
 
