@@ -1,0 +1,2796 @@
+{
+ "actualizado": "2026-10-14T15:50-03:00",
+ "resultados": [
+  {
+   "fecha": "2025-11-20",
+   "equipo": "A",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-20",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-20",
+   "equipo": "A",
+   "jugador": "Matías Vera",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-20",
+   "equipo": "A",
+   "jugador": "Marco Bernardi",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-20",
+   "equipo": "A",
+   "jugador": "Clemente Cavangh (Tato)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-20",
+   "equipo": "B",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-20",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-20",
+   "equipo": "B",
+   "jugador": "Hernán Braidot",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-20",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-20",
+   "equipo": "B",
+   "jugador": "Nicolás Malberti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-27",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-27",
+   "equipo": "A",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-27",
+   "equipo": "A",
+   "jugador": "Jose Bressan",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-27",
+   "equipo": "A",
+   "jugador": "Eduardo Bacca",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-27",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-27",
+   "equipo": "B",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-27",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-27",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-27",
+   "equipo": "B",
+   "jugador": "Geronimo Aguilar",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-11-27",
+   "equipo": "B",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-04",
+   "equipo": "A",
+   "jugador": "Nicolás Malberti",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-04",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-04",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-04",
+   "equipo": "A",
+   "jugador": "Renato Fernández",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-04",
+   "equipo": "A",
+   "jugador": "Matías Vera",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-04",
+   "equipo": "B",
+   "jugador": "Joaquin Moragues",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-04",
+   "equipo": "B",
+   "jugador": "Ariel Raffin",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-04",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-04",
+   "equipo": "B",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-04",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-11",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-11",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-11",
+   "equipo": "A",
+   "jugador": "Marco Bernardi",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-11",
+   "equipo": "A",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-11",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-11",
+   "equipo": "B",
+   "jugador": "Clemente Cavangh (Tato)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-11",
+   "equipo": "B",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-11",
+   "equipo": "B",
+   "jugador": "Gastón Sanchez",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-11",
+   "equipo": "B",
+   "jugador": "Martin Leguizamón",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-11",
+   "equipo": "B",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-18",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-18",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-18",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-18",
+   "equipo": "A",
+   "jugador": "Matías Vera",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-18",
+   "equipo": "A",
+   "jugador": "Clemente Cavangh (Tato)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-18",
+   "equipo": "B",
+   "jugador": "Nicolás Malberti",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-18",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-18",
+   "equipo": "B",
+   "jugador": "Jose Bressan",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-18",
+   "equipo": "B",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2025-12-18",
+   "equipo": "B",
+   "jugador": "Matías Gassmann",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-08",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-08",
+   "equipo": "A",
+   "jugador": "Marco Bernardi",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-08",
+   "equipo": "A",
+   "jugador": "Hernán Braidot",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-08",
+   "equipo": "A",
+   "jugador": "Ariel Raffin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-08",
+   "equipo": "A",
+   "jugador": "Matías Agustini (Diente)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-08",
+   "equipo": "B",
+   "jugador": "Renato Fernández",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-08",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-08",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-08",
+   "equipo": "B",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-08",
+   "equipo": "B",
+   "jugador": "Enzo Mena",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-29",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-29",
+   "equipo": "A",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-29",
+   "equipo": "A",
+   "jugador": "Matías Vera",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-29",
+   "equipo": "A",
+   "jugador": "Renato Fernández",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-29",
+   "equipo": "A",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-29",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-29",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-29",
+   "equipo": "B",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-29",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-01-29",
+   "equipo": "B",
+   "jugador": "Lucas Luna",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-05",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-05",
+   "equipo": "A",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-05",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-05",
+   "equipo": "A",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-05",
+   "equipo": "A",
+   "jugador": "Matías Gassmann",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-05",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-05",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-05",
+   "equipo": "B",
+   "jugador": "Lucas Luna",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-05",
+   "equipo": "B",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-05",
+   "equipo": "B",
+   "jugador": "Martin Leguizamón",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-12",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-12",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-12",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-12",
+   "equipo": "A",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-12",
+   "equipo": "A",
+   "jugador": "Lucas Luna",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-12",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-12",
+   "equipo": "B",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-12",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-12",
+   "equipo": "B",
+   "jugador": "Matías Vera",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-12",
+   "equipo": "B",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-16",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-16",
+   "equipo": "A",
+   "jugador": "Franco Cignetti",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-16",
+   "equipo": "A",
+   "jugador": "Lucas Luna",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-16",
+   "equipo": "A",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-16",
+   "equipo": "A",
+   "jugador": "Joaquín Rosas (Ojón)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-16",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-16",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-16",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-16",
+   "equipo": "B",
+   "jugador": "Renato Fernández",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-16",
+   "equipo": "B",
+   "jugador": "Fernando Peressón",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-19",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-19",
+   "equipo": "A",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-19",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-19",
+   "equipo": "A",
+   "jugador": "Jose Bressan",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-19",
+   "equipo": "A",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-19",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-19",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-19",
+   "equipo": "B",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-19",
+   "equipo": "B",
+   "jugador": "Lucas Luna",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-02-19",
+   "equipo": "B",
+   "jugador": "Joaquín Rosas (Ojón)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-05",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-05",
+   "equipo": "A",
+   "jugador": "Lucas Luna",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-05",
+   "equipo": "A",
+   "jugador": "Nicolás Malberti",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-05",
+   "equipo": "A",
+   "jugador": "Matías Vera",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-05",
+   "equipo": "A",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-05",
+   "equipo": "B",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-05",
+   "equipo": "B",
+   "jugador": "Matías Gassmann",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-05",
+   "equipo": "B",
+   "jugador": "Renato Fernández",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-05",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-05",
+   "equipo": "B",
+   "jugador": "Franco Cignetti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-12",
+   "equipo": "A",
+   "jugador": "Fernando Peressón",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-12",
+   "equipo": "A",
+   "jugador": "Matías Gassmann",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-12",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-12",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-12",
+   "equipo": "A",
+   "jugador": "Lucas Luna",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-12",
+   "equipo": "B",
+   "jugador": "Matías Agustini (Diente)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-12",
+   "equipo": "B",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-12",
+   "equipo": "B",
+   "jugador": "Renato Fernández",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-12",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-12",
+   "equipo": "B",
+   "jugador": "Daniel Orso",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-19",
+   "equipo": "A",
+   "jugador": "Matías Agustini (Diente)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-19",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-19",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-19",
+   "equipo": "A",
+   "jugador": "Matías Gassmann",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-19",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-19",
+   "equipo": "B",
+   "jugador": "Daniel Orso",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-19",
+   "equipo": "B",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-19",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-19",
+   "equipo": "B",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-19",
+   "equipo": "B",
+   "jugador": "Santiago Centurión",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-26",
+   "equipo": "A",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-26",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-26",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-26",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-26",
+   "equipo": "A",
+   "jugador": "Lucas Luna",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-26",
+   "equipo": "B",
+   "jugador": "Renato Fernández",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-26",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-26",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-26",
+   "equipo": "B",
+   "jugador": "Franco Cignetti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-03-26",
+   "equipo": "B",
+   "jugador": "Pablo Aletti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-02",
+   "equipo": "A",
+   "jugador": "Hernán Braidot",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-02",
+   "equipo": "A",
+   "jugador": "Franco Cignetti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-02",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-02",
+   "equipo": "A",
+   "jugador": "Lucas Luna",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-02",
+   "equipo": "A",
+   "jugador": "Fernando González",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-02",
+   "equipo": "B",
+   "jugador": "Renato Fernández",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-02",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-02",
+   "equipo": "B",
+   "jugador": "Ariel Raffin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-02",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-02",
+   "equipo": "B",
+   "jugador": "Paolo Gómez (Colo)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-09",
+   "equipo": "A",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-09",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-09",
+   "equipo": "A",
+   "jugador": "Ariel Raffin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-09",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-09",
+   "equipo": "A",
+   "jugador": "Clemente Cavangh (Tato)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-09",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-09",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-09",
+   "equipo": "B",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-09",
+   "equipo": "B",
+   "jugador": "Lucas Luna",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-09",
+   "equipo": "B",
+   "jugador": "Matías Vera",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-16",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-16",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-16",
+   "equipo": "A",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-16",
+   "equipo": "A",
+   "jugador": "Matías Vera",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-16",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-16",
+   "equipo": "B",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-16",
+   "equipo": "B",
+   "jugador": "Renato Fernández",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-16",
+   "equipo": "B",
+   "jugador": "Lucas Luna",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-16",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-16",
+   "equipo": "B",
+   "jugador": "Clemente Cavangh (Tato)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "A",
+   "jugador": "Franco Cignetti",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "A",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "A",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "A",
+   "jugador": "Nicolás Malberti",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "A",
+   "jugador": "Alonso Rugiero",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "B",
+   "jugador": "Lucas Luna",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "B",
+   "jugador": "Clemente Cavangh (Tato)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-23",
+   "equipo": "B",
+   "jugador": "Fernando González",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "equipo": "A",
+   "jugador": "Franco Cignetti",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "equipo": "A",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "equipo": "A",
+   "jugador": "Lucas Luna",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "equipo": "B",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "equipo": "B",
+   "jugador": "Fernando Peressón",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "equipo": "B",
+   "jugador": "Clemente Cavangh (Tato)",
+   "resultado": "E",
+   "puntos": 1.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-07",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-07",
+   "equipo": "A",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-07",
+   "equipo": "A",
+   "jugador": "Guillermo Silva (Chunior)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-07",
+   "equipo": "A",
+   "jugador": "Lucas Luna",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-07",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-07",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-07",
+   "equipo": "B",
+   "jugador": "Franco Cignetti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-07",
+   "equipo": "B",
+   "jugador": "Martin Bailat",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-07",
+   "equipo": "B",
+   "jugador": "Nahuel Lugo",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-07",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-14",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-14",
+   "equipo": "A",
+   "jugador": "Joaquín Moreyra",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-14",
+   "equipo": "A",
+   "jugador": "Sergio Massin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-14",
+   "equipo": "A",
+   "jugador": "Guillermo Silva (Chunior)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-14",
+   "equipo": "A",
+   "jugador": "Ariel Raffin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-14",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-14",
+   "equipo": "B",
+   "jugador": "Alejandro Bressan",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-14",
+   "equipo": "B",
+   "jugador": "Matías Vera",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-14",
+   "equipo": "B",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-14",
+   "equipo": "B",
+   "jugador": "Clemente Cavangh (Tato)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-21",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-21",
+   "equipo": "A",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-21",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-21",
+   "equipo": "A",
+   "jugador": "Guillermo Silva (Chunior)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-21",
+   "equipo": "A",
+   "jugador": "Ariel Raffin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-21",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-21",
+   "equipo": "B",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-21",
+   "equipo": "B",
+   "jugador": "Lucas Luna",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-21",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-21",
+   "equipo": "B",
+   "jugador": "Nicolás Malberti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-28",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-28",
+   "equipo": "A",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-28",
+   "equipo": "A",
+   "jugador": "Matías Vera",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-28",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-28",
+   "equipo": "A",
+   "jugador": "Clemente Cavangh (Tato)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-28",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-28",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-28",
+   "equipo": "B",
+   "jugador": "Gastón Zilli",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-28",
+   "equipo": "B",
+   "jugador": "Lucas Luna",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-05-28",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-04",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-04",
+   "equipo": "A",
+   "jugador": "Clemente Cavangh (Tato)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-04",
+   "equipo": "A",
+   "jugador": "Fernando Peressón",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-04",
+   "equipo": "A",
+   "jugador": "Nicolás Malberti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-04",
+   "equipo": "A",
+   "jugador": "Gastón Zilli",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-04",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-04",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-04",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-04",
+   "equipo": "B",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-04",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-25",
+   "equipo": "A",
+   "jugador": "Milton Solari",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-25",
+   "equipo": "A",
+   "jugador": "Renato Fernández",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-25",
+   "equipo": "A",
+   "jugador": "Marco Bernardi",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-25",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-25",
+   "equipo": "A",
+   "jugador": "Matías Gassmann",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-25",
+   "equipo": "B",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-25",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-25",
+   "equipo": "B",
+   "jugador": "Nicolás Malberti",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-25",
+   "equipo": "B",
+   "jugador": "Matías Boschi",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-06-25",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-15",
+   "equipo": "A",
+   "jugador": "Matías Vera",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-15",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-15",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-15",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-15",
+   "equipo": "A",
+   "jugador": "Jose Bressan",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-15",
+   "equipo": "B",
+   "jugador": "Fernando Peressón",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-15",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-15",
+   "equipo": "B",
+   "jugador": "Nicolás Malberti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-15",
+   "equipo": "B",
+   "jugador": "Joaquín Moreyra",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-15",
+   "equipo": "B",
+   "jugador": "Ariel Raffin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-23",
+   "equipo": "A",
+   "jugador": "Fernando Peressón",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-23",
+   "equipo": "A",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-23",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-23",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-23",
+   "equipo": "A",
+   "jugador": "Ariel Raffin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-23",
+   "equipo": "B",
+   "jugador": "Milton Solari",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-23",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-23",
+   "equipo": "B",
+   "jugador": "Nicolás Malberti",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-23",
+   "equipo": "B",
+   "jugador": "Tomás Moschen",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-23",
+   "equipo": "B",
+   "jugador": "Jose Bressan",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-30",
+   "equipo": "A",
+   "jugador": "Marco Bernardi",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-30",
+   "equipo": "A",
+   "jugador": "Mateo Apud",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-30",
+   "equipo": "A",
+   "jugador": "Mateo Fontana",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-30",
+   "equipo": "A",
+   "jugador": "Nicolás Malberti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-30",
+   "equipo": "A",
+   "jugador": "Ariel Raffin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-30",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-30",
+   "equipo": "B",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-30",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-30",
+   "equipo": "B",
+   "jugador": "Joaquin Moragues",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-07-30",
+   "equipo": "B",
+   "jugador": "Ruben Torres",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-08-27",
+   "equipo": "A",
+   "jugador": "Joaquín Moreyra",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-08-27",
+   "equipo": "A",
+   "jugador": "Emanuel Sager (Chancho)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-08-27",
+   "equipo": "A",
+   "jugador": "Ariel Raffin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-08-27",
+   "equipo": "A",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-08-27",
+   "equipo": "A",
+   "jugador": "Joaquin Moragues",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-08-27",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-08-27",
+   "equipo": "B",
+   "jugador": "Nicolás Malberti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-08-27",
+   "equipo": "B",
+   "jugador": "Federico Marega (Colo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-08-27",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-08-27",
+   "equipo": "B",
+   "jugador": "Jose Bressan",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-03",
+   "equipo": "A",
+   "jugador": "Nicolás Malberti",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-03",
+   "equipo": "A",
+   "jugador": "Alexis Bressan",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-03",
+   "equipo": "A",
+   "jugador": "Juan Bogado",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-03",
+   "equipo": "A",
+   "jugador": "Gastón Sanchez",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-03",
+   "equipo": "A",
+   "jugador": "Joaquin Moragues",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-03",
+   "equipo": "B",
+   "jugador": "Matías Vera",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-03",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-03",
+   "equipo": "B",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-03",
+   "equipo": "B",
+   "jugador": "Emanuel Sager (Chancho)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-03",
+   "equipo": "B",
+   "jugador": "Jose Bressan",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-10",
+   "equipo": "A",
+   "jugador": "Renato Fernández",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-10",
+   "equipo": "A",
+   "jugador": "Nicolás Malberti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-10",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-10",
+   "equipo": "A",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-10",
+   "equipo": "A",
+   "jugador": "Gastón Sanchez",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-10",
+   "equipo": "B",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-10",
+   "equipo": "B",
+   "jugador": "Matías Gassmann",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-10",
+   "equipo": "B",
+   "jugador": "Lucas Luna",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-10",
+   "equipo": "B",
+   "jugador": "Alexis Bressan",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-10",
+   "equipo": "B",
+   "jugador": "Joaquin Moragues",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-24",
+   "equipo": "A",
+   "jugador": "Alejandro Bressan",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-24",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-24",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-24",
+   "equipo": "A",
+   "jugador": "Matías Gassmann",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-24",
+   "equipo": "A",
+   "jugador": "Ramiro Montenegro",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-24",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-24",
+   "equipo": "B",
+   "jugador": "Nicolás Malberti",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-24",
+   "equipo": "B",
+   "jugador": "Francisco Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-24",
+   "equipo": "B",
+   "jugador": "Juan Pablo Berlanda (Carlanga)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-09-24",
+   "equipo": "B",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-10-01",
+   "equipo": "A",
+   "jugador": "Emiliano Pighin (Chizo)",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-10-01",
+   "equipo": "A",
+   "jugador": "Cayetano Fabrissin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-10-01",
+   "equipo": "A",
+   "jugador": "Adrián Peressón",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-10-01",
+   "equipo": "A",
+   "jugador": "Sebastián Mussin",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-10-01",
+   "equipo": "A",
+   "jugador": "Ruben Torres",
+   "resultado": "G",
+   "puntos": 3.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-10-01",
+   "equipo": "B",
+   "jugador": "Marco Bernardi",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-10-01",
+   "equipo": "B",
+   "jugador": "Nicolás Malberti",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-10-01",
+   "equipo": "B",
+   "jugador": "Federico Ferrer",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-10-01",
+   "equipo": "B",
+   "jugador": "Gastón Foschiatti",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  },
+  {
+   "fecha": "2026-10-01",
+   "equipo": "B",
+   "jugador": "Jorge Fernández (Coty)",
+   "resultado": "P",
+   "puntos": 0.0,
+   "partido": 34.0
+  }
+ ],
+ "jugadores": [
+  "Alejandro Bressan",
+  "Alexis Bressan",
+  "Alonso Rugiero",
+  "Ariel Raffin",
+  "Cayetano Fabrissin",
+  "Clemente Cavangh (Tato)",
+  "Daniel Orso",
+  "Eduardo Bacca",
+  "Emanuel Sager (Chancho)",
+  "Emiliano Pighin (Chizo)",
+  "Enzo Mena",
+  "Federico Marega (Colo)",
+  "Fernando González",
+  "Fernando Peressón",
+  "Francisco Fabrissin",
+  "Franco Cignetti",
+  "Gastón Sanchez",
+  "Gastón Zilli",
+  "Geronimo Aguilar",
+  "Guillermo Silva (Chunior)",
+  "Hernán Braidot",
+  "Joaquin Moragues",
+  "Joaquín Moreyra",
+  "Joaquín Rosas (Ojón)",
+  "Jorge Fernández (Coty)",
+  "Jose Bressan",
+  "Juan Bogado",
+  "Juan Pablo Berlanda (Carlanga)",
+  "Lucas Luna",
+  "Marco Bernardi",
+  "Martin Bailat",
+  "Martin Leguizamón",
+  "Mateo Apud",
+  "Mateo Fontana",
+  "Matías Agustini (Diente)",
+  "Matías Boschi",
+  "Matías Gassmann",
+  "Matías Vera",
+  "Milton Solari",
+  "Nahuel Lugo",
+  "Nicolás Malberti",
+  "Pablo Aletti",
+  "Paolo Gómez (Colo)",
+  "Ramiro Montenegro",
+  "Renato Fernández",
+  "Ruben Torres",
+  "Santiago Centurión",
+  "Sebastián Mussin",
+  "Sergio Massin",
+  "Tomás Moschen",
+  "Adrián Peressón",
+  "Federico Ferrer",
+  "Gastón Foschiatti"
+ ]
+}
