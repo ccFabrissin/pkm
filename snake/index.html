@@ -2002,6 +2002,239 @@ body.evol-fs .bump-axis  { font-size: 8px; }
 .bottombar .footer-link { color: var(--text-dim); text-decoration: none; margin-left: 10px; }
 .bottombar .footer-link:hover { color: var(--teal); }
 .bottombar .footer-warn { color: var(--amber); }
+
+/* ---------- BorderGlow (port del componente de React Bits) ----------
+   Tarjeta con borde de malla de colores y luz exterior que sigue al puntero
+   cuando se acerca a los bordes. Paleta de la página: teal, violeta, verde. */
+
+.border-glow-card {
+  --edge-proximity: 0;
+  --cursor-angle: 45deg;
+  --edge-sensitivity: 30;
+  --color-sensitivity: calc(var(--edge-sensitivity) + 20);
+  --border-radius: var(--radius);
+  --glow-padding: 40px;
+  --cone-spread: 25;
+  --fill-opacity: 0.5;
+  --card-bg: #0d1b2a;
+  /* luz exterior: teal (hsl de #1EC3C3 aclarado) */
+  --glow-color:    hsl(180deg 70% 62% / 100%);
+  --glow-color-60: hsl(180deg 70% 62% / 60%);
+  --glow-color-50: hsl(180deg 70% 62% / 50%);
+  --glow-color-40: hsl(180deg 70% 62% / 40%);
+  --glow-color-30: hsl(180deg 70% 62% / 30%);
+  --glow-color-20: hsl(180deg 70% 62% / 20%);
+  --glow-color-10: hsl(180deg 70% 62% / 10%);
+  /* malla de colores del borde: teal / violeta / verde */
+  --gradient-one:   radial-gradient(at 80% 55%, #1EC3C3 0px, transparent 50%);
+  --gradient-two:   radial-gradient(at 69% 34%, #A78BFA 0px, transparent 50%);
+  --gradient-three: radial-gradient(at 8% 6%,   #10B981 0px, transparent 50%);
+  --gradient-four:  radial-gradient(at 41% 38%, #1EC3C3 0px, transparent 50%);
+  --gradient-five:  radial-gradient(at 86% 85%, #A78BFA 0px, transparent 50%);
+  --gradient-six:   radial-gradient(at 82% 18%, #10B981 0px, transparent 50%);
+  --gradient-seven: radial-gradient(at 51% 4%,  #A78BFA 0px, transparent 50%);
+  --gradient-base:  linear-gradient(#1EC3C3 0 100%);
+
+  position: relative;
+  border-radius: var(--border-radius);
+  isolation: isolate;
+  transform: translate3d(0, 0, 0.01px);
+  display: grid;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 22, 34, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: visible;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.border-glow-card::before,
+.border-glow-card::after,
+.border-glow-card > .edge-light {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transition: opacity 0.25s ease-out;
+  z-index: -1;
+}
+
+.border-glow-card:not(:hover):not(.sweep-active)::before,
+.border-glow-card:not(:hover):not(.sweep-active)::after,
+.border-glow-card:not(:hover):not(.sweep-active) > .edge-light {
+  opacity: 0;
+  transition: opacity 0.75s ease-in-out;
+}
+
+/* borde de malla de colores */
+.border-glow-card::before {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--card-bg) 0 100%) padding-box,
+    linear-gradient(rgb(255 255 255 / 0%) 0% 100%) border-box,
+    var(--gradient-one) border-box,
+    var(--gradient-two) border-box,
+    var(--gradient-three) border-box,
+    var(--gradient-four) border-box,
+    var(--gradient-five) border-box,
+    var(--gradient-six) border-box,
+    var(--gradient-seven) border-box,
+    var(--gradient-base) border-box;
+  opacity: calc((var(--edge-proximity) - var(--color-sensitivity)) / (100 - var(--color-sensitivity)));
+  mask-image: conic-gradient(
+    from var(--cursor-angle) at center,
+    black calc(var(--cone-spread) * 1%),
+    transparent calc((var(--cone-spread) + 15) * 1%),
+    transparent calc((100 - var(--cone-spread) - 15) * 1%),
+    black calc((100 - var(--cone-spread)) * 1%)
+  );
+  -webkit-mask-image: conic-gradient(
+    from var(--cursor-angle) at center,
+    black calc(var(--cone-spread) * 1%),
+    transparent calc((var(--cone-spread) + 15) * 1%),
+    transparent calc((100 - var(--cone-spread) - 15) * 1%),
+    black calc((100 - var(--cone-spread)) * 1%)
+  );
+}
+
+/* relleno de malla cerca de los bordes */
+.border-glow-card::after {
+  border: 1px solid transparent;
+  background:
+    var(--gradient-one) padding-box,
+    var(--gradient-two) padding-box,
+    var(--gradient-three) padding-box,
+    var(--gradient-four) padding-box,
+    var(--gradient-five) padding-box,
+    var(--gradient-six) padding-box,
+    var(--gradient-seven) padding-box,
+    var(--gradient-base) padding-box;
+  mask-image:
+    linear-gradient(to bottom, black, black),
+    radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%),
+    radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%),
+    conic-gradient(from var(--cursor-angle) at center, transparent 5%, black 15%, black 85%, transparent 95%);
+  mask-composite: subtract, add, add, add, add, add;
+  opacity: calc(var(--fill-opacity) * (var(--edge-proximity) - var(--color-sensitivity)) / (100 - var(--color-sensitivity)));
+  mix-blend-mode: soft-light;
+}
+
+/* luz exterior */
+.border-glow-card > .edge-light {
+  inset: calc(var(--glow-padding) * -1);
+  pointer-events: none;
+  z-index: 1;
+  mask-image: conic-gradient(from var(--cursor-angle) at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%);
+  -webkit-mask-image: conic-gradient(from var(--cursor-angle) at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%);
+  opacity: calc((var(--edge-proximity) - var(--edge-sensitivity)) / (100 - var(--edge-sensitivity)));
+  mix-blend-mode: plus-lighter;
+}
+
+.border-glow-card > .edge-light::before {
+  content: "";
+  position: absolute;
+  inset: var(--glow-padding);
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px var(--glow-color),
+    inset 0 0 1px 0 var(--glow-color-60),
+    inset 0 0 3px 0 var(--glow-color-50),
+    inset 0 0 6px 0 var(--glow-color-40),
+    inset 0 0 15px 0 var(--glow-color-30),
+    inset 0 0 25px 2px var(--glow-color-20),
+    inset 0 0 50px 2px var(--glow-color-10),
+    0 0 1px 0 var(--glow-color-60),
+    0 0 3px 0 var(--glow-color-50),
+    0 0 6px 0 var(--glow-color-40),
+    0 0 15px 0 var(--glow-color-30),
+    0 0 25px 2px var(--glow-color-20),
+    0 0 50px 2px var(--glow-color-10);
+}
+
+.border-glow-inner {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: auto;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* las tablas de posiciones adentro de la tarjeta: el vidrio lo pone la tarjeta */
+.border-glow-card .standings-wrap {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  border-radius: inherit;
+}
+
+/* ---------- FlipCard (port del componente de React Bits, sin la librería motion) ----------
+   Las dos tablas de posiciones son las dos caras de una tarjeta que gira
+   solo con el switch Habituales / Esporádicos (sin click ni arrastre). */
+
+.standings-flip-wrap { margin-top: 4px; }
+.standings-toggle { margin-bottom: 16px; }
+
+.flip-card {
+  position: relative;
+  width: 100%;
+  perspective: 1100px;
+  transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.flip-card.no-anim,
+.flip-card.no-anim * { transition: none !important; animation: none !important; }
+
+.flip-card__shadow {
+  position: absolute;
+  inset: 12% 6% -4%;
+  border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.45);
+  filter: blur(22px);
+  pointer-events: none;
+  z-index: 0;
+  transform-origin: center;
+}
+.flip-card.is-turning .flip-card__shadow { animation: fc-shadow-turn 0.9s ease-in-out; }
+@keyframes fc-shadow-turn {
+  50% { transform: scaleX(0.08); opacity: 0.15; }
+}
+
+.flip-card__rotor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 0.9s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.flip-card.is-flipped .flip-card__rotor { transform: rotateY(180deg); }
+
+.flip-card__face {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-card__face--back { transform: rotateY(180deg); }
+.flip-card__face.is-hidden { visibility: hidden; }
+
+/* con "reducir movimiento": fundido en vez de giro */
+.flip-card[data-fade] .flip-card__rotor { transform: none !important; transition: none; }
+.flip-card[data-fade] .flip-card__face {
+  transform: none;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.flip-card[data-fade]:not(.is-flipped) .flip-card__face--front,
+.flip-card[data-fade].is-flipped .flip-card__face--back { opacity: 1; }
+.flip-card[data-fade] .flip-card__shadow { animation: none; }
 </style>
 </head>
 <body>
@@ -2563,6 +2796,116 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 });
+
+// ---------------- FlipCard de las tablas ----------------
+// Port del componente de React Bits sin la librería motion: giro con
+// transición CSS (con rebote) y altura animada a la cara activa.
+// Gira solo con el switch; nada de click, arrastre ni inclinación.
+
+const STANDINGS_FACE_KEY = 'futbol-standings-face-v1';
+let STANDINGS_FACE = 'habituales';
+try { if (localStorage.getItem(STANDINGS_FACE_KEY) === 'esporadicos') STANDINGS_FACE = 'esporadicos'; } catch (_) {}
+
+function buildStandingsFlip(frontSection, backSection) {
+  const startFlipped = STANDINGS_FACE === 'esporadicos';
+  const wrap = el(`
+    <div class="standings-flip-wrap">
+      <div class="mode-toggle standings-toggle">
+        <span class="mode-label ${startFlipped ? '' : 'active'}" data-target="habituales">Habituales</span>
+        <label class="switch" aria-label="Cambiar entre Habituales y Esporádicos">
+          <input type="checkbox" id="standings-face-input" ${startFlipped ? 'checked' : ''}>
+          <span class="slider"></span>
+        </label>
+        <span class="mode-label ${startFlipped ? 'active' : ''}" data-target="esporadicos">Esporádicos</span>
+      </div>
+      <div class="flip-card no-anim" aria-live="polite">
+        <span class="flip-card__shadow" aria-hidden="true"></span>
+        <div class="flip-card__rotor">
+          <div class="flip-card__face flip-card__face--front"></div>
+          <div class="flip-card__face flip-card__face--back"></div>
+        </div>
+      </div>
+    </div>
+  `);
+  const card  = wrap.querySelector('.flip-card');
+  const faceF = wrap.querySelector('.flip-card__face--front');
+  const faceB = wrap.querySelector('.flip-card__face--back');
+  const input = wrap.querySelector('#standings-face-input');
+  const labels = wrap.querySelectorAll('.mode-label');
+  faceF.appendChild(frontSection);
+  faceB.appendChild(backSection);
+
+  const reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
+  if (reduce) card.dataset.fade = '';
+  const TURN_MS = reduce ? 250 : 950;
+
+  const isFlipped = () => card.classList.contains('is-flipped');
+  const activeFace = () => (isFlipped() ? faceB : faceF);
+  function syncHeight() { card.style.height = activeFace().offsetHeight + 'px'; }
+  function hideInactive() {
+    const a = activeFace(), i = a === faceF ? faceB : faceF;
+    i.classList.add('is-hidden'); i.setAttribute('inert', ''); i.setAttribute('aria-hidden', 'true');
+    a.classList.remove('is-hidden'); a.removeAttribute('inert'); a.removeAttribute('aria-hidden');
+  }
+  function syncToggle() {
+    const f = isFlipped();
+    input.checked = f;
+    labels.forEach(l => l.classList.toggle('active', (l.dataset.target === 'esporadicos') === f));
+  }
+
+  card.classList.toggle('is-flipped', startFlipped);
+  hideInactive();
+  if (typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(syncHeight);
+    ro.observe(faceF); ro.observe(faceB);
+  }
+  requestAnimationFrame(() => { syncHeight(); requestAnimationFrame(() => card.classList.remove('no-anim')); });
+
+  let turning = 0;
+  function flipTo(toBack) {
+    if (isFlipped() === toBack) { syncToggle(); return; }
+    STANDINGS_FACE = toBack ? 'esporadicos' : 'habituales';
+    try { localStorage.setItem(STANDINGS_FACE_KEY, STANDINGS_FACE); } catch (_) {}
+    // las dos caras visibles mientras gira
+    [faceF, faceB].forEach(f => { f.classList.remove('is-hidden'); f.removeAttribute('inert'); f.removeAttribute('aria-hidden'); });
+    card.classList.toggle('is-flipped', toBack);
+    card.classList.remove('is-turning');
+    void card.offsetWidth; // reinicia la animación de la sombra
+    card.classList.add('is-turning');
+    syncHeight();
+    syncToggle();
+    clearTimeout(turning);
+    turning = setTimeout(() => { card.classList.remove('is-turning'); hideInactive(); }, TURN_MS);
+  }
+
+  input.addEventListener('change', () => flipTo(input.checked));
+  labels.forEach(l => l.addEventListener('click', () => flipTo(l.dataset.target === 'esporadicos')));
+  return wrap;
+}
+
+// ---------------- BorderGlow ----------------
+// Port del componente de React Bits: envuelve un nodo en una tarjeta cuyo
+// borde se ilumina del lado por donde se acerca el puntero.
+
+function wrapBorderGlow(node) {
+  const card = el(`<div class="border-glow-card"><span class="edge-light"></span><div class="border-glow-inner"></div></div>`);
+  card.querySelector('.border-glow-inner').appendChild(node);
+  card.addEventListener('pointermove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const cx = rect.width / 2, cy = rect.height / 2;
+    const dx = (e.clientX - rect.left) - cx;
+    const dy = (e.clientY - rect.top) - cy;
+    let kx = Infinity, ky = Infinity;
+    if (dx !== 0) kx = cx / Math.abs(dx);
+    if (dy !== 0) ky = cy / Math.abs(dy);
+    const edge = Math.min(Math.max(1 / Math.min(kx, ky), 0), 1);
+    let angle = (dx === 0 && dy === 0) ? 0 : Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+    if (angle < 0) angle += 360;
+    card.style.setProperty('--edge-proximity', (edge * 100).toFixed(3));
+    card.style.setProperty('--cursor-angle', angle.toFixed(3) + 'deg');
+  }, { passive: true });
+  return card;
+}
 
 // ---------------- Fondo: Aurora (WebGL2) ----------------
 // Port a JS plano del componente <Aurora /> de React Bits (reactbits.dev),
@@ -3154,6 +3497,8 @@ function renderTabla(root) {
         <div class="standings-wrap"><table class="standings"><thead><tr></tr></thead><tbody></tbody></table></div>
       </section>
     `);
+    const wrap = section.querySelector('.standings-wrap');
+    section.appendChild(wrapBorderGlow(wrap));
 
     const badgeEl = section.querySelector('.badge-avg');
     if (badgeEl) {
@@ -3215,8 +3560,10 @@ function renderTabla(root) {
     return section;
   }
 
-  root.appendChild(buildTable(habituales,  'Habituales',  'Todavía no hay jugadores con 5 o más partidos.'));
-  root.appendChild(buildTable(esporadicos, 'Esporádicos', 'Sin jugadores con menos de 5 partidos.'));
+  root.appendChild(buildStandingsFlip(
+    buildTable(habituales,  'Habituales',  'Todavía no hay jugadores con 5 o más partidos.'),
+    buildTable(esporadicos, 'Esporádicos', 'Sin jugadores con menos de 5 partidos.')
+  ));
 
   // KPIs después de la tabla
   const kpiRow = el(`<div class="kpi-row kpi-row-bottom"></div>`);

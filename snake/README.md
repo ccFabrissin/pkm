@@ -6,7 +6,7 @@ Es una página estática (`index.html`) que lee en vivo el Google Sheet del grup
 
 ## Vistas
 
-- **Tabla:** posiciones por puntaje promedio, separadas en habituales y esporádicos. Click en una columna para reordenar.
+- **Tabla:** posiciones por puntaje promedio, separadas en habituales (más de 5 partidos) y esporádicos. Las dos tablas son las caras de una tarjeta que gira con el switch Habituales / Esporádicos (la elección queda guardada en el navegador). Click en una columna para reordenar. El borde de la tabla se ilumina del lado por donde se acerca el mouse.
 - **Próximo partido:** elegís 10 o 12 jugadores (5v5 / 6v6) y arma los equipos con la serpiente: ordena por puntaje efectivo y reparte Blanco / Negro / Negro / Blanco / Blanco… Los jugadores con 5 partidos o menos se ponderan con el promedio del resto; se pueden tipear jugadores nuevos. La selección queda guardada en el navegador.
 - **Historial:** todos los partidos, con equipos y resultado.
 - **Jugadores:** ficha de cada uno (rachas, compañeros, rivales).
@@ -31,6 +31,16 @@ python snake/scripts/actualizar_datos.py
 ```
 
 Baja las dos hojas y reescribe `data/datos.json` con la fecha de actualización. Conviene correrlo cada tanto y commitearlo, así el respaldo no queda viejo.
+
+## Efectos visuales
+
+Vienen de componentes de [React Bits](https://reactbits.dev) portados a JS plano, sin React ni dependencias, con la paleta de la página (teal `#1EC3C3`, violeta `#A78BFA`, verde `#10B981`):
+
+- **Aurora** (fondo): shader WebGL2 en un canvas fijo; se ajusta en `AURORA_OPTS` dentro de `index.html`. Sin WebGL2 vuelven las partículas 2D de antes.
+- **BorderGlow** (tablas de posiciones): borde de malla de colores y luz exterior que siguen al puntero. Es solo CSS más un `pointermove` que setea `--edge-proximity` y `--cursor-angle`.
+- **FlipCard** (tablas de posiciones): giro 3D con transición CSS, sin la librería `motion`. Gira solo con el switch.
+
+Los tres respetan `prefers-reduced-motion`.
 
 ## Origen
 
