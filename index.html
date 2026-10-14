@@ -1,13 +1,631 @@
 <!doctype html>
 <html lang="es">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>cayetano.click</title>
-<style>
-  body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 4rem auto; padding: 0 1rem; color: #222; }
-  a { color: #1a5fb4; }
-</style>
-<h1>cayetano.click</h1>
-<ul>
-  <li><a href="pkm/">PKM Champions DB</a> · teambuilder para Pokémon Champions (dobles, Reg M-C)</li>
-</ul>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SynapseX</title>
+  <meta name="description" content="Saludo según la hora local sobre el hero de SynapseX.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background: #000;
+      color: #fff;
+      font-family: "Space Mono", monospace;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      padding: 80px 16px 48px;
+      overflow: hidden;
+      background: #000;
+    }
+    @media (min-width: 640px) { .hero { padding: 96px 24px 72px; } }
+    @media (min-width: 768px) { .hero { padding: 96px 32px 96px; } }
+
+    .hero__video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Sombra inferior para que el texto se lea sobre las zonas claras del video */
+    .hero__shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 38%, rgba(0,0,0,0) 68%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    @media (max-width: 767px) {
+      .hero__shade {
+        background: linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0) 78%);
+      }
+    }
+
+    .hero__grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#ffffff 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero__mark {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, calc(-50% + 50px));
+      font-family: "Anton SC", sans-serif;
+      font-size: clamp(120px, 30vw, 521px);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: -4px;
+      white-space: nowrap;
+      opacity: 0.10;
+      background: radial-gradient(circle, rgba(142,127,148,0) 0%, #8E7F94 70%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+    }
+
+    /* Todo el contenido entra con un fade de 1s, 800ms después de cargar */
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 1;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+      text-shadow: 0 1px 14px rgba(0,0,0,0.6);
+    }
+    .hero.is-in .hero__content { opacity: 1; }
+
+    .hero__greet {
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      font-size: clamp(34px, 8vw, 96px);
+      color: #fff;
+      white-space: nowrap;
+      min-height: 0.95em;
+    }
+
+    .hero__time,
+    .hero__cta {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.2s,
+                  transform 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.2s;
+    }
+    .hero__cta { transition-delay: 0.45s; }
+    .hero.is-in .hero__time,
+    .hero.is-in .hero__cta { opacity: 1; transform: none; }
+
+    .hero__time {
+      margin-top: 24px;
+      font-size: clamp(22px, 4.5vw, 44px);
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.6);
+      font-variant-numeric: tabular-nums;
+    }
+    @media (min-width: 640px) { .hero__time { margin-top: 32px; } }
+
+    .hero__cta { margin-top: 36px; text-shadow: none; }
+    @media (min-width: 640px) { .hero__cta { margin-top: 44px; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero__content, .hero__time, .hero__cta { transition: none; }
+    }
+
+    /* ---------- HoldButton (port a CSS puro de React Bits) ---------- */
+    .hold-button {
+      --hb-radius: 14px;
+      --hb-bg: #27272a;
+      --hb-fill: #5227ff;
+      --hb-text: #f5f5f5;
+      --hb-fill-text: #ffffff;
+      --hb-hold: 2000ms;
+      --hb-release: 200ms;
+      --hb-press: 0.97;
+      --hb-wave: 6px;
+      --hb-w: 0px;
+      --hb-h: 0px;
+      --hb-cycles: 2;
+      --hb-p: 0;
+      --hb-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --hb-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      --hb-glow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 10px 32px -6px color-mix(in srgb, var(--hb-fill) 70%, transparent);
+
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      isolation: isolate;
+      margin: 0;
+      border: 0;
+      border-radius: var(--hb-radius);
+      background: var(--hb-bg);
+      color: var(--hb-text);
+      font-family: inherit;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1;
+      box-shadow: var(--hb-shadow);
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition:
+        transform 160ms var(--hb-ease-out),
+        background-color 160ms ease,
+        box-shadow var(--hb-release) var(--hb-ease-out);
+    }
+
+    .hold-button--sm { height: 36px; padding: 0 16px; font-size: 13px; }
+    .hold-button--md { height: 44px; padding: 0 22px; font-size: 15px; }
+    .hold-button--lg { height: 52px; padding: 0 28px; font-size: 17px; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .hold-button:not(:disabled):hover {
+        background: color-mix(in srgb, var(--hb-bg) 92%, #fff);
+      }
+    }
+
+    .hold-button[data-phase='holding'][data-input='pointer'] {
+      transform: scale(var(--hb-press));
+    }
+
+    .hold-button[data-glow='true'][data-phase='holding'],
+    .hold-button[data-glow='true'][data-phase='done'] {
+      box-shadow: var(--hb-glow);
+    }
+
+    .hold-button[data-glow='true'][data-phase='holding'] {
+      transition:
+        transform 160ms var(--hb-ease-out),
+        background-color 160ms ease,
+        box-shadow var(--hb-hold) linear;
+    }
+
+    .hold-button:focus-visible {
+      outline: 2px solid var(--hb-fill);
+      outline-offset: 3px;
+    }
+
+    .hold-button:disabled { opacity: 0.5; cursor: default; pointer-events: none; }
+
+    .hold-button__pulse {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: var(--hb-radius);
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .hold-button[data-glow='true'][data-phase='done'] .hold-button__pulse {
+      animation: hb-pulse 600ms var(--hb-ease-out) forwards;
+    }
+
+    @keyframes hb-pulse {
+      from { opacity: 1; box-shadow: 0 0 0 0 color-mix(in srgb, var(--hb-fill) 55%, transparent); }
+      to   { opacity: 0; box-shadow: 0 0 0 14px color-mix(in srgb, var(--hb-fill) 0%, transparent); }
+    }
+
+    .hold-button__label {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+    }
+
+    .hold-button__label > span {
+      grid-area: 1 / 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: opacity 200ms ease, filter 200ms ease;
+    }
+
+    .hold-button__icon { display: inline-flex; flex: none; }
+    .hold-button__icon > svg { display: block; }
+
+    .hold-button__done { opacity: 0; filter: blur(2px); }
+    .hold-button[data-phase='done'] .hold-button__idle { opacity: 0; filter: blur(2px); }
+    .hold-button[data-phase='done'] .hold-button__done { opacity: 1; filter: blur(0); }
+
+    .hold-button__clip {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      clip-path: inset(0 round var(--hb-radius));
+      pointer-events: none;
+    }
+
+    .hold-button__fill {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: var(--hb-fill);
+      color: var(--hb-fill-text);
+      clip-path: inset(
+        0 calc((1 - var(--hb-p)) * (100% + 0.75 * var(--hb-wave)) - var(--hb-p) * 0.25 * var(--hb-wave)) 0 0
+      );
+    }
+
+    .hold-button[data-direction='up'] .hold-button__fill {
+      clip-path: inset(
+        calc((1 - var(--hb-p)) * (100% + 0.75 * var(--hb-wave)) - var(--hb-p) * 0.25 * var(--hb-wave)) 0 0 0
+      );
+    }
+
+    .hold-button__crest {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: var(--hb-fill);
+      color: var(--hb-fill-text);
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='200' viewBox='0 0 20 200' preserveAspectRatio='none'%3E%3Cpath d='M0 0H10C18 8 18 25.3 10 33.3S2 58.7 10 66.7S18 92 10 100S2 125.3 10 133.3S18 158.7 10 166.7S2 192 10 200H0Z'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='200' viewBox='0 0 20 200' preserveAspectRatio='none'%3E%3Cpath d='M0 0H10C18 8 18 25.3 10 33.3S2 58.7 10 66.7S18 92 10 100S2 125.3 10 133.3S18 158.7 10 166.7S2 192 10 200H0Z'/%3E%3C/svg%3E");
+      -webkit-mask-repeat: repeat-y;
+      mask-repeat: repeat-y;
+      -webkit-mask-size: var(--hb-wave) calc(var(--hb-h) * 2);
+      mask-size: var(--hb-wave) calc(var(--hb-h) * 2);
+      -webkit-mask-position-x: calc(-1 * var(--hb-wave) + var(--hb-p) * (var(--hb-w) + var(--hb-wave)));
+      mask-position-x: calc(-1 * var(--hb-wave) + var(--hb-p) * (var(--hb-w) + var(--hb-wave)));
+      -webkit-mask-position-y: calc(-1 * var(--hb-p) * var(--hb-cycles) * var(--hb-h));
+      mask-position-y: calc(-1 * var(--hb-p) * var(--hb-cycles) * var(--hb-h));
+    }
+
+    .hold-button[data-direction='up'] .hold-button__crest {
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='20' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M0 20V10C12 2 38 2 50 10S88 18 100 10S138 2 150 10S188 18 200 10V20Z'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='20' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M0 20V10C12 2 38 2 50 10S88 18 100 10S138 2 150 10S188 18 200 10V20Z'/%3E%3C/svg%3E");
+      -webkit-mask-repeat: repeat-x;
+      mask-repeat: repeat-x;
+      -webkit-mask-size: calc(var(--hb-w) * 2) var(--hb-wave);
+      mask-size: calc(var(--hb-w) * 2) var(--hb-wave);
+      -webkit-mask-position-x: calc(-1 * var(--hb-p) * var(--hb-cycles) * var(--hb-w));
+      mask-position-x: calc(-1 * var(--hb-p) * var(--hb-cycles) * var(--hb-w));
+      -webkit-mask-position-y: calc(var(--hb-h) - var(--hb-p) * (var(--hb-h) + var(--hb-wave)));
+      mask-position-y: calc(var(--hb-h) - var(--hb-p) * (var(--hb-h) + var(--hb-wave)));
+    }
+
+    .hold-button__label--fill { z-index: auto; }
+
+    .hold-button__sr {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    @media (prefers-contrast: more) {
+      .hold-button { outline: 1px solid var(--hb-text); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hold-button {
+        transition: background-color 160ms ease, box-shadow var(--hb-release) ease;
+        transform: none !important;
+      }
+      .hold-button__fill,
+      .hold-button[data-direction='up'] .hold-button__fill {
+        clip-path: inset(0);
+        opacity: 0;
+        transition: opacity var(--hb-release) ease;
+      }
+      .hold-button__crest { display: none; }
+      .hold-button[data-phase='holding'] .hold-button__fill,
+      .hold-button[data-phase='done'] .hold-button__fill {
+        opacity: 1;
+        transition: opacity var(--hb-hold) linear;
+      }
+      .hold-button__pulse { animation: none !important; }
+      .hold-button__label > span { transition: opacity 200ms ease; filter: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero" id="hero">
+    <video class="hero__video" id="heroVideo" muted playsinline preload="auto"
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_083515_290e5a10-0b95-41af-a5e2-32b6389baa4d.mp4"></video>
+
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero__grid" aria-hidden="true"></div>
+    <div class="hero__mark" aria-hidden="true">Transcendence</div>
+
+    <div class="hero__content">
+      <h1 class="hero__greet" id="greeting" aria-live="polite">&nbsp;</h1>
+      <time class="hero__time" id="clock"></time>
+      <div class="hero__cta">
+        <button type="button" id="snakeButton" class="hold-button hold-button--md"
+          data-phase="idle" data-direction="right" data-glow="true" aria-describedby="snakeHint"
+          style="--hb-radius:14px; --hb-bg:#1c1c1f; --hb-fill:#166534; --hb-text:#f5f5f5; --hb-fill-text:#ffffff; --hb-hold:2000ms; --hb-cycles:1.8182; --hb-release:200ms; --hb-press:0.97; --hb-wave:6px;">
+          <span class="hold-button__pulse" aria-hidden="true"></span>
+          <span class="hold-button__label" data-labels></span>
+          <span class="hold-button__clip" aria-hidden="true">
+            <span class="hold-button__fill"><span class="hold-button__label hold-button__label--fill" data-labels></span></span>
+            <span class="hold-button__crest" aria-hidden="true"><span class="hold-button__label hold-button__label--fill" data-labels></span></span>
+          </span>
+          <span id="snakeHint" class="hold-button__sr">Mantené presionado 2 segundos para abrir Snake</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* ====== A dónde manda el botón ====== */
+    var SNAKE_URL = 'https://script.google.com/macros/s/REEMPLAZAR_POR_EL_ID_DEL_DEPLOY/exec';
+
+    (function () {
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---------- Saludo según la hora local ---------- */
+      function buildGreeting() {
+        var h = new Date().getHours();
+        if (h >= 6 && h < 12) return '¡Buenos días!';
+        if (h >= 12 && h < 20) return '¡Buenas tardes!';
+        return '¡Buenas noches!';
+      }
+
+      /* ---------- Reloj ---------- */
+      var clockEl = document.getElementById('clock');
+      function pad(n) { return (n < 10 ? '0' : '') + n; }
+      function tick() {
+        var d = new Date();
+        var hhmm = pad(d.getHours()) + ':' + pad(d.getMinutes());
+        clockEl.textContent = hhmm + ':' + pad(d.getSeconds());
+        clockEl.setAttribute('datetime', hhmm);
+      }
+      tick();
+      setInterval(tick, 1000);
+
+      /* ---------- ScrambleIn: revela de izquierda a derecha ---------- */
+      var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~|}{[]:;?><';
+      function randomChar() { return CHARS.charAt(Math.floor(Math.random() * CHARS.length)); }
+
+      function scrambleIn(el, text, delay) {
+        el.textContent = ' ';
+        if (reduceMotion) { el.textContent = text; return; }
+        setTimeout(function () {
+          var reveal = 0;
+          var timer = setInterval(function () {
+            reveal += 0.5;
+            var cursor = Math.floor(reveal);
+            if (cursor >= text.length) {
+              el.textContent = text;
+              clearInterval(timer);
+              return;
+            }
+            var out = '';
+            for (var i = 0; i < text.length; i++) {
+              var c = text.charAt(i);
+              if (c === ' ') out += ' ';
+              else if (i < cursor) out += c;
+              else if (i < cursor + 3) out += randomChar();
+            }
+            el.textContent = out || ' ';
+          }, 25);
+        }, delay);
+      }
+
+      /* ---------- Video scrubeado con el movimiento horizontal ---------- */
+      var video = document.getElementById('heroVideo');
+      var SENSITIVITY = 0.8;
+      var target = 0, seeking = false, lastX = null;
+
+      function clamp(t) {
+        var max = Math.max(0, (video.duration || 0) - 0.05);
+        return Math.min(max, Math.max(0, t));
+      }
+      function seek() {
+        if (seeking || !isFinite(video.duration)) return;
+        var t = clamp(target);
+        if (Math.abs(video.currentTime - t) < 0.01) return;
+        seeking = true;
+        video.currentTime = t;
+      }
+      video.addEventListener('seeked', function () { seeking = false; seek(); });
+      video.addEventListener('loadedmetadata', function () { video.pause(); video.currentTime = 0; });
+      video.addEventListener('play', function () { video.pause(); });
+
+      function onMove(x) {
+        if (lastX !== null && isFinite(video.duration)) {
+          var dx = x - lastX;
+          target = clamp(target + (dx / window.innerWidth) * video.duration * SENSITIVITY);
+          seek();
+        }
+        lastX = x;
+      }
+      window.addEventListener('mousemove', function (e) { onMove(e.clientX); });
+      document.addEventListener('mouseleave', function () { lastX = null; });
+      window.addEventListener('touchmove', function (e) { onMove(e.touches[0].clientX); }, { passive: true });
+      window.addEventListener('touchend', function () { lastX = null; });
+
+      /* ---------- Entrada: 800ms de espera, luego fade + scramble ---------- */
+      var hero = document.getElementById('hero');
+      var greetingEl = document.getElementById('greeting');
+
+      setTimeout(function () {
+        hero.classList.add('is-in');
+        scrambleIn(greetingEl, buildGreeting(), 200);
+      }, 800);
+
+      /* Si la pestaña queda abierta, el saludo cambia con la franja horaria */
+      setInterval(function () {
+        var g = buildGreeting();
+        if (hero.classList.contains('is-in') && greetingEl.textContent !== g) scrambleIn(greetingEl, g, 0);
+      }, 60000);
+
+      /* ---------- HoldButton: mantener presionado para ir a Snake ---------- */
+      var SNAKE_ICON =
+        '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<path d="M19.5 4.5h-3.5a3 3 0 0 0 0 6h3a3 3 0 0 1 0 6H9"/>' +
+        '<path d="M9 16.5a3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3h3z"/>' +
+        '<circle cx="5.2" cy="15.9" r="0.6" fill="currentColor" stroke="none"/>' +
+        '<path d="M3 16.5H1.2M1.2 16.5l-0.8-0.7M1.2 16.5l-0.8 0.7"/>' +
+        '</svg>';
+
+      var LABELS =
+        '<span class="hold-button__idle"><span class="hold-button__icon">' + SNAKE_ICON + '</span>Snake</span>' +
+        '<span class="hold-button__done" aria-hidden="true"><span class="hold-button__icon">' + SNAKE_ICON + '</span>Abriendo…</span>';
+
+      holdButton(document.getElementById('snakeButton'), {
+        holdTime: 2000,
+        releaseTime: 200,
+        resetAfter: 0,
+        onHold: function () {
+          setTimeout(function () { window.location.href = SNAKE_URL; }, 450);
+        }
+      });
+
+      function holdButton(button, opts) {
+        var TAP_MS = 250, HIT_PAD = 10;
+        var holdTime = opts.holdTime, releaseTime = opts.releaseTime, resetAfter = opts.resetAfter;
+        var phase = 'idle', input = null;
+        var gesture = { pointerId: null, start: 0, rect: null };
+        var timers = { complete: 0, reset: 0 };
+        var motion = { raf: 0, p: 0, from: 0, to: 0, start: 0 };
+        var LINEAR = function (t) { return t; };
+        var EASE_OUT = function (t) { return 1 - Math.pow(1 - t, 3); };
+
+        Array.prototype.forEach.call(button.querySelectorAll('[data-labels]'), function (el) { el.innerHTML = LABELS; });
+
+        function go(next, kind) {
+          phase = next; input = kind || null;
+          button.setAttribute('data-phase', next);
+          if (input) button.setAttribute('data-input', input); else button.removeAttribute('data-input');
+          var idle = button.querySelector('.hold-button__label > .hold-button__idle');
+          var done = button.querySelector('.hold-button__label > .hold-button__done');
+          if (idle) idle.setAttribute('aria-hidden', next === 'done' ? 'true' : 'false');
+          if (done) done.setAttribute('aria-hidden', next !== 'done' ? 'true' : 'false');
+        }
+        function clearTimers() { clearTimeout(timers.complete); clearTimeout(timers.reset); }
+
+        function drive(to, duration, ease) {
+          cancelAnimationFrame(motion.raf);
+          motion.from = motion.p; motion.to = to; motion.start = performance.now();
+          var step = function (now) {
+            var t = duration > 0 ? Math.min(1, (now - motion.start) / duration) : 1;
+            motion.p = motion.from + (motion.to - motion.from) * ease(t);
+            button.style.setProperty('--hb-p', motion.p.toFixed(4));
+            if (t < 1) { motion.raf = requestAnimationFrame(step); return; }
+            motion.raf = 0;
+            if (motion.to === 1) complete();
+          };
+          motion.raf = requestAnimationFrame(step);
+        }
+
+        function complete() {
+          if (phase !== 'holding') return;
+          if (performance.now() - gesture.start < holdTime - 50) return;
+          clearTimers();
+          go('done', input);
+          if (opts.onHold) opts.onHold();
+          if (resetAfter > 0) {
+            timers.reset = setTimeout(function () { go('idle'); drive(0, releaseTime, EASE_OUT); }, resetAfter);
+          }
+        }
+
+        function begin(kind) {
+          if (button.disabled || phase !== 'idle') return false;
+          gesture.start = performance.now();
+          gesture.rect = button.getBoundingClientRect();
+          go('holding', kind);
+          drive(1, holdTime, LINEAR);
+          timers.complete = setTimeout(complete, holdTime + 100);
+          return true;
+        }
+
+        function release(drifted) {
+          if (phase !== 'holding') return;
+          clearTimers();
+          var held = performance.now() - gesture.start;
+          go('idle');
+          drive(0, releaseTime, EASE_OUT);
+          if (!drifted && held < TAP_MS && opts.onTap) opts.onTap();
+        }
+
+        function endPointer(e, drifted) {
+          if (e.pointerId !== gesture.pointerId) return;
+          gesture.pointerId = null;
+          try { if (button.hasPointerCapture(e.pointerId)) button.releasePointerCapture(e.pointerId); } catch (err) {}
+          release(drifted);
+        }
+
+        button.addEventListener('pointerdown', function (e) {
+          if (e.button !== 0 || !e.isPrimary || gesture.pointerId !== null) return;
+          if (!begin('pointer')) return;
+          gesture.pointerId = e.pointerId;
+          try { button.setPointerCapture(e.pointerId); } catch (err) {}
+        });
+        button.addEventListener('pointermove', function (e) {
+          if (e.pointerId !== gesture.pointerId || !gesture.rect) return;
+          var r = gesture.rect;
+          var out = e.clientX < r.left - HIT_PAD || e.clientX > r.right + HIT_PAD ||
+                    e.clientY < r.top - HIT_PAD || e.clientY > r.bottom + HIT_PAD;
+          if (out) endPointer(e, true);
+        });
+        button.addEventListener('pointerup', function (e) { endPointer(e, false); });
+        button.addEventListener('pointercancel', function (e) { endPointer(e, true); });
+        button.addEventListener('lostpointercapture', function (e) { endPointer(e, true); });
+        button.addEventListener('pointerleave', function (e) { if (e.pointerType !== 'touch') endPointer(e, true); });
+        button.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+        button.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') { if (input === 'key') release(true); return; }
+          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); if (!e.repeat) begin('key'); }
+        });
+        button.addEventListener('keyup', function (e) {
+          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); if (input === 'key') release(false); }
+        });
+
+        window.addEventListener('blur', function () { release(true); });
+        document.addEventListener('visibilitychange', function () { if (document.hidden) release(true); });
+
+        function measure() {
+          button.style.setProperty('--hb-w', button.offsetWidth + 'px');
+          button.style.setProperty('--hb-h', button.offsetHeight + 'px');
+        }
+        measure();
+        if (window.ResizeObserver) new ResizeObserver(measure).observe(button);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+      }
+    })();
+  </script>
+</body>
+</html>
