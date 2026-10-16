@@ -31,17 +31,22 @@
     <div id="grilla" class="grilla"></div>
   </section>
 
-  <!-- Pantalla de juego: juego arriba, Salir arriba a la derecha, otros juegos abajo -->
+  <!-- Pantalla de juego: el juego ocupa todo. "Salir" lo achica y muestra los otros juegos abajo -->
   <section id="pantalla-juego" class="pantalla-juego" aria-label="Juego" hidden>
     <header class="pantalla-juego__barra">
       <h1 id="juego-titulo" class="pantalla-juego__titulo"></h1>
       <button id="salir" class="boton boton--salir" type="button" aria-label="Salir y elegir otro juego">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="currentColor"/></svg>
-        <span>Salir</span>
+        <span id="salir-texto">Salir</span>
       </button>
     </header>
-    <main id="juego-area" class="pantalla-juego__area"></main>
-    <nav id="tira" class="tira" aria-label="Otros juegos"></nav>
+    <div id="juego-marco" class="pantalla-juego__marco">
+      <main id="juego-area" class="pantalla-juego__area"></main>
+      <button id="seguir" class="seguir" type="button" aria-label="Seguir jugando">
+        <span class="seguir__icono" aria-hidden="true">▶</span>
+      </button>
+    </div>
+    <nav id="tira" class="tira" aria-label="Otros juegos" inert></nav>
   </section>
 
   <div id="banner" class="banner" role="dialog" aria-label="Instalar la app" hidden>

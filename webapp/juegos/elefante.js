@@ -210,12 +210,20 @@ export function iniciar(contenedor) {
   function nuevoLugar() {
     const m = medidas();
     const margenX = (m.elefLado / 2 + 12) / m.w;
-    const minY = Math.max(0.62, (m.elefLado + 20) / m.h);
-    // Que quede bien lejos del nene, así tiene que caminar: entre varios lugares al azar,
-    // uno de los que están lejos; si ninguno lo está, el más lejano
-    const candidatos = Array.from({ length: 30 }, () => ({ x: azar(margenX, 1 - margenX), y: azar(minY, 0.95) }));
-    const distancia = (l) => Math.abs(l.x - estado.nene.x);
-    const lejanos = candidatos.filter((l) => distancia(l) > 0.3);
+    // Puede ir a cualquier altura, siempre que entren él y el nene parado a su lado
+    const minY = (Math.max(m.elefLado, m.neneAlto) + 12) / m.h;
+    const maxY = 0.97;
+    // Distancia real en píxeles, en cualquier dirección (horizontal, vertical o diagonal)
+    const distancia = (l) => Math.hypot((l.x - estado.nene.x) * m.w, (l.y - estado.nene.y) * m.h);
+    // No tan exigente como para que en pantallas bajas solo pueda irse de costado
+    const lejos = Math.max(m.elefLado * 1.2, Math.min(m.w, m.h) * 0.4);
+    // Entre varios lugares al azar, uno de los que quedan lejos del nene (así tiene que caminar);
+    // si ninguno lo está, el más lejano
+    const candidatos = Array.from({ length: 40 }, () => ({
+      x: azar(margenX, 1 - margenX),
+      y: minY < maxY ? azar(minY, maxY) : maxY,
+    }));
+    const lejanos = candidatos.filter((l) => distancia(l) > lejos);
     if (lejanos.length) return lejanos[Math.floor(Math.random() * lejanos.length)];
     return candidatos.reduce((a, b) => (distancia(b) > distancia(a) ? b : a));
   }

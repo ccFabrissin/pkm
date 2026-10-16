@@ -60,6 +60,7 @@ async function mostrar() {
     detenerJuego = null;
   }
   area.replaceChildren();
+  cerrarMenu();
 
   const id = idEnRuta();
   const juego = JUEGOS.find((j) => j.id === id && !j.pronto);
@@ -86,11 +87,50 @@ async function mostrar() {
   }
 }
 
-document.getElementById('salir').addEventListener('click', () => {
+// ---------- Menú "Salir": achica el juego y muestra los otros abajo ----------
+
+const marco = document.getElementById('juego-marco');
+const salirTexto = document.getElementById('salir-texto');
+const botonSalir = document.getElementById('salir');
+
+function abrirMenu() {
+  // Achicar el juego lo justo para que entre arriba de la fila de juegos
+  const arriba = marco.getBoundingClientRect().top;
+  const libre = window.innerHeight - tira.offsetHeight - 12 - arriba;
+  const escala = Math.min(0.85, Math.max(0.3, libre / marco.offsetHeight));
+  pantallaJuego.style.setProperty('--escala', escala.toFixed(3));
+  pantallaJuego.classList.add('pantalla-juego--menu');
+  tira.inert = false;
+  salirTexto.textContent = 'Inicio';
+  botonSalir.setAttribute('aria-label', 'Ir a todos los juegos');
+}
+
+function cerrarMenu() {
+  pantallaJuego.classList.remove('pantalla-juego--menu');
+  tira.inert = true;
+  salirTexto.textContent = 'Salir';
+  botonSalir.setAttribute('aria-label', 'Salir y elegir otro juego');
+}
+
+botonSalir.addEventListener('click', () => {
   sonido.clic();
+  if (!pantallaJuego.classList.contains('pantalla-juego--menu')) {
+    abrirMenu();
+    return;
+  }
+  // Segundo toque: a la grilla de inicio.
   // replaceState no dispara hashchange: se llama a mostrar() a mano
   history.replaceState(null, '', location.pathname);
   mostrar();
+});
+
+document.getElementById('seguir').addEventListener('click', () => {
+  sonido.clic();
+  cerrarMenu();
+});
+
+window.addEventListener('resize', () => {
+  if (pantallaJuego.classList.contains('pantalla-juego--menu')) abrirMenu();
 });
 
 window.addEventListener('hashchange', mostrar);

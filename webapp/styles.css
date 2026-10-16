@@ -212,7 +212,8 @@ body {
   position: fixed;
   inset: 0;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
   background: #000;
 }
 
@@ -237,12 +238,59 @@ body {
   text-overflow: ellipsis;
 }
 
-.pantalla-juego__area {
+/* El marco tiene siempre el mismo tamaño: al abrir el menú se achica con transform,
+   así el juego no se entera ni se reacomoda */
+.pantalla-juego__marco {
   position: relative;
-  margin: 0 calc(var(--seguro-derecha) + 12px) 0 calc(var(--seguro-izquierda) + 12px);
+  margin:
+    0
+    calc(var(--seguro-derecha) + 12px)
+    calc(var(--seguro-abajo) + 12px)
+    calc(var(--seguro-izquierda) + 12px);
+  transform-origin: 50% 0;
+  transition: transform 380ms cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.pantalla-juego--menu .pantalla-juego__marco { transform: scale(var(--escala, 0.6)); }
+
+.pantalla-juego__area {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  isolation: isolate; /* los z-index de cada juego quedan adentro y no tapan el botón de seguir */
   border-radius: var(--radio);
   overflow: hidden;
   background: #101010;
+}
+
+/* Con el menú abierto, tocar el juego achicado vuelve a él */
+.seguir {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radio);
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+}
+.pantalla-juego--menu .seguir { display: flex; }
+
+.seguir__icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  padding-left: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--fondo-1);
+  font-size: 48px;
+  box-shadow: var(--sombra);
 }
 
 .aviso {
@@ -257,8 +305,14 @@ body {
   color: var(--texto-suave);
 }
 
-/* Fila de otros juegos, abajo */
+/* Fila de otros juegos: escondida abajo, sube al tocar "Salir" */
 .tira {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateY(105%);
+  transition: transform 380ms cubic-bezier(0.3, 0, 0.2, 1);
   display: flex;
   gap: 14px;
   padding:
@@ -275,6 +329,20 @@ body {
   scrollbar-width: none;
 }
 .tira::-webkit-scrollbar { display: none; }
+.pantalla-juego--menu .tira { transform: none; }
+
+/* Celular acostado y pantallas bajas: barra más finita para dejarle lugar al juego */
+@media (max-height: 520px) {
+  .pantalla-juego__barra { padding-top: calc(var(--seguro-arriba) + 6px); padding-bottom: 6px; }
+  .pantalla-juego__titulo { font-size: 18px; }
+  .boton--salir { min-height: 44px; padding: 0 16px; font-size: 17px; }
+  .tira { padding-top: 8px; }
+  .tira .tarjeta { width: 130px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pantalla-juego__marco, .tira { transition: none; }
+}
 
 .tira .tarjeta {
   flex: none;
