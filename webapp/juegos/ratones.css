@@ -1,0 +1,189 @@
+/* Cocina: pared con azulejos, zócalo y piso de madera, cueva de ratón al fondo */
+.ratones-juego {
+  --pulso: 0.8s; /* duración de un paso de baile = 2 tiempos de la música */
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, transparent 62%, #6b3f22 62%, #6b3f22 64%, transparent 64%),
+    repeating-linear-gradient(90deg, #c98a52 0 90px, #b97a44 90px 180px) 0 64% / 100% 36% no-repeat,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.5) 2px, transparent 2px) 0 0 / 48px 48px,
+    linear-gradient(0deg, rgba(255, 255, 255, 0.5) 2px, transparent 2px) 0 0 / 48px 48px,
+    #ffe8b8;
+}
+
+.ratones-juego__cueva {
+  position: absolute;
+  bottom: 36%;
+  left: 50%;
+  width: 14%;
+  aspect-ratio: 1 / 0.8;
+  translate: -50% 0;
+  border-radius: 50% 50% 0 0;
+  background: #2b1a10;
+  box-shadow: inset 0 8px 0 #4a2c1a;
+  pointer-events: none;
+}
+
+/* Tele en la pared: muestra el video propio (si se cargó uno en este dispositivo) */
+.tele {
+  position: absolute;
+  z-index: 5;
+  top: 7%;
+  right: 4%;
+  width: min(34%, 52cqh);
+  aspect-ratio: 16 / 10;
+  padding: 1.2%;
+  border-radius: 14px;
+  background: #3b2a20;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25), inset 0 0 0 3px #5a4334;
+  -webkit-touch-callout: none;
+}
+.ratones-juego { container-type: size; }
+.tele__video {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #000;
+  pointer-events: none;
+}
+.tele__vacia {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 8px;
+  background: #22303a;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: clamp(28px, 6cqh, 54px);
+  text-align: center;
+}
+.tele__vacia small { font-size: 12px; line-height: 1.2; padding: 0 8px; }
+.tele__video[hidden], .tele__vacia[hidden] { display: none; }
+
+.ratones-juego__marcador {
+  position: absolute;
+  z-index: 50;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 26px;
+  pointer-events: none;
+}
+
+/* ---------- Ratoncitos ---------- */
+.ratones-juego__ratones { position: absolute; inset: 0; }
+
+.raton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 600ms cubic-bezier(0.3, 0, 0.3, 1);
+  cursor: pointer;
+}
+.raton svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.raton__cuerpo { transform-origin: 50% 100%; }
+
+/* Twist: cadera para un lado y para el otro, al ritmo de la música */
+.ratones--bailan .raton__cuerpo { animation: twist var(--pulso) ease-in-out infinite alternate; }
+.ratones--bailan .raton:nth-child(even) .raton__cuerpo { animation-direction: alternate-reverse; }
+@keyframes twist {
+  from { rotate: -12deg; translate: -4% 0; }
+  to   { rotate: 12deg;  translate: 4% 2%; }
+}
+
+.ratones--miedo .raton__cuerpo { animation: temblar 90ms linear infinite; }
+@keyframes temblar {
+  25% { translate: -2px 0; }
+  75% { translate: 2px 0; }
+}
+.raton .ojo-miedo { display: none; }
+.ratones--miedo .raton .ojo-miedo { display: inline; }
+.ratones--miedo .raton .ojo-normal { display: none; }
+
+.raton--salta .raton__cuerpo { animation: salto 450ms ease-out !important; }
+@keyframes salto {
+  40% { translate: 0 -30%; rotate: 0deg; }
+}
+
+.raton--atrapado { transition-timing-function: ease-in; }
+.raton--atrapado .raton__cuerpo { animation: patalear 160ms linear infinite !important; }
+@keyframes patalear {
+  50% { rotate: 15deg; }
+}
+
+/* ---------- Gato ---------- */
+.gato {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  cursor: pointer;
+}
+.gato svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.gato__cuerpo { transform-origin: 50% 100%; }
+.gato--camina .gato__cuerpo { animation: sigilo 520ms ease-in-out infinite; }
+@keyframes sigilo {
+  0%, 100% { translate: 0 0;    rotate: -3deg; }
+  50%      { translate: 0 -5%;  rotate: 3deg; }
+}
+
+.gato .cara-susto { display: none; }
+.gato--susto .cara-susto { display: inline; }
+.gato--susto .cara-normal { display: none; }
+.gato--susto .gato__cuerpo { animation: susto 380ms ease-out; }
+@keyframes susto {
+  30% { translate: 0 -35%; scale: 1.1 0.9; }
+  60% { translate: 0 -20%; scale: 0.95 1.1; }
+}
+.gato--huye .gato__cuerpo { animation: sigilo 200ms ease-in-out infinite; }
+
+/* Texto que salta al ahuyentarlo */
+.ratones-juego__grito {
+  position: absolute;
+  z-index: 60;
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: #fff;
+  color: #d62828;
+  font-weight: 900;
+  font-size: 28px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  translate: -50% 0;
+  animation: grito 900ms ease-out forwards;
+}
+@keyframes grito {
+  0%   { opacity: 0; scale: 0.4; }
+  25%  { opacity: 1; scale: 1.1; }
+  75%  { opacity: 1; scale: 1; }
+  100% { opacity: 0; translate: -50% -30px; }
+}
+
+.confeti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 70;
+  pointer-events: none;
+  line-height: 1;
+  animation: confeti 1400ms cubic-bezier(0.2, 0.6, 0.4, 1) forwards;
+}
+@keyframes confeti {
+  0%   { transform: translate(var(--x0), var(--y0)) scale(0.4) rotate(0deg); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translate(var(--x1), var(--y1)) scale(1.2) rotate(var(--giro)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ratones--bailan .raton__cuerpo, .ratones--miedo .raton__cuerpo, .gato--camina .gato__cuerpo { animation: none; }
+  .confeti { display: none; }
+}

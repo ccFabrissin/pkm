@@ -25,8 +25,16 @@ export const JUEGOS = [
     id: 'auto',
     titulo: 'El auto bochinchero',
     emoji: '🚗',
-    color: '#2fb344',
+    imagen: '/webapp/assets/auto/portada.svg',
+    color: '#7cc6f2',
     cargar: () => import('./auto.js'),
+  },
+  {
+    id: 'ratones',
+    titulo: 'Ratoncitos y el gato',
+    emoji: '🐭',
+    color: '#ff9f68',
+    cargar: () => import('./ratones.js'),
   },
   {
     id: 'burbujas',

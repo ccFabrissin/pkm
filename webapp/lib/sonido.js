@@ -29,6 +29,12 @@ function contexto() {
   return c;
 }
 
+// Para quien necesite programar sonidos a mano (por ejemplo, música de fondo).
+// Devuelve null si el sonido está apagado.
+export function contextoAudio() {
+  return contexto();
+}
+
 // ---------- Clips de audio (archivos) ----------
 
 const clips = new Map();

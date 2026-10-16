@@ -1,6 +1,6 @@
 // Cambiá CACHE_VERSION cada vez que modifiques cualquier archivo de /webapp/:
 // los assets se sirven cache-first, así que sin este cambio el iPad sigue con los viejos.
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v5';
 const PREFIJO = 'cf-webapp-';
 const CACHE_NAME = `${PREFIJO}${CACHE_VERSION}`;
 
@@ -13,6 +13,7 @@ const PRECACHE = [
   '/webapp/lib/sonido.js',
   '/webapp/lib/voz.js',
   '/webapp/lib/estilos.js',
+  '/webapp/lib/twist.js',
   '/webapp/juegos/catalogo.js',
   // Un renglón por cada archivo de cada minijuego
   '/webapp/juegos/elefante.js',
@@ -26,6 +27,9 @@ const PRECACHE = [
   '/webapp/juegos/auto.js',
   '/webapp/juegos/auto.css',
   '/webapp/assets/auto/bien.wav',
+  '/webapp/assets/auto/portada.svg',
+  '/webapp/juegos/ratones.js',
+  '/webapp/juegos/ratones.css',
   '/webapp/juegos/burbujas.js',
   '/webapp/juegos/burbujas.css',
   '/webapp/icons/apple-touch-icon.png',
