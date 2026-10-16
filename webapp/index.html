@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Jueguitos</title>
+  <meta name="description" content="Minijuegos para chicos de 2 años.">
+  <meta name="theme-color" content="#14248a">
+
+  <link rel="manifest" href="/webapp/manifest.json">
+  <link rel="apple-touch-icon" href="/webapp/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/webapp/icons/icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Jueguitos">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="stylesheet" href="/webapp/styles.css">
+  <script type="module" src="/webapp/app.js"></script>
+</head>
+<body>
+  <!-- Pantalla inicial: grilla de juegos -->
+  <section id="inicio" class="inicio" aria-label="Elegí un juego">
+    <header class="inicio__barra">
+      <div class="marca">
+        <img src="/webapp/icons/icon-192.png" alt="" width="44" height="44">
+        <span>Jueguitos</span>
+      </div>
+      <button id="sonido" class="boton" type="button" aria-label="Apagar el sonido" aria-pressed="true">🔊</button>
+    </header>
+    <div id="grilla" class="grilla"></div>
+  </section>
+
+  <!-- Pantalla de juego: juego arriba, Salir arriba a la derecha, otros juegos abajo -->
+  <section id="pantalla-juego" class="pantalla-juego" aria-label="Juego" hidden>
+    <header class="pantalla-juego__barra">
+      <h1 id="juego-titulo" class="pantalla-juego__titulo"></h1>
+      <button id="salir" class="boton boton--salir" type="button" aria-label="Salir y elegir otro juego">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="currentColor"/></svg>
+        <span>Salir</span>
+      </button>
+    </header>
+    <main id="juego-area" class="pantalla-juego__area"></main>
+    <nav id="tira" class="tira" aria-label="Otros juegos"></nav>
+  </section>
+
+  <div id="banner" class="banner" role="dialog" aria-label="Instalar la app" hidden>
+    <p>Para instalarla en el iPad tocá <strong>Compartir</strong> <svg class="icono-compartir" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4M6 11H5v10h14V11h-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> → <strong>Agregar a pantalla de inicio</strong>.</p>
+    <button id="banner-cerrar" class="boton" type="button" aria-label="Cerrar aviso">✕</button>
+  </div>
+</body>
+</html>

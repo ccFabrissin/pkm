@@ -1,0 +1,18 @@
+# Reglas solo para /webapp/ (no afectan al resto del sitio)
+
+<IfModule mod_mime.c>
+  <Files "manifest.json">
+    ForceType application/manifest+json
+  </Files>
+</IfModule>
+
+<IfModule mod_headers.c>
+  # El navegador tiene que pedir siempre sw.js al servidor para detectar versiones nuevas
+  <Files "sw.js">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </Files>
+
+  <Files "manifest.json">
+    Header set Cache-Control "no-cache"
+  </Files>
+</IfModule>

@@ -1,0 +1,147 @@
+/* Cuarto: pared lila arriba, cama con acolchado abajo */
+.elefante-juego {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.55) 1.5px, transparent 2px) 0 0 / 34px 34px,
+    linear-gradient(180deg, #e9e2f2 0%, #e9e2f2 46%, #f3eee6 46%, #ebe4d8 100%);
+}
+
+/* Almohadón de ositos al fondo */
+.elefante-juego::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 30%;
+  height: 16%;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 50%, #e98a5b 0 7px, transparent 8px) 0 0 / 64px 100%,
+    radial-gradient(circle, rgba(255, 255, 255, 0.35) 1.5px, transparent 2px) 0 0 / 18px 18px,
+    #7a746f;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0.85;
+}
+
+/* ---------- Personajes ---------- */
+.personaje {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.personaje__cuerpo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 100%;
+}
+
+/* Nene */
+.nene--listo { transition: transform 750ms cubic-bezier(0.45, 0, 0.3, 1); }
+.nene img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.18));
+}
+.nene--camina .personaje__cuerpo { animation: caminar 250ms ease-in-out 3; }
+.nene--salta .personaje__cuerpo { animation: saltito 320ms ease-out; }
+
+@keyframes caminar {
+  0%, 100% { translate: 0 0;    rotate: 0deg; }
+  25%      { translate: 0 -6%;  rotate: -4deg; }
+  75%      { translate: 0 -6%;  rotate: 4deg; }
+}
+
+@keyframes saltito {
+  0%, 100% { translate: 0 0; }
+  45%      { translate: 0 -10%; }
+}
+
+/* Elefante */
+.elefante { cursor: pointer; }
+.elefante--corre { transition: transform 1300ms cubic-bezier(0.5, 0, 0.4, 1); }
+.elefante svg { overflow: visible; filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.18)); }
+
+.elefante .ojo-abierto { display: none; }
+.elefante--despierto .ojo-abierto { display: inline; }
+.elefante--despierto .ojo-cerrado { display: none; }
+
+.elefante--durmiendo .personaje__cuerpo { animation: respirar 2600ms ease-in-out infinite; }
+.elefante--durmiendo .cabeza { transform: rotate(-8deg); }
+.elefante .cabeza { transform-box: fill-box; transform-origin: 50% 90%; transition: transform 300ms ease; }
+
+.elefante--se-mueve .personaje__cuerpo { animation: sacudon 380ms ease-in-out; }
+.elefante--despierto .oreja { animation: aletear 260ms ease-in-out 4; }
+.elefante .oreja { transform-box: fill-box; }
+.elefante .oreja--izq { transform-origin: 90% 40%; }
+.elefante .oreja--der { transform-origin: 10% 40%; }
+.elefante--corre .personaje__cuerpo { animation: trote 260ms ease-in-out infinite; }
+
+@keyframes respirar {
+  0%, 100% { scale: 1 1; }
+  50%      { scale: 1.02 1.035; }
+}
+
+@keyframes sacudon {
+  20% { rotate: -5deg; }
+  50% { rotate: 5deg; }
+  80% { rotate: -2deg; }
+}
+
+@keyframes aletear {
+  50% { scale: 1.12 0.92; }
+}
+
+@keyframes trote {
+  0%, 100% { translate: 0 0;    rotate: -3deg; }
+  50%      { translate: 0 -12%; rotate: 3deg; }
+}
+
+/* Zzz */
+.zeta {
+  position: absolute;
+  font-weight: 900;
+  color: #5b6cff;
+  text-shadow: 0 2px 0 #fff;
+  pointer-events: none;
+  animation: zeta 2400ms ease-out forwards;
+}
+
+@keyframes zeta {
+  0%   { translate: 0 0;        opacity: 0; scale: 0.6; }
+  15%  { opacity: 1; }
+  100% { translate: 40px -90px; opacity: 0; scale: 1.3; }
+}
+
+/* Globito con "¡ate!" */
+.globo {
+  position: absolute;
+  padding: 6px 14px;
+  border-radius: 18px;
+  background: #fff;
+  color: #1d3557;
+  font-weight: 900;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  translate: -50% 0;
+  animation: globo 900ms ease-out forwards;
+}
+
+@keyframes globo {
+  0%   { opacity: 0; scale: 0.5; }
+  20%  { opacity: 1; scale: 1.05; }
+  70%  { opacity: 1; scale: 1; }
+  100% { opacity: 0; scale: 1; translate: -50% -20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elefante--durmiendo .personaje__cuerpo,
+  .elefante--corre .personaje__cuerpo,
+  .nene--camina .personaje__cuerpo { animation: none; }
+}
