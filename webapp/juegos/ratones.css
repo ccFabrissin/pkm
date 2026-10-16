@@ -63,7 +63,38 @@
   text-align: center;
 }
 .tele__vacia small { font-size: 12px; line-height: 1.2; padding: 0 8px; }
-.tele__video[hidden], .tele__vacia[hidden] { display: none; }
+/* Botón que aparece con la presión larga. El <input type=file> lo cubre entero
+   (transparente) para que el toque llegue directo al selector */
+.tele__elegir {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 10px);
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  min-height: 56px;
+  padding: 0 20px;
+  border-radius: 28px;
+  background: #fff;
+  color: #1d3557;
+  font-weight: 800;
+  font-size: 20px;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+.tele__archivo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  font-size: 100px; /* que toda el área sea tocable en Safari */
+  cursor: pointer;
+}
+.tele__video[hidden], .tele__vacia[hidden], .tele__elegir[hidden] { display: none; }
 
 .ratones-juego__marcador {
   position: absolute;

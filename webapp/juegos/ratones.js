@@ -100,7 +100,7 @@ export function iniciar(contenedor) {
     <div class="tele" aria-label="Tele: mantené apretado para elegir un video">
       <video class="tele__video" playsinline loop preload="auto" hidden></video>
       <div class="tele__vacia">📺<small>Mantené apretado para elegir el video</small></div>
-      <input class="tele__archivo" type="file" accept="video/*,audio/*" hidden>
+      <div class="tele__elegir" hidden>🎬 Elegir video<input class="tele__archivo" type="file" accept="video/*,audio/*" aria-label="Elegir video"></div>
     </div>
     <div class="ratones-juego__marcador" aria-live="polite"></div>
     <div class="ratones-juego__ratones ratones--bailan"></div>
@@ -114,6 +114,7 @@ export function iniciar(contenedor) {
   const video = escena.querySelector('.tele__video');
   const teleVacia = escena.querySelector('.tele__vacia');
   const inputArchivo = escena.querySelector('.tele__archivo');
+  const botonElegir = escena.querySelector('.tele__elegir');
   let urlVideo = null;
 
   const estado = {
@@ -409,20 +410,28 @@ export function iniciar(contenedor) {
   inputArchivo.addEventListener('change', async () => {
     const archivo = inputArchivo.files && inputArchivo.files[0];
     inputArchivo.value = '';
+    botonElegir.hidden = true;
     if (!archivo) return;
     ponerVideo(archivo);
     asegurarMusica();
     await guardarArchivo(ARCHIVO_VIDEO, archivo);
   });
 
-  // Presión larga sobre la tele: elegir otro video (un toque corto no hace nada,
-  // así el nene no abre el selector sin querer)
+  // Presión larga sobre la tele: aparece el botón "Elegir video" (un toque corto no
+  // hace nada, así el nene no lo abre sin querer). El selector se abre al tocar ese
+  // botón: Safari en iPhone/iPad solo lo permite si lo abre el toque mismo, no un temporizador.
   let timerPresion = 0;
+  let timerOcultar = 0;
   tele.addEventListener('pointerdown', (e) => {
     e.stopPropagation();
     asegurarMusica();
+    if (!botonElegir.hidden) return;
     clearTimeout(timerPresion);
-    timerPresion = setTimeout(() => inputArchivo.click(), PRESION_LARGA);
+    timerPresion = setTimeout(() => {
+      botonElegir.hidden = false;
+      clearTimeout(timerOcultar);
+      timerOcultar = setTimeout(() => { botonElegir.hidden = true; }, 8000);
+    }, PRESION_LARGA);
   });
   ['pointerup', 'pointerleave', 'pointercancel'].forEach((ev) => tele.addEventListener(ev, () => clearTimeout(timerPresion)));
   tele.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -473,6 +482,7 @@ export function iniciar(contenedor) {
   return function detener() {
     timers.forEach(clearTimeout);
     clearTimeout(timerPresion);
+    clearTimeout(timerOcultar);
     musica.parar();
     video.pause();
     video.removeAttribute('src');
