@@ -30,6 +30,13 @@ export const JUEGOS = [
     cargar: () => import('./auto.js'),
   },
   {
+    id: 'vehiculos',
+    titulo: 'Vehículos',
+    emoji: '🚒',
+    color: '#4cc9f0',
+    cargar: () => import('./vehiculos.js'),
+  },
+  {
     id: 'ratones',
     titulo: 'Ratoncitos y el gato',
     emoji: '🐭',

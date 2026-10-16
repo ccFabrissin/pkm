@@ -1,0 +1,144 @@
+.vehiculos {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  container-type: size;
+  background:
+    radial-gradient(circle at 85% 12%, #fff6b0 0 6%, transparent 6.5%),
+    linear-gradient(180deg, #bfe6ff 0%, #e8f6ff 55%, #9ed97a 55%, #7cc85a 100%);
+  font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, sans-serif;
+}
+
+.vehiculos__contenido {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4cqh;
+  padding: 3cqh 3cqw;
+}
+
+/* ---------- Parlante (igual que en Vocales) ---------- */
+.vehiculos__parlante {
+  --p: min(22cqh, 120px);
+  flex: none;
+  width: var(--p);
+  height: var(--p);
+  min-width: 56px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #2a3fd1;
+  box-shadow: 0 8px 0 #c9d2ff, 0 14px 28px rgba(42, 63, 209, 0.22);
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.vehiculos__parlante:active { transform: translateY(4px) scale(0.96); }
+.vehiculos__parlante svg { width: 62%; height: 62%; overflow: visible; }
+.vehiculos__parlante .onda { opacity: 0.35; }
+.vehiculos__parlante--habla .onda { animation: onda 700ms ease-in-out infinite; }
+.vehiculos__parlante--habla .onda--2 { animation-delay: 180ms; }
+.vehiculos__parlante--espera { animation: latir 1100ms ease-in-out infinite; }
+
+@keyframes onda { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+@keyframes latir { 0%, 100% { scale: 1; } 50% { scale: 1.1; } }
+
+/* ---------- Vehículos: 4 + 3 en horizontal, 3 + 3 + 1 en vertical ---------- */
+.vehiculos__fila {
+  --t: min(21cqw, 52cqh);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5cqh 2cqw;
+  max-width: calc(var(--t) * 4 + 6cqw + 1px);
+}
+
+/* En vertical: de a 2 por fila, más grandes */
+@container (aspect-ratio < 1) {
+  .vehiculos__fila { --t: min(43cqw, 23cqh); gap: 2cqh 4cqw; max-width: calc(var(--t) * 2 + 4cqw + 1px); }
+}
+
+.vehiculo {
+  width: var(--t);
+  aspect-ratio: 5 / 3;
+  min-width: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--t) * 0.06); /* en % se mediría contra toda la fila */
+  border: 0;
+  border-radius: 18%/30%;
+  background: var(--fondo);
+  box-shadow:
+    inset 0 -8px 0 rgba(0, 0, 0, 0.08),
+    0 7px 0 color-mix(in srgb, var(--fondo) 75%, black),
+    0 12px 22px rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.vehiculo:active { transform: translateY(4px); }
+.vehiculo svg { width: 100%; height: auto; max-height: 100%; overflow: visible; pointer-events: none; }
+
+/* Al acertar se va: cada uno a su manera */
+.vehiculo--ida { pointer-events: none; animation: irse-andando 1100ms cubic-bezier(0.5, 0, 0.8, 0.5) forwards; }
+.vehiculo--ida[data-id="avion"] { animation-name: irse-volando; }
+.vehiculo--ida[data-id="moto"] { animation-name: irse-willy; }
+.vehiculo--fuera { visibility: hidden; pointer-events: none; }
+.vehiculo--vuelve { animation: volver 620ms cubic-bezier(0.2, 1.3, 0.5, 1) both; }
+.vehiculo--mal { animation: mal 420ms ease-in-out; }
+.vehiculo--pista { animation: pista 560ms ease-in-out 2; }
+
+@keyframes irse-andando {
+  0%   { translate: 0 0; }
+  15%  { translate: -6% 0; }
+  30%  { translate: 0 -3%; }
+  100% { translate: 160cqw 0; }
+}
+@keyframes irse-volando {
+  0%   { translate: 0 0; rotate: 0deg; }
+  25%  { translate: 10% -5%; rotate: -10deg; }
+  100% { translate: 140cqw -120cqh; rotate: -25deg; }
+}
+@keyframes irse-willy {
+  0%   { translate: 0 0; rotate: 0deg; }
+  20%  { translate: 0 -4%; rotate: -18deg; }
+  45%  { rotate: -18deg; }
+  100% { translate: 160cqw 0; rotate: -5deg; }
+}
+@keyframes volver {
+  from { translate: -120cqw 0; }
+  to   { translate: 0 0; }
+}
+@keyframes mal {
+  20%, 60% { translate: -6% 0; }
+  40%, 80% { translate: 6% 0; }
+}
+@keyframes pista {
+  50% { translate: 0 -14%; scale: 1.06; }
+}
+
+.confeti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  line-height: 1;
+  animation: confeti 1400ms cubic-bezier(0.2, 0.6, 0.4, 1) forwards;
+}
+@keyframes confeti {
+  0%   { transform: translate(var(--x0), var(--y0)) scale(0.4) rotate(0deg); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translate(var(--x1), var(--y1)) scale(1.2) rotate(var(--giro)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vehiculo--ida { animation-duration: 1ms; }
+  .vehiculos__parlante--espera, .vehiculo--pista { animation: none; }
+  .confeti { display: none; }
+}

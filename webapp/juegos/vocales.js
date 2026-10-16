@@ -6,13 +6,16 @@ import { decir, callar } from '../lib/voz.js';
 import { tono, NOTAS } from '../lib/sonido.js';
 
 const NOMBRE = 'Gael';
+// dice: lo que lee la voz. La "u" sola la leen como la conjunción ("u"), corta y
+// apenas audible; estirada ("uuu") la pronuncian como la vocal.
 const VOCALES = [
-  { letra: 'A', color: '#ff6b6b' },
-  { letra: 'E', color: '#ffb703' },
-  { letra: 'I', color: '#06d6a0' },
-  { letra: 'O', color: '#4cc9f0' },
-  { letra: 'U', color: '#9b6bff' },
+  { letra: 'A', color: '#ff6b6b', dice: 'a' },
+  { letra: 'E', color: '#ffb703', dice: 'e' },
+  { letra: 'I', color: '#06d6a0', dice: 'i' },
+  { letra: 'O', color: '#4cc9f0', dice: 'o' },
+  { letra: 'U', color: '#9b6bff', dice: 'uuu' },
 ];
+const dice = (letra) => VOCALES.find((v) => v.letra === letra).dice;
 const ERRORES_PARA_PISTA = 2;
 
 const PARLANTE_SVG = `
@@ -81,10 +84,16 @@ export function iniciar(contenedor) {
     el.classList.add(clase);
   }
 
+  // Animaciones cortas (error, pista): se sacan al terminar para no pisar a las demás
+  function animarUnaVez(el, clase) {
+    reiniciarAnimacion(el, clase);
+    el.addEventListener('animationend', () => el.classList.remove(clase), { once: true });
+  }
+
   async function decirObjetivo() {
     if (!estado.objetivo) return;
     parlante.classList.add('vocales__parlante--habla');
-    await decir(estado.objetivo.toLowerCase());
+    await decir(dice(estado.objetivo), { velocidad: 0.7 });
     parlante.classList.remove('vocales__parlante--habla');
   }
 
@@ -107,6 +116,8 @@ export function iniciar(contenedor) {
     estado.objetivo = null;
     estado.quedan.delete(letra);
     sonidoAcierto();
+    // Si antes la tocó mal, sacar esas animaciones: si no, tapan la de irse
+    boton.classList.remove('vocal--mal', 'vocal--pista');
     reiniciarAnimacion(boton, 'vocal--ida');
     boton.addEventListener('animationend', () => {
       boton.classList.remove('vocal--ida');
@@ -117,10 +128,10 @@ export function iniciar(contenedor) {
 
   function error(boton) {
     sonidoError();
-    reiniciarAnimacion(boton, 'vocal--mal');
+    animarUnaVez(boton, 'vocal--mal');
     estado.errores += 1;
     if (estado.errores >= ERRORES_PARA_PISTA) {
-      reiniciarAnimacion(botones.get(estado.objetivo), 'vocal--pista');
+      animarUnaVez(botones.get(estado.objetivo), 'vocal--pista');
     }
     despues(550, decirObjetivo);
   }
@@ -193,8 +204,8 @@ export function iniciar(contenedor) {
     if (estado.ocupado || !estado.quedan.has(letra)) return;
     // Todavía no sonó ninguna vocal: la que toca dice su nombre
     if (!estado.objetivo) {
-      reiniciarAnimacion(boton, 'vocal--pista');
-      decir(letra.toLowerCase());
+      animarUnaVez(boton, 'vocal--pista');
+      decir(dice(letra), { velocidad: 0.7 });
       return;
     }
     if (letra === estado.objetivo) acierto(boton, letra);
