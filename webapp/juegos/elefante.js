@@ -4,6 +4,7 @@
 // - Cuando está lejos, cada toque: "ate" y el nene camina un paso hacia él.
 //   Al llegar, vuelve a empezar.
 import { cargar, reproducir } from '../lib/sonido.js';
+import { cargarEstilos } from '../lib/estilos.js';
 
 const BASE = '/webapp/assets/elefante/';
 const AUDIO_ATE_ATE = BASE + 'ate-ate.wav';
@@ -82,25 +83,8 @@ const ELEFANTE_SVG = `
   </g>
 </svg>`;
 
-// Resuelve cuando el CSS ya está aplicado: antes de eso las medidas de la escena no sirven
-function cargarEstilos() {
-  let link = document.querySelector('link[data-juego="elefante"]');
-  if (link && link.sheet) return Promise.resolve();
-  if (!link) {
-    link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = '/webapp/juegos/elefante.css';
-    link.dataset.juego = 'elefante';
-    document.head.appendChild(link);
-  }
-  return new Promise((listo) => {
-    link.addEventListener('load', listo, { once: true });
-    link.addEventListener('error', listo, { once: true });
-  });
-}
-
 export function iniciar(contenedor) {
-  const estilos = cargarEstilos();
+  const estilos = cargarEstilos('elefante', '/webapp/juegos/elefante.css');
   [AUDIO_ATE_ATE, ...AUDIO_ATE].forEach(cargar);
 
   const escena = document.createElement('div');

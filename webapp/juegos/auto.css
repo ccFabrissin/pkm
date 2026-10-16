@@ -1,0 +1,162 @@
+.auto-juego {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  container-type: size;
+  background:
+    linear-gradient(180deg, #bfe6ff 0%, #e4f5ff 34%, transparent 34%),
+    linear-gradient(180deg, transparent 34%, #7cc85a 34%, #5fb347 58%, #c99a63 58%, #b98952 100%);
+}
+
+/* Camino de tierra con huellas */
+.auto-juego::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 58%;
+  bottom: 0;
+  background: repeating-linear-gradient(90deg, transparent 0 60px, rgba(255, 255, 255, 0.12) 60px 90px);
+  pointer-events: none;
+}
+
+.auto-juego__escenario {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 4cqh;
+}
+
+.auto {
+  width: min(94cqw, 150cqh);
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 14px 10px rgba(0, 0, 0, 0.18));
+}
+
+/* ---------- Partes ---------- */
+/* Lo decorativo (carrocería, guardabarros...) deja pasar el toque a la parte de abajo */
+.auto > :not(.parte) { pointer-events: none; }
+.parte { cursor: pointer; }
+/* Solo lo que se anima gira o escala sobre sí mismo (no tocar los rotate() del dibujo) */
+.rueda-giro, .baul-tapa, .asiento-dibujo, .bocina-boton { transform-box: fill-box; }
+.toque { fill: transparent; }
+
+.parte--bien { animation: parte-bien 900ms ease-out; }
+.parte--mal { animation: parte-mal 420ms ease-in-out; }
+.parte--pista { animation: parte-pista 600ms ease-in-out 2; }
+.parte { transform-box: fill-box; transform-origin: 50% 50%; }
+
+@keyframes parte-bien {
+  0%   { filter: drop-shadow(0 0 0 #ffe066); }
+  30%  { filter: drop-shadow(0 0 14px #ffe066) drop-shadow(0 0 4px #fff); scale: 1.08; }
+  100% { filter: drop-shadow(0 0 0 #ffe066); scale: 1; }
+}
+
+@keyframes parte-mal {
+  20%, 60% { translate: -10px 0; }
+  40%, 80% { translate: 10px 0; }
+}
+
+@keyframes parte-pista {
+  50% { scale: 1.15; filter: drop-shadow(0 0 10px #fff); }
+}
+
+/* Efectos de cada parte cuando acierta */
+.auto--vibra { animation: vibrar 70ms linear 10; }
+@keyframes vibrar {
+  25% { translate: -3px 1px; }
+  75% { translate: 3px -1px; }
+}
+
+.rueda-giro { transform-origin: 50% 50%; }
+.auto--ruedas .rueda-giro { animation: girar 900ms cubic-bezier(0.3, 0, 0.3, 1); }
+@keyframes girar { to { rotate: -720deg; } }
+
+.haz { opacity: 0; transition: opacity 200ms; }
+.auto--luz .haz { opacity: 1; animation: parpadeo 1200ms ease-out forwards; }
+.auto--luz .faro-vidrio { fill: #fffbe0; filter: drop-shadow(0 0 12px #ffe066); }
+@keyframes parpadeo {
+  0%, 70% { opacity: 0.9; }
+  100%    { opacity: 0; }
+}
+
+.baul-tapa { transform-origin: 0% 100%; transition: rotate 300ms ease; }
+.auto--baul .baul-tapa { rotate: -40deg; }
+
+.auto--asiento .asiento-dibujo { animation: rebote 600ms ease-out; transform-origin: 50% 100%; }
+@keyframes rebote {
+  30% { scale: 1 0.88; }
+  60% { scale: 1 1.06; }
+}
+
+.reflejo { opacity: 0.55; }
+.auto--vidrio .reflejo-vidrio, .auto--espejo .reflejo-espejo { animation: brillo 800ms ease-in-out; }
+@keyframes brillo {
+  from { translate: -40px 0; opacity: 0; }
+  50%  { opacity: 1; }
+  to   { translate: 40px 0; opacity: 0; }
+}
+
+.auto--bocina .bocina-boton { fill: #ff3b30; animation: apretar 180ms ease-in-out 2; transform-origin: 50% 50%; }
+@keyframes apretar { 50% { scale: 0.75; } }
+
+.auto--festejo { animation: festejo 1400ms ease-in-out; }
+@keyframes festejo {
+  20% { translate: -6% 0; rotate: -2deg; }
+  50% { translate: 6% -3%; rotate: 2deg; }
+  80% { translate: -2% 0; rotate: 0deg; }
+}
+
+/* ---------- Parlante ---------- */
+.auto-juego__parlante {
+  --p: min(22cqh, 120px);
+  position: absolute;
+  z-index: 2;
+  top: 3cqh;
+  left: 3cqw;
+  width: var(--p);
+  height: var(--p);
+  min-width: 56px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #1f8a33;
+  box-shadow: 0 6px 0 #c6ebcd, 0 12px 24px rgba(31, 138, 51, 0.25);
+  cursor: pointer;
+}
+.auto-juego__parlante:active { transform: translateY(3px) scale(0.96); }
+.auto-juego__parlante svg { width: 62%; height: 62%; overflow: visible; }
+.auto-juego__parlante .onda { opacity: 0.35; }
+.auto-juego__parlante--habla .onda { animation: onda 700ms ease-in-out infinite; }
+.auto-juego__parlante--habla .onda--2 { animation-delay: 180ms; }
+.auto-juego__parlante--espera { animation: latir 1100ms ease-in-out infinite; }
+
+@keyframes onda { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+@keyframes latir { 0%, 100% { scale: 1; } 50% { scale: 1.1; } }
+
+.confeti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  pointer-events: none;
+  line-height: 1;
+  animation: confeti 1400ms cubic-bezier(0.2, 0.6, 0.4, 1) forwards;
+}
+@keyframes confeti {
+  0%   { transform: translate(var(--x0), var(--y0)) scale(0.4) rotate(0deg); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translate(var(--x1), var(--y1)) scale(1.2) rotate(var(--giro)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auto--vibra, .auto--festejo, .auto-juego__parlante--espera, .parte--pista { animation: none; }
+  .confeti { display: none; }
+}

@@ -15,6 +15,20 @@ export const JUEGOS = [
     cargar: () => import('./elefante.js'),
   },
   {
+    id: 'vocales',
+    titulo: 'Vocales',
+    emoji: '🔤',
+    color: '#ffb703',
+    cargar: () => import('./vocales.js'),
+  },
+  {
+    id: 'auto',
+    titulo: 'El auto bochinchero',
+    emoji: '🚗',
+    color: '#2fb344',
+    cargar: () => import('./auto.js'),
+  },
+  {
     id: 'burbujas',
     titulo: 'Burbujas',
     emoji: '🫧',

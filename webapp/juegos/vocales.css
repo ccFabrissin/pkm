@@ -1,0 +1,153 @@
+.vocales {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  container-type: size;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.7), transparent 40%),
+    linear-gradient(160deg, #fff4d6 0%, #ffe0ec 55%, #dcecff 100%);
+  font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, sans-serif;
+}
+
+.vocales__contenido {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6cqh;
+  padding: 3cqh 3cqw;
+}
+
+/* ---------- Parlante ---------- */
+.vocales__parlante {
+  --p: min(26cqh, 140px);
+  position: relative;
+  flex: none;
+  width: var(--p);
+  height: var(--p);
+  min-width: 56px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #2a3fd1;
+  box-shadow: 0 8px 0 #c9d2ff, 0 14px 28px rgba(42, 63, 209, 0.22);
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.vocales__parlante:active { transform: translateY(4px) scale(0.96); }
+.vocales__parlante svg { width: 62%; height: 62%; overflow: visible; }
+
+.vocales__parlante .onda { opacity: 0.35; transition: opacity 150ms; }
+.vocales__parlante--habla .onda { animation: onda 700ms ease-in-out infinite; }
+.vocales__parlante--habla .onda--2 { animation-delay: 180ms; }
+
+/* Late hasta el primer toque: iPadOS no deja hablar antes */
+.vocales__parlante--espera { animation: latir 1100ms ease-in-out infinite; }
+
+@keyframes onda {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 1; }
+}
+
+@keyframes latir {
+  0%, 100% { scale: 1; }
+  50%      { scale: 1.1; }
+}
+
+/* ---------- Vocales ---------- */
+.vocales__fila {
+  --t: min(16.5cqw, 40cqh);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5cqw;
+}
+
+/* En vertical: 3 arriba y 2 abajo, más grandes */
+@container (aspect-ratio < 1) {
+  .vocales__fila { --t: min(27cqw, 22cqh); max-width: 92cqw; gap: 4cqw; }
+}
+
+.vocal {
+  position: relative;
+  width: var(--t);
+  height: var(--t);
+  min-width: 64px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 24%;
+  background: var(--color);
+  color: #fff;
+  font: inherit;
+  font-size: calc(var(--t) * 0.64);
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+  box-shadow:
+    inset 0 -10px 0 rgba(0, 0, 0, 0.12),
+    0 8px 0 color-mix(in srgb, var(--color) 70%, black),
+    0 14px 24px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.vocal:active { transform: translateY(4px); }
+
+.vocal--ida {
+  pointer-events: none;
+  animation: vocal-irse 750ms cubic-bezier(0.5, 0, 0.7, 0.4) forwards;
+}
+.vocal--fuera { visibility: hidden; pointer-events: none; }
+.vocal--vuelve { animation: vocal-volver 520ms cubic-bezier(0.3, 1.6, 0.5, 1) both; }
+.vocal--mal { animation: vocal-mal 420ms ease-in-out; }
+.vocal--pista { animation: vocal-pista 560ms ease-in-out 2; }
+
+@keyframes vocal-irse {
+  0%   { scale: 1;    rotate: 0deg;  translate: 0 0;     opacity: 1; }
+  30%  { scale: 1.25; rotate: -10deg; translate: 0 -10%;  opacity: 1; }
+  100% { scale: 0.3;  rotate: 25deg; translate: 0 -160%; opacity: 0; }
+}
+
+@keyframes vocal-volver {
+  from { scale: 0; opacity: 0; }
+  to   { scale: 1; opacity: 1; }
+}
+
+@keyframes vocal-mal {
+  20%, 60% { translate: -8% 0; }
+  40%, 80% { translate: 8% 0; }
+}
+
+@keyframes vocal-pista {
+  50% { translate: 0 -18%; scale: 1.08; }
+}
+
+/* ---------- Festejo ---------- */
+.confeti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  line-height: 1;
+  animation: confeti 1400ms cubic-bezier(0.2, 0.6, 0.4, 1) forwards;
+}
+
+@keyframes confeti {
+  0%   { transform: translate(var(--x0), var(--y0)) scale(0.4) rotate(0deg); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translate(var(--x1), var(--y1)) scale(1.2) rotate(var(--giro)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vocal--ida { animation-duration: 1ms; }
+  .vocales__parlante--espera, .vocal--pista { animation: none; }
+  .confeti { display: none; }
+}
