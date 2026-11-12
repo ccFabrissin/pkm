@@ -5091,8 +5091,8 @@ function renderProximo(root) {
       `);
       return node;
     };
-    teamsWrap.appendChild(wrapBorderGlow(refineFrame(card('Equipo Blanco', teams.blanco, 'blanco'), { light: true })));
-    teamsWrap.appendChild(wrapBorderGlow(refineFrame(card('Equipo Negro',  teams.negro,  'negro'))));
+    teamsWrap.appendChild(wrapBorderGlow(card('Equipo Blanco', teams.blanco, 'blanco')));
+    teamsWrap.appendChild(wrapBorderGlow(card('Equipo Negro',  teams.negro,  'negro')));
 
     // Odómetro en los promedios de cada equipo
     teamsWrap.querySelectorAll('strong[data-anim-to]').forEach(s => {
